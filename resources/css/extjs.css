@@ -1,0 +1,59 @@
+@CHARSET "EUC-KR";
+
+
+/*트리구조 강제로 좌측 정렬*/
+.x-grid-cell-inner.x-grid-cell-inner-treecolumn {text-align: left !important;}
+.x-column-header-text-wrapper {text-align:center;}
+
+/* 버튼에 쓰이는 아이콘 */
+.icon-user { background-image: url(/resources/images/icons/user.png) !important; }
+.icon-add { background-image: url(/resources/images/icons/add.png) !important; }
+.icon-delete { background-image: url(/resources/images/icons/delete.png) !important; }
+.icon-bell { background-image: url(/resources/images/icons/bell.png) !important; }
+.icon-cancel { background-image: url(/resources/images/icons/cancel.png) !important; }
+.icon-pagesave { background-image: url(/resources/images/icons/page_save.png) !important; }
+.icon-refresh { background-image: url(/resources/images/icons/arrow_refresh.png) !important; }
+.icon-sms { background-image: url(/resources/images/icons/comment.png) !important; }
+.icon-eye { background-image: url(/resources/images/icons/eye.png) !important; }
+.icon-link { background-image: url(/resources/images/icons/link.png) !important; }
+.icon-table_print { background-image: url(/resources/images/icons/printer.png) !important; }
+.icon-table_print_add { background-image: url(/resources/images/icons/printer_add.png) !important; }
+.icon-table_edit { background-image: url(/resources/images/icons/table_edit.png) !important; }
+.icon-table_edit2 { background-image: url(/resources/images/icons/comment_edit.png) !important; }
+.icon-excel { background-image: url(/resources/images/icons/page_excel.png) !important; }
+
+
+
+
+/*그리드 행 배경색*/
+.extjsNumber { text-align:right; }
+.cell_font_blue { color:#0084ff; font-weight:bold; }
+.cell_font_red { color:red; }
+.cell_bg_red { background-color:red; }
+.cell_bg_red:hover {	background-color:white; }
+.x-grid-item-selected .cell_bg_red { background-color:white; !important }
+.cell_bg_pink { background-color:pink; }
+.cell_bg_pink:hover {	background-color:white; }
+.x-grid-item-selected .cell_bg_pink { background-color:white; !important }
+.cell_bg_skyblue { background-color:#dbf4ff; }
+.cell_bg_skyblue:hover {	background-color:white; }
+.x-grid-item-selected .cell_bg_skyblue { background-color:white; !important }
+
+.cell_height70 { height:70 }
+.x-grid-td {vertical-align:middle; !important}
+.extjsHead { padding:15px; background-color:white; font-weight:bold; font-size:1.5em; }
+
+
+/* 그리드 컬럼에 아이콘 표시*/
+.grid_icon_edit1:before { content: url(/resources/images/icons/comment_edit.png); float:left; margin:5px; }
+.font_edit { margin-left:2px; color:blue; font-weight:bold; }
+
+
+
+.x-column-header-inner{
+	text-align:left;
+}
+
+.x-grid-cell-inner {
+	text-align: left; !important;
+}

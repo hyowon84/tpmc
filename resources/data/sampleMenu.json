@@ -1,0 +1,51 @@
+{
+    children:[
+    {
+        name:"대시보드",
+        url:"",
+        leaf: false,
+				expanded: true,
+        children:[
+					{
+						name:"종합",	/*노드명*/
+						url:"td.view.dashboard.Main",
+						leaf:true,
+					},{
+							name:"CPU",
+							url:"td.view.dashboard.Cpu",
+							leaf:true,
+					},{
+							name:"MEMORY",
+							url:"td.view.dashboard.Memory",
+							leaf:true
+					},{
+							name:"NETWORK",
+							url:"td.view.dashboard.Network",
+							leaf:true
+					},{
+							name:"STORAGE",
+							url:"td.view.dashboard.Storage",
+							leaf:true
+					}
+				]
+    },{
+        name:"자원",
+        url:"",
+        leaf: false,
+				expanded: true,
+        children:[{
+            name:"메뉴1",
+            url:"...",
+            leaf:true
+        },{
+            name:"메뉴2",
+            url:"...",
+            leaf:true
+        },{
+            name:"메뉴3",
+            url:"...",
+            leaf:true
+        }]
+    }
+	]
+}

@@ -1,0 +1,22 @@
+<?
+include "_common.php";
+?>
+<style>
+	.mmsTopLogo { float:left; width:70%; height:40px; }
+	.mmsTopNavi { float:right; width:30%; height:40px; }
+</style>
+<div class="mmsTopLogo">
+	<img src="/resources/images/logo.jpg" height="30" align="absmiddle" style="margin-top:5px;" />
+</div>
+<div class="mmsTopNavi">
+	<table align="right">
+		<tr>
+			<td height="40" valign="bottom">
+			<?
+			echo "- ".$_SESSION[mb_name]."님 로그인중입니다 - ";
+			?>
+			</td>
+			<td height="40" valign="bottom"><a href="/logout.php">로그아웃</a>&nbsp;</td>
+		</tr>
+	</table>
+</div>
