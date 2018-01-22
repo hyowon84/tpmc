@@ -7,6 +7,7 @@ Ext.define('td.view.invoice.WireMain', {
 		'td.store.mbinfo',
 		'td.view.invoice.winGpSms',
 		'td.view.invoice.winMakeInvoice',
+		'td.view.invoice.winMakeWire',
 		'td.view.grid.WireTodoInvoiceList',
 		'Ext.ux.grid.Printer',
 		'td.store.Local',
@@ -38,9 +39,8 @@ Ext.define('td.view.invoice.WireMain', {
 			minWidth: 100,
 			scrollable: false,
 			items : [
-
 				{
-					//id : 'InvoiceOrderItemList',
+					id : 'WireInvoice',
 					layout: {
 						type: 'vbox',
 						pack: 'start',
@@ -68,7 +68,7 @@ Ext.define('td.view.invoice.WireMain', {
 						},
 						{
 							layout: 'fit',
-							flex: 3,
+							flex: 1,
 							items : [
 								{
 									headerPosition: 'left',
@@ -92,7 +92,7 @@ Ext.define('td.view.invoice.WireMain', {
 			width : '70%',
 			items : [
 				{
-					//id : 'InvoiceOrderItemList',
+					id : 'WireItem',
 					layout: {
 						type: 'vbox',
 						pack: 'start',
@@ -112,8 +112,8 @@ Ext.define('td.view.invoice.WireMain', {
 								{
 									headerPosition: 'left',
 									title : '<b>연결된 공구정보</b>',
-									name : 'WireGpInfo',
-									xtype: 'WireGpInfo',
+									name : 'InvoiceGpInfo',
+									xtype: 'InvoiceGpInfo',
 									border: 0
 								}
 							]

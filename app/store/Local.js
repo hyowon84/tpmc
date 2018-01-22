@@ -351,7 +351,6 @@ Ext.define('td.store.moneytype',{
 });
 
 
-
 //딜러
 Ext.define('td.store.dealers', {
 	extend: 'Ext.data.ArrayStore',
@@ -369,6 +368,20 @@ Ext.define('td.store.dealers', {
 	]
 });
 
+
+
+/*화폐유형*/
+Ext.define('td.store.wiretype',{
+	extend: 'Ext.data.ArrayStore',
+	model: 'td.model.comboDefault',
+	alias: 'store.wiretype',
+	data:[
+		[0, '00', '은행-코인즈투데이'],
+		[1, '01', '은행-투데이(주)'],
+		[2, '10', '페이팔'],
+		[3, '20', '마운틴']
+	]
+});
 
 
 /*

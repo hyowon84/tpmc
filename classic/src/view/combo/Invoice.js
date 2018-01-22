@@ -50,3 +50,22 @@ Ext.define('td.view.combo.MoneyType', {
 		itemTpl: ['<div data-qtip="{value}">{value}</div>']
 	}
 });
+
+
+Ext.define('td.view.combo.WireType', {
+	extend: 'Ext.form.ComboBox',
+	alias: 'widget.cb_wiretype',
+	reference: 'wiretype',
+	store: {type: 'wiretype'},
+	editable: false,
+	queryMode: 'local',
+	editable: false,
+	emptyText: '선택 또는 입력',
+	displayField: 'title',
+	publishes: 'value',
+	anchor: '0',
+	queryMode: 'local',
+	listConfig: {
+		itemTpl: ['<div data-qtip="{value}">{value}</div>']
+	}
+});

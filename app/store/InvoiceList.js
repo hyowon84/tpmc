@@ -234,11 +234,13 @@ Ext.define('td.store.InvoiceOrderItemList', {
 //});
 //
 //
-///* 발주서 발주예정 목록*/
-//Ext.define('td.store.MakeInvoiceList',{
-//	extend: 'Ext.data.ArrayStore',
-//	model : 'td.model.invoiceEndWire',
-//	alias: 'store.MakeInvoiceList',
-//	groupField: 'Group',
-//	sorters:	{	property:'reg_date',		direction:'DESC'}
-//});
+
+
+/* 발주서 발주예정 목록*/
+Ext.define('td.store.MakeInvoiceList',{
+	extend: 'Ext.data.ArrayStore',
+	model : 'td.model.WireEndInvoice',
+	alias: 'store.MakeInvoiceList',
+	groupField: 'Group',
+	sorters:	{	property:'reg_date',		direction:'DESC'}
+});

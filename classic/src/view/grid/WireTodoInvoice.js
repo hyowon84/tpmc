@@ -70,11 +70,28 @@ Ext.define('td.view.grid.WireTodoInvoiceList',{
 				{ text : '입출금링크',				dataIndex : 'iv_receipt_link',	width:120	}
 			],
 			tbar: [
+				{	xtype: 'label',	text: '검색어 : ',		autoWidth:true,	style : 'font-weight:bold;'},
 				{
-					text	: '추출',
-					reference : 'BtnExportGraded',
-					iconCls	: 'icon-table_print_add',
-					handler : 'exportGradedList'
+					xtype: 'textfield',
+					reference : 'WireTodo_keyword',
+					style: 'padding:0px;',
+					enableKeyEvents: true,
+					listeners:{
+						keydown: 'searchWireTodoKeyword'
+					}
+				},
+				{
+					id		: 'btn_wire',
+					text	: '송금',
+					iconCls	: 'icon-table_edit',
+					handler : 'openWinMakeWireInfo'
+				},
+				{
+					text	: '삭제(1개)',
+					iconCls	: 'icon-delete',
+					handler: function() {
+						//delSelectedGrid1Row(grid_invoiceTodoWire);
+					}
 				}
 			],
 			bbar: {
@@ -93,7 +110,7 @@ Ext.define('td.view.grid.WireTodoInvoiceList',{
 		//this.getStore().load();
 	},
 	listeners : {
-		//selectionchange: 'selOrderLoadLogs'
+		selectionchange: 'selectWireTodoInvoice'
 	}
 });
 
@@ -175,7 +192,16 @@ Ext.define('td.view.grid.WireEndInvoiceList',{
 				{ text : '입출금링크',					dataIndex : 'iv_receipt_link',	width:120	}
 			],
 			tbar: [
-
+				{	xtype: 'label',	text: '검색어 : ',		autoWidth:true,	style : 'font-weight:bold;'},
+				{
+					xtype: 'textfield',
+					reference : 'WireEnd_keyword',
+					style: 'padding:0px;',
+					enableKeyEvents: true,
+					listeners:{
+						keydown: 'searchWireEndKeyword'
+					}
+				}
 			],
 			bbar: {
 				xtype: 'pagingtoolbar',
@@ -193,17 +219,17 @@ Ext.define('td.view.grid.WireEndInvoiceList',{
 		//this.getStore().load();
 	},
 	listeners : {
-		//selectionchange: 'selOrderLoadLogs'
+		selectionchange: 'selectWireEndInvoice'
 	}
 });
 
 
 
 
-//공구메모
-Ext.define('td.view.grid.InvoiceGpMemo',{
+//인보이스 관련 공구정보
+Ext.define('td.view.grid.InvoiceGpInfo',{
 	extend: 'Ext.grid.Panel',
-	xtype: 'WireGpInfo',
+	xtype: 'InvoiceGpInfo',
 	requires: [
 		'Ext.selection.CellModel',
 		'Ext.grid.*',
@@ -211,9 +237,9 @@ Ext.define('td.view.grid.InvoiceGpMemo',{
 		'Ext.util.*',
 		'Ext.form.*'
 	],
-	name : 'WireGpInfo',
-	alias:'widget.WireGpInfo',
-	controller:'InvoiceMainController',
+	name : 'InvoiceGpInfo',
+	alias:'widget.InvoiceGpInfo',
+	//controller:'InvoiceMainController',
 	remoteSort: true,
 	autoLoad : false,
 	initComponent: function(){
@@ -230,11 +256,15 @@ Ext.define('td.view.grid.InvoiceGpMemo',{
 			},
 			autoWidth : true,
 			columns : [
-				{ text : '공구명', 			width : 210,	dataIndex : 'gpcode_name',		sortable: false,	align:'left'	},
-				{ text : '공구코드',			width : 120,	dataIndex : 'gpcode',					hidden:true,			align:'left'	},
-				{ text : '날짜',					width : 120,	dataIndex : 'reg_date',				hidden:true,			align:'left'	},
-				{	text : '메모',					width : 620,	dataIndex : 'memo',						align:'left'					},
-				{	text : '발주관련메모',	width : 620,	dataIndex : 'invoice_memo',		align:'left'	}
+				{ text : '공구명', 			width : 380,	dataIndex : 'gpcode_name',	sortable: false	},
+				{ text : '공구코드',		width : 120,	dataIndex : 'gpcode',				hidden:true	},
+				{ text : '날짜',				width : 120,	dataIndex : 'reg_date',			hidden:true	},
+				{ text : '주문',				width : 70,		dataIndex : 'SUM_QTY',			style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
+				{ text : '미발주',			width : 80,		dataIndex : 'NEED_IV_QTY',	style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
+				{ text : '발주',				width : 70,		dataIndex : 'SUM_IV_QTY',		style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
+				{ text : '주문총액',		width : 120,	dataIndex : 'SUM_PAY',			style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
+				{ text : '주문량',			width : 90,		dataIndex : 'ITC_CNT',			style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
+				{ text : '발주량',			width : 90,		dataIndex : 'IVC_CNT',			style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') }
 			]
 		});
 		this.callParent();
@@ -242,21 +272,7 @@ Ext.define('td.view.grid.InvoiceGpMemo',{
 	afterRender: function(){
 		this.callParent(arguments);
 		this.getStore().load();
-	},
-	listeners : {
-		itemdblclick: {
-			/**
-			 * @grid        그리드 오브젝트
-			 * @selRow      선택한 셀의 오브젝트
-			 * @selHtml     선택한 셀의  html
-			 *
-			 * 기본적으로 Ext.define에서 idProperty로 선언한 field가 internalId로 설정된다.
-			 *  그 외 데이터는 selRow.data.{field}로 접근할 수 있다.
-			 */
-			fn: 'openWinGpMemo'
-		}
 	}
-
 });
 
 
@@ -360,7 +376,7 @@ Ext.define('td.view.grid.MakeWireList',{
 		this.cellEditing = new Ext.grid.plugin.CellEditing({
 			clicksToEdit: 1
 		});
-		var store = Ext.create('td.store.MakeWireList');
+		var store = Ext.create('td.store.MakeInvoiceList');
 		Ext.apply(this, {
 			store: store,
 			plugins: [this.cellEditing],

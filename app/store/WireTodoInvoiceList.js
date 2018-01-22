@@ -117,7 +117,6 @@ Ext.define('td.store.WireItemList', {
 
 
 
-
 ////좌측 상단 송금예정 발주서 목록
 //Ext.define('store.invoice_list',{
 //	extend: 'Ext.data.Store',

@@ -1,13 +1,12 @@
 Ext.Panel.prototype.buttonAlign = 'right';
 
-Ext.define('td.view.invoice.winMakeInvoice', {
+Ext.define('td.view.invoice.winMakeWire', {
 	extend: 'Ext.window.Window',
-	xtype: 'winMakeInvoice',
-	reference: 'winMakeInvoice',
-	title: '공구상품목록 재정렬',
-	width: 1400,
-	minWidth: 350,
-	height: 460,
+	xtype: 'winMakeWire',
+	reference: 'winMakeWire',
+	title: '송금내역 작성',
+	width: 862,
+	height: 487,
 	closable: true,
 	closeAction: 'hide',
 	maximizable: false,
@@ -17,9 +16,8 @@ Ext.define('td.view.invoice.winMakeInvoice', {
 	items: [
 		{
 			xtype : 'form',
-			id : 'winMakeInvoiceForm',
-			reference : 'winMakeInvoiceForm',
-			url : '/resources/crud/invoice/invoice.insert.php',
+			id : 'winMakeWireForm',
+			url : '/resources/crud/invoice/wire.insert.php',
 			//url : '/adm/extjs/stock/crud/stock_update.php',
 			layout: 'column',
 			border : 0,
@@ -31,7 +29,7 @@ Ext.define('td.view.invoice.winMakeInvoice', {
 			items:[
 				{
 					labelAlign : 'top',
-					columnWidth: 0.3,
+					columnWidth: 0.45,
 					defaults: {
 						anchor: '100%',
 						collapsible: false,
@@ -41,7 +39,7 @@ Ext.define('td.view.invoice.winMakeInvoice', {
 						//{	xtype: 'label',	text: '- 발주시 입력정보 -',	style: 'margin:10px 0 0 10px; display:block;'	},
 						{
 							xtype: 'fieldset',
-							title: '발주시 입력정보',
+							title: '송금내역 기본정보',
 							labelAlign : 'top',
 							defaultType: 'textfield',
 							style : 'padding:10px',
@@ -52,35 +50,32 @@ Ext.define('td.view.invoice.winMakeInvoice', {
 							},
 							items: [
 								{
-									fieldLabel: '공구코드',
-									name: 'gpcode',
+									fieldLabel: '발주ID',
+									name: 'iv_id',
 									readOnly: true
 								},
 								{
-									fieldLabel: '발주서 별칭',
-									name: 'iv_name'
-								},
-								{
-									xtype : 'cb_dealers',
-									fieldLabel: '딜러',
-									reference: 'dealers',
-									listConfig: {
-										itemTpl: ['<div data-qtip="{ct_id}: {ct_name}">{ct_name} ({ct_id})</div>']
-									}
-								},
-								{
-									fieldLabel: '인보이스번호',
-									emptyText: '인보이스번호',
-									name: 'iv_order_no'
+									fieldLabel: '송금내역별칭',
+									name: 'wr_name'
 								},
 								{
 									xtype: 'datefield',
 									format: 'Y-m-d',
-									fieldLabel: '인보이스날짜',
-									name: 'iv_date',
+									fieldLabel: '송금일',
+									name: 'wr_date',
 									allowBlank: false,
 									maxValue: new Date(),
 									value : new Date()
+								},
+								{
+									xtype: 'cb_wiretype',
+									reference: 'wiretype',
+									fieldLabel: '송금유형',
+									emptyText: '선택 또는 입력',
+									name: 'wr_type',
+									listConfig: {
+										itemTpl: ['<div data-qtip="{value}">{title}</div>']
+									}
 								},
 								{
 									xtype : 'cb_moneytype',
@@ -92,30 +87,40 @@ Ext.define('td.view.invoice.winMakeInvoice', {
 									}
 								},
 								{
-									fieldLabel: '환율',
-									emptyText: '0',
-									name: 'od_exch_rate'
+									fieldLabel: '송금기준환율',
+									id: 'wr_exchrate',
+									name: 'wr_exchrate',
+									allowBlank: false
 								},
 								{
-									fieldLabel: 'TAX',
-									emptyText: '0',
-									name: 'iv_tax'
+									xtype: 'numberfield',
+									reference : 'wr_totalprice',
+									name: 'wr_totalprice',
+									fieldLabel: '송금 총액',
+									labelWidth:150,
+									allowBlank: false,
+									enforceMaxLength: true,
+									maskRe: /\d/
 								},
 								{
-									fieldLabel: 'SHIP.FEE',
-									emptyText: '0',
-									name: 'iv_shippingfee'
+									fieldLabel: '송금수수료(국외)',
+									name: 'wr_out_fee',
+									allowBlank: false
 								},
 								{
-									fieldLabel: 'DISCOUNT.FEE',
-									emptyText: '0',
-									name: 'iv_discountfee'
+									fieldLabel: '송금수수료(국내)',
+									name: 'wr_in_fee',
+									allowBlank: false
 								},
 								{
-									fieldLabel: '추출된 품목수',
-									emptyText: '0',
-									readOnly: true,
-									reference : 'ItemCount'
+									xtype: 'textarea',
+									fieldLabel: '메모',
+									labelAlign : 'top',
+									width: '98%',
+									height : 60,
+									margin: '0 0 10 6',
+									style:'float:left;',
+									name: 'wr_memo'
 								}
 							]
 						}
@@ -123,8 +128,8 @@ Ext.define('td.view.invoice.winMakeInvoice', {
 				},	//필드셋 엘리먼트 end
 				{
 					region: 'center',
-					columnWidth: 0.7,
-					xtype : 'MakeInvoiceList',
+					columnWidth: 0.55,
+					xtype : 'MakeWireList',
 					height : 380
 				}
 			],	//items item end
@@ -141,15 +146,15 @@ Ext.define('td.view.invoice.winMakeInvoice', {
 				},
 				{
 					text: '인쇄',
-					handler: 'printWinMakeInvoice'
+					handler: 'printwinMakeWire'
 				},
 				{
 					text: '취소',
-					handler: 'closeWinMakeInvoice'
+					handler: 'closewinMakeWire'
 				}, {
 					text: '기록',
 					reference : 'BtnSubmitInvoice',
-					handler: 'submitWinMakeInvoice'
+					handler: 'submitwinMakeWire'
 				}
 			]
 		}
