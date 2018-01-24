@@ -347,7 +347,7 @@ Ext.define('td.view.grid.WireItemList',{
 		this.getStore().load();
 	},
 	listeners : {
-		selectionchange: 'selectLoadInvoiceItem'
+		//selectionchange: 'selectLoadInvoiceItem'
 	}
 });
 

@@ -3,16 +3,14 @@ Ext.define('td.view.invoice.WireMain', {
 	extend: 'Ext.panel.Panel',
 	alias: 'widget.WireMain',
 	requires:[
-		'td.view.invoice.WireMainController',
-		'td.store.mbinfo',
-		'td.view.invoice.winGpSms',
-		'td.view.invoice.winMakeInvoice',
-		'td.view.invoice.winMakeWire',
-		'td.view.grid.WireTodoInvoiceList',
 		'Ext.ux.grid.Printer',
+		'td.view.invoice.WireMainController',
 		'td.store.Local',
-		'td.store.WireTodoInvoiceList',
-		'td.view.combo.Invoice'
+		'td.store.mbinfo',
+		'td.view.combo.Invoice',
+		'td.view.invoice.winMakeWire',
+		'td.view.grid.InvoiceOrderItemList',
+		'td.view.grid.WireTodoInvoiceList'
 	],
 	controller:'WireMainController',
 	closable: true,

@@ -7,8 +7,8 @@ Ext.define('td.view.invoice.InvoiceMain', {
 		'td.store.mbinfo',
 		'td.view.invoice.winGpSms',
 		'td.view.invoice.winGpMemo',
-		'td.view.invoice.winMakeInvoice',
-		'td.view.grid.InvoiceOrderItemList'
+		'td.view.grid.InvoiceOrderItemList',
+		'td.view.invoice.winMakeInvoice'
 	],
 	controller:'InvoiceMainController',
 	closable: true,
