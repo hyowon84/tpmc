@@ -21,7 +21,6 @@ Ext.define('td.view.combo.Dealers', {
 	store: {type: 'dealers'},
 	editable: false,
 	queryMode: 'local',
-	editable: false,
 	emptyText: '선택 또는 입력',
 	displayField: 'ct_name',
 	publishes: 'value',
@@ -40,9 +39,8 @@ Ext.define('td.view.combo.MoneyType', {
 	store: {type: 'moneytype'},
 	editable: false,
 	queryMode: 'local',
-	editable: false,
 	emptyText: '선택 또는 입력',
-	displayField: 'title',
+	displayField: 'name',
 	publishes: 'value',
 	anchor: '0',
 	queryMode: 'local',
@@ -62,10 +60,11 @@ Ext.define('td.view.combo.WireType', {
 	editable: false,
 	emptyText: '선택 또는 입력',
 	displayField: 'title',
+	valueField: 'value',
 	publishes: 'value',
 	anchor: '0',
 	queryMode: 'local',
 	listConfig: {
-		itemTpl: ['<div data-qtip="{value}">{value}</div>']
+		itemTpl: ['<div data-qtip="{value}">{title}</div>']
 	}
 });

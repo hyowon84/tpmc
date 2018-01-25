@@ -17,7 +17,7 @@ Ext.define('td.view.invoice.winMakeWire', {
 		{
 			xtype : 'form',
 			id : 'winMakeWireForm',
-			url : '/resources/crud/invoice/wire.insert.php',
+			url : '/resources/crud/invoice/wire.create.php',
 			//url : '/adm/extjs/stock/crud/stock_update.php',
 			layout: 'column',
 			border : 0,
@@ -71,7 +71,6 @@ Ext.define('td.view.invoice.winMakeWire', {
 									xtype: 'cb_wiretype',
 									reference: 'wiretype',
 									fieldLabel: '송금유형',
-									emptyText: '선택 또는 입력',
 									name: 'wr_type',
 									listConfig: {
 										itemTpl: ['<div data-qtip="{value}">{title}</div>']
@@ -80,8 +79,8 @@ Ext.define('td.view.invoice.winMakeWire', {
 								{
 									xtype : 'cb_moneytype',
 									reference: 'moneytype',
+									name: 'wr_currency',
 									fieldLabel: '통화유형',
-									emptyText: '선택 또는 입력',
 									listConfig: {
 										itemTpl: ['<div data-qtip="{value}">{value}</div>']
 									}
@@ -146,15 +145,15 @@ Ext.define('td.view.invoice.winMakeWire', {
 				},
 				{
 					text: '인쇄',
-					handler: 'printwinMakeWire'
+					handler: 'printWinMakeWire'
 				},
 				{
 					text: '취소',
-					handler: 'closewinMakeWire'
+					handler: 'closeWinMakeWire'
 				}, {
 					text: '기록',
-					reference : 'BtnSubmitInvoice',
-					handler: 'submitwinMakeWire'
+					reference : 'BtnSubmitWire',
+					handler: 'submitWinMakeWire'
 				}
 			]
 		}

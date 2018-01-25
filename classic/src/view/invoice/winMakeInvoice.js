@@ -86,7 +86,6 @@ Ext.define('td.view.invoice.winMakeInvoice', {
 									xtype : 'cb_moneytype',
 									reference: 'moneytype',
 									fieldLabel: '통화유형',
-									emptyText: '선택 또는 입력',
 									listConfig: {
 										itemTpl: ['<div data-qtip="{value}">{value}</div>']
 									}

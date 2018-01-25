@@ -224,6 +224,87 @@ Ext.define('td.view.invoice.WireMainController', {
 			Ext.apply(grid_item.store.getProxy().extraParams, v_param);
 			grid_item.store.load();
 		}
+	},
+
+
+
+
+	//일괄수정
+	updateInvoiceQty : function() {
+		var win = this.lookupReference('winMakeInvoice');
+		var store = win.down("[name=MakeInvoiceList]").store;
+		var cnt = store.getCount();
+		var v_qty = this.lookupReference('InvoiceQty').getValue();
+
+		for(var i = 0; i < cnt; i++) {
+			store.getData().getAt(i).set('iv_qty',v_qty);
+		}
+	},
+
+	//인쇄
+	printWinMakeWire : function() {
+		var win = this.lookupReference('winMakeWire');
+		var grid_win = win.down("[name=MakeWireList]");
+		Ext.ux.grid.Printer.mainTitle = Ext.util.Format.date(new Date(),'Y-m-d g:i:s') +' WIRE LIST';
+		Ext.ux.grid.Printer.print(grid_win);
+	},
+
+	//취소
+	closeWinMakeWire : function(btn, e) {
+		var win = this.lookupReference('winMakeWire'),
+			grid = win.down("[name=MakeWireList]");
+
+		win.hide();
+		Ext.getCmp('winMakeWireForm').getForm().reset();
+		grid.store.removeAll();
+	},
+
+	//기록
+	submitWinMakeWire : function() {
+		var win = this.lookupReference('winMakeWire'),
+				grid_win = win.down("[name=MakeWireList]"),
+				grid_todo = Ext.getCmp('WireInvoice').down("[name=WireTodoInvoiceList]"),
+				grid_end = Ext.getCmp('WireInvoice').down("[name=WireEndInvoiceList]"),
+				grid_gpinfo = Ext.getCmp('WireItem').down("[name=InvoiceGpInfo]"),
+				grid_item = Ext.getCmp('WireItem').down("[name=WireItemList]"),
+				form = Ext.getCmp('winMakeWireForm'),
+				btn = this.lookup('BtnSubmitWire');
+
+		var jsonData = "[",
+				cnt = grid_win.getStore().data.items.length;
+
+
+		for(var i = 0; i < cnt; i++) {
+			jsonData += Ext.encode(grid_win.getStore().data.items[i].data)+",";
+		}
+
+		jsonData = jsonData.substring(0,jsonData.length-1) + "]";
+
+		btn.hide();
+		form.submit({
+			params : {	mode : 'new',
+				grid : jsonData
+			},
+			success : function(form,action) {
+				Ext.Msg.alert('기록완료', action.result.message);
+				form.reset();
+				grid_win.getStore().removeAll();
+
+				grid_todo.store.load();
+				grid_end.store.load();
+				grid_gpinfo.store.load();
+				grid_item.store.load();
+
+				//grid_orderitems.getStore().load();//발주대상 주문품목들 리로딩
+				//grid_invoiceTodoWire.getStore().load();//송금예정발주서 리로딩
+				win.hide();
+				btn.show();
+			},
+			failure : function (form, action) {
+				Ext.Msg.alert('기록실패', action.result ? action.result.message : '실패하였습니다');
+				btn.show();
+			}
+		});
 	}
 
 	////공구목록 선택해제

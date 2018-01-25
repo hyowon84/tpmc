@@ -45,13 +45,14 @@ Ext.define('td.store.WireEndInvoiceList', {
 	extend: 'Ext.data.Store',
 	model: 'td.model.WireEndInvoice',
 	alias: 'store.WireEndInvoiceList',
+	groupField: 'Group',
 	pageSize : 100,
 	autoSync : false,
 	autoLoad : true,
 	remoteSort: true,
 	sorters:[
 		{
-			property: "GI.reg_date",
+			property: "wr_id",
 			direction:'DESC'
 		}
 	],
@@ -61,8 +62,8 @@ Ext.define('td.store.WireEndInvoiceList', {
 		},
 		api : {
 			read		: '/resources/crud/invoice/invoice.read.php?mode=WireEndInvoice',
-			update	: '/resources/crud/invoice/invoice.update.php',
-			destroy	: '/resources/crud/invoice/invoice.delete.php'
+			update	: '/resources/crud/invoice/invoice.update.php'	//stockinfo_update.php
+			//destroy	: '/resources/crud/invoice/invoice.delete.php'
 		},
 		reader : {
 			rootProperty : 'data',
