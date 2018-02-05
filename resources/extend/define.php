@@ -618,7 +618,7 @@ $sql_auction_item = " SELECT
  장바구니 관련 목록부터 주문까지 사용할 쿼리
  */
 $ss_id = $_SESSION[ss_id];
-$mb_id = $member[mb_id];
+$mb_id = $_SESSION[admin_id];
 $회원조건 = ($mb_id) ? "	OR			CT.mb_id = '$mb_id' " : '';
 $sql_cartproduct = "	(	SELECT	CT.number,
 																CT.it_id,				/*상품코드*/

@@ -143,6 +143,6 @@ Ext.define('td.view.grid.BankStatement',{
 		this.callParent(arguments);
 	},
 	listeners : {
-		selectionchange: 'selBankDataLoadOrders'
+		selectionchange: 'selectBankDataLoadOrders'
 	}
 });

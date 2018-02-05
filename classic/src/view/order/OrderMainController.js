@@ -138,5 +138,58 @@ Ext.define('td.view.order.OrderMainController', {
 				}
 			}).open();
 		})
+	},
+
+	//주문관리 그리드 두번째 툴바 변경버튼
+	updateOrderStats : function(btn,e) {
+		var grid = Ext.getCmp('od_odlist').down("[name=OrderList]");
+
+		var sm = grid.getSelection();
+		if( sm == '' ) {
+			Ext.Msg.alert('알림','품목들을 선택해주세요');
+			return false;
+		}
+
+		var editStats = combo_editStats.getValue();
+		var deliverytype = combo_deliverytype.getValue();
+		var cashreceipt_yn = combo_cashreceipt_yn.getValue();
+		var cashreceipt_type = combo_cashreceipt_type.getValue();
+
+		for(var i = 0; i < sm.length; i++) {
+			if(editStats) sm[i].set('stats',editStats);
+			if(deliverytype) sm[i].set('delivery_type',deliverytype);
+			if(cashreceipt_yn) sm[i].set('cash_receipt_yn',cashreceipt_yn);
+			if(cashreceipt_type) sm[i].set('cash_receipt_type',cashreceipt_type);
+		}
+
+	},
+
+	printOrders :	function(btn,e) {
+		var grid = Ext.getCmp('od_odlist').down("[name=OrderList]");
+		var bk_store = grid.getStore();	//백업
+		var store = Ext.create('td.store.OrderList');
+
+		var sm = grid.getSelection();
+		if( sm == '' ) {
+			Ext.Msg.alert('알림','품목들을 선택해주세요');
+			return false;
+		}
+
+		sm = grid.getSelectionModel().getSelection();
+
+		//선택된 레코드 임시 스토어에 저장해두기
+		for(var i = 0; i < sm.length; i++) {
+			//var rec = Ext.create('td.model.InvoiceItem', {
+			//
+			//});
+			record = sm[i];
+			rec = bk_store.getById(record.getId());
+			store.add(rec);
+		}
+
+		grid.reconfigure(store);
+		Ext.ux.grid.Printer.mainTitle = '선택된 주문목록';
+		Ext.ux.grid.Printer.print(grid);
+		grid.reconfigure(bk_store);
 	}
 });

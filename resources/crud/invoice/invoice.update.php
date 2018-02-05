@@ -4,7 +4,7 @@ include_once('./_common.php');
 
 //스트립슬래시를 안하면 json_decode가 안됨
 $arr = json_decode(str_replace('\"','"',stripslashes( iconv('utf-8', 'cp949', $_POST['data'] ) )),true);
-$mb_id = $member[mb_id];
+$mb_id = $_SESSION[admin_id];
 
 
 

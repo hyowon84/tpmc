@@ -101,6 +101,29 @@ Ext.define('td.view.invoice.WireMainController', {
 
 	},
 
+	//송금예정 발주서 레코드 삭제
+	deleteWireTodoInvoice : function(view, records) {
+		var grid = Ext.getCmp('WireInvoice').down("[name=WireTodoInvoiceList]");
+
+		var sm = grid.getSelectionModel().getSelection();
+
+
+		if(sm.length == 1) {
+			Ext.MessageBox.confirm('확인', '정말 삭제하시겠습니까?',
+				function(button) {
+					if (button == 'yes') {
+						grid.store.remove(sm[0]);
+					}
+					else {
+
+					}
+				});
+		} else {
+			Ext.Msg.alert('위험','발주서가 '+sm.length+'개 이상 선택되어있습니다 1개씩 꼼꼼히 삭제바랍니다');
+			return false;
+		}
+	},
+
 	//송금예정발주서 선택시 우측 공구정보, 송금관련 목록 로딩
 	selectWireTodoInvoice : function(view, records) {
 
@@ -226,9 +249,6 @@ Ext.define('td.view.invoice.WireMainController', {
 		}
 	},
 
-
-
-
 	//일괄수정
 	updateInvoiceQty : function() {
 		var win = this.lookupReference('winMakeInvoice');
@@ -305,6 +325,66 @@ Ext.define('td.view.invoice.WireMainController', {
 				btn.show();
 			}
 		});
+	},
+
+	//우측 송금완료 인보이스건 상태값 변경
+	updateWireInvoiceItem : function() {
+		var grid_item = Ext.getCmp('WireItem').down("[name=WireItemList]"),
+				sm = grid_item.getSelection();
+		if( sm == '' ) {
+			Ext.Msg.alert('알림','품목들을 선택해주세요');
+			return false;
+		}
+
+		var iv_stats = this.lookupReference('wr_stats').getValue();
+		for(var i = 0; i < sm.length; i++) {
+			sm[i].set('iv_stats',iv_stats);
+		}
+
+		grid_item.store.update();
+	},
+
+	//선택된 발주품목들만 인쇄
+	printWireInvoiceItem : function() {
+		var grid_item = Ext.getCmp('WireItem').down("[name=WireItemList]");
+		var bk_store = grid_item.getStore();	//백업
+		var store = Ext.create('td.store.MakeInvoiceList');
+
+		var sm = grid_item.getSelection();
+		if( sm == '' ) {
+			Ext.Msg.alert('알림','품목들을 선택해주세요');
+			return false;
+		}
+
+		//선택된 레코드 임시 스토어에 저장해두기
+		for(var i = 0; i < sm.length; i++) {
+			var rec = Ext.create('td.model.InvoiceItem', {
+				'number'				: sm[i].data.number,
+				'real_jaego'		: sm[i].data.real_jaego,
+				'cr_id'					: sm[i].data.cr_id,
+				'iv_id'					: sm[i].data.iv_id,
+				'iv_order_no'		: sm[i].data.iv_order_no,
+				'iv_stats'			: sm[i].data.iv_stats,
+				'reg_date'			: sm[i].data.reg_date,
+				'gpcode'				: sm[i].data.gpcode,
+				'iv_it_img'			: sm[i].data.iv_it_img,
+				'iv_it_id'			: sm[i].data.iv_it_id,
+				'iv_it_name' 		: sm[i].data.iv_it_name,
+				'money_type'  	: sm[i].data.money_type,
+				'iv_dealer_worldprice'  : sm[i].data.iv_dealer_worldprice,
+				'iv_dealer_price'       : sm[i].data.iv_dealer_price,
+				'SUM_QTY'       : sm[i].data.SUM_QTY,
+				'iv_qty'				: sm[i].data.iv_qty,
+				'cr_qty'				: sm[i].data.cr_qty,
+				'cr_cancel_qty'	: sm[i].data.cr_cancel_qty
+			});
+			store.add(rec);
+		}
+
+		grid_item.reconfigure(store);
+		Ext.ux.grid.Printer.mainTitle = Ext.util.Format.date(new Date(),'Y-m-d g:i:s') +' 발주목록';
+		Ext.ux.grid.Printer.print(grid_item);
+		grid_item.reconfigure(bk_store);
 	}
 
 	////공구목록 선택해제

@@ -68,3 +68,4 @@ Ext.define('td.view.combo.WireType', {
 		itemTpl: ['<div data-qtip="{value}">{title}</div>']
 	}
 });
+

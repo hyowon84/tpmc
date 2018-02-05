@@ -30,7 +30,7 @@ Ext.define('td.view.bank.BankMain', {
 	},
 	items: [
 		{
-			id : 'bank_list',
+			id : 'BankList',
 			layout: 'fit',
 			title : '입출금내역',
 			region:'west',
@@ -45,7 +45,7 @@ Ext.define('td.view.bank.BankMain', {
 			]
 		},
 		{
-			id : 'bank_order',
+			id : 'BankOrder',
 			layout: 'fit',
 			title : '연결된 주문내역',
 			collapsible: false,

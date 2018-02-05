@@ -118,7 +118,7 @@ else if($mode == 'banklinklist') {
 	}
 
 	if ($keyword) {
-		$조건문[] = " CL.od_id LIKE '%$keyword%' OR CL.it_id LIKE '%$keyword%' 
+		$조건문[] = " CL.od_id LIKE '%$keyword%' OR CL.it_id LIKE '%$keyword%'
 										OR CL.it_name LIKE '%$keyword%' OR CI.clay_id LIKE '%$keyword%'
 										OR CI.hphone LIKE '%$keyword%' OR CI.name LIKE '%$keyword%'
 										OR GI.gpcode_name LIKE '%$keyword%' OR CI.memo LIKE '%$keyword%'
@@ -126,6 +126,12 @@ else if($mode == 'banklinklist') {
 	}
 	if($number || $keyword) {
 		$조건문SQL = " AND ( ".implode('OR', $조건문)." ) ";
+
+		//환불제외 로딩, 전체로딩
+		if($except_refund) {
+			$조건문SQL .= " AND CL.stats <= 60 ";
+		}
+
 	}
 
 }

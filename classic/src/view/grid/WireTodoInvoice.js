@@ -89,9 +89,7 @@ Ext.define('td.view.grid.WireTodoInvoiceList',{
 				{
 					text	: '삭제(1개)',
 					iconCls	: 'icon-delete',
-					handler: function() {
-						//delSelectedGrid1Row(grid_invoiceTodoWire);
-					}
+					handler: 'deleteWireTodoInvoice'
 				}
 			],
 			bbar: {
@@ -329,7 +327,21 @@ Ext.define('td.view.grid.WireItemList',{
 				{ text: '품목명',			dataIndex : 'iv_it_name',						width:450,			style:'text-align:center',		align:'left'	}
 			],
 			tbar : [
-				{	xtype: 'label',	text: '검색어 : ',		autoWidth:true,	style : 'font-weight:bold;'}
+				{
+					xtype : 'cb_ivstats',
+					reference : 'wr_stats'
+				},
+				{
+					text	: '변경',
+					iconCls	: 'icon-table_edit',
+					handler : 'updateWireInvoiceItem'
+				},
+				{
+					text	: '인쇄',
+					iconCls	: 'icon-table_print',
+					handler: 'printWireInvoiceItem'
+				}
+
 			],
 			bbar: {
 				xtype: 'pagingtoolbar',

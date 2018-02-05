@@ -1,7 +1,7 @@
 <?php
 include_once('./_common.php');
 
-$mb_id = $member[mb_id];
+$mb_id = $_SESSION[admin_id];
 
 /*
  * JSON DECODE 관련 이슈

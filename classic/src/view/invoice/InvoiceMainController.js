@@ -445,6 +445,7 @@ Ext.define('td.view.invoice.InvoiceMainController', {
 	printWinMakeInvoice : function() {
 		var win = this.lookupReference('winMakeInvoice');
 		var grid_win = win.down("[name=MakeInvoiceList]");
+
 		Ext.ux.grid.Printer.mainTitle = Ext.util.Format.date(new Date(),'Y-m-d g:i:s') +' INVOICE LIST';
 		Ext.ux.grid.Printer.print(grid_win);
 	},
@@ -458,20 +459,21 @@ Ext.define('td.view.invoice.InvoiceMainController', {
 
 	//기록
 	submitWinMakeInvoice : function() {
-		this.lookupReference('BtnSubmitInvoice').hide();
-		var win = this.lookupReference('winMakeInvoice');
-		var grid_win = win.down("[name=MakeInvoiceList]");
-
-		var jsonData = "[";
-		var cnt = grid_win.getStore().data.items.length;
-		var form = Ext.getCmp('winMakeInvoiceForm');
+		var win = this.lookupReference('winMakeInvoice'),
+				grid_win = win.down("[name=MakeInvoiceList]"),
+				grid_item = Ext.getCmp('InvoiceOrderItemList').down("[name=InvoiceOrderItemList]"),
+				grid_todo = Ext.getCmp('WireInvoice').down("[name=WireTodoInvoiceList]"),
+				form = Ext.getCmp('winMakeInvoiceForm'),
+				btn = this.lookupReference('BtnSubmitInvoice'),
+				cnt = grid_win.getStore().data.items.length,
+				jsonData = "[";
 
 		for(var i = 0; i < cnt; i++) {
 			jsonData += Ext.encode(grid_win.getStore().data.items[i].data)+",";
 		}
-
 		jsonData = jsonData.substring(0,jsonData.length-1) + "]";
 
+		btn.hide();
 		form.submit({
 			params : {	mode : 'new',
 				grid : jsonData
@@ -480,14 +482,15 @@ Ext.define('td.view.invoice.InvoiceMainController', {
 				Ext.Msg.alert('기록완료', action.result.message);
 				form.reset();
 				grid_win.getStore().removeAll();
-				//grid_orderitems.getStore().load();//발주대상 주문품목들 리로딩
-				//grid_invoiceTodoWire.getStore().load();//송금예정발주서 리로딩
+				//grid_gpinfo.store.load();
+				grid_item.store.load();
+				grid_todo.store.load();
 				win.hide();
-				Ext.getCmp('BtnSubmitInvoice').show();
+				btn.show();
 			},
 			failure : function (form, action) {
 				Ext.Msg.alert('기록실패', action.result ? action.result.message : '실패하였습니다');
-				Ext.getCmp('BtnSubmitInvoice').show();
+				btn.show();
 			}
 		});
 	},

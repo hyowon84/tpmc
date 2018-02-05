@@ -154,115 +154,92 @@ Ext.define('td.view.grid.OrderList',{
 							}
 						}
 					]
-				}
+				},
 				
-				//{
-				//	xtype : 'toolbar',
-				//	dock : 'top',
-				//	items : [
-				//		{
-				//			fieldLabel : '변경',
-				//			labelWidth : 60,
-				//			id : 'cb_editstats',
-				//			xtype: 'cb_stats'
-				//		},
-				//		{
-				//			id		: 'ordStatsUpdBtn',
-				//			text	: '변경',
-				//			iconCls	: 'icon-table_edit',
-				//			handler : function() {
-				//
-				//				var sm = grid_orderlist.getSelection();
-				//				if( sm == '' ) {
-				//					Ext.Msg.alert('알림','품목들을 선택해주세요');
-				//					return false;
-				//				}
-				//
-				//				var editStats = combo_editStats.getValue();
-				//				var deliverytype = combo_deliverytype.getValue();
-				//				var cashreceipt_yn = combo_cashreceipt_yn.getValue();
-				//				var cashreceipt_type = combo_cashreceipt_type.getValue();
-				//
-				//				for(var i = 0; i < sm.length; i++) {
-				//					if(editStats) sm[i].set('stats',editStats);
-				//					if(deliverytype) sm[i].set('delivery_type',deliverytype);
-				//					if(cashreceipt_yn) sm[i].set('cash_receipt_yn',cashreceipt_yn);
-				//					if(cashreceipt_type) sm[i].set('cash_receipt_type',cashreceipt_type);
-				//				}
-				//
-				//			}
-				//		},
-				//		{
-				//			text	: '인쇄',
-				//			iconCls	: 'icon-table_print',
-				//			handler: function() {
-				//				Ext.ux.grid.Printer.mainTitle = '선택된 주문목록';
-				//				Ext.ux.grid.Printer.print(grid_orderlist);
-				//			}
-				//		},
-				//		{
-				//			text	: 'SMS',
-				//			id		: 'sendSMS',
-				//			iconCls	: 'icon-sms',
-				//			handler: function() {
-				//				var sm = grid_orderlist.getSelection();
-				//
-				//				if( sm == '' ) {
-				//					Ext.Msg.alert('알림','주문내역들을 선택해주세요');
-				//					return false;
-				//				}
-				//
-				//				store_winSms.removeAll();
-				//				var v_prev_od_id;
-				//
-				//				for(var i = 0; i < sm.length; i++) {
-				//					sm[i].data.message = v_SmsMsg[sm[i].data.stats];
-				//
-				//					/*중복주문번호에 대해서는 중복발송 방지위해 필터링*/
-				//					if(sm[i].data.od_id == v_prev_od_id) continue;
-				//
-				//					var stats = sm[i].data.stats;
-				//					if( (stats >= 10 && stats <= 40) || stats == 90)
-				//						stats = stats;
-				//					else
-				//						stats = '';
-				//
-				//					var rec = Ext.create('model.SmsSendForm', {
-				//						'stats'			: stats,
-				//						'message'		: sm[i].data.message,
-				//						'nickname'		: sm[i].data.nickname,
-				//						'name'			: sm[i].data.name,
-				//						'hphone'			: sm[i].data.hphone,
-				//						'od_id'			: sm[i].data.od_id,
-				//						'TOTAL_PRICE'	: sm[i].data.TOTAL_PRICE,
-				//						'it_name'		: sm[i].data.it_name
-				//					});
-				//					store_winSms.add(rec);
-				//
-				//					v_prev_od_id = sm[i].data.od_id;
-				//				}
-				//
-				//
-				//				var button = Ext.get('sendSMS');
-				//				button.dom.disabled = true;
-				//				//this.container.dom.style.visibility=true
-				//
-				//				if (winSmsForm.isVisible()) {
-				//					winSmsForm.hide(this, function() {
-				//						button.dom.disabled = false;
-				//					});
-				//				} else {
-				//					winSmsForm.show(this, function() {
-				//						button.dom.disabled = false;
-				//					});
-				//				}
-				//
-				//				//grid_winSms.reconfigure(store_winSms);
-				//
-				//			}
-				//		}
-				//	]
-				//}
+				{
+					xtype : 'toolbar',
+					dock : 'top',
+					items : [
+						{
+							fieldLabel : '변경',
+							labelWidth : 60,
+							reference : 'cb_editstats',
+							xtype: 'cb_stats'
+						},
+						{
+							reference		: 'ordStatsUpdBtn',
+							text	: '변경',
+							iconCls	: 'icon-table_edit',
+							handler : 'updateOrderStats'
+						},
+						{
+							text	: '인쇄',
+							iconCls	: 'icon-table_print',
+							handler: 'printOrders'
+						}
+						//{
+						//	text	: 'SMS',
+						//	id		: 'sendSMS',
+						//	iconCls	: 'icon-sms',
+						//	handler: function() {
+						//		var sm = grid_orderlist.getSelection();
+						//
+						//		if( sm == '' ) {
+						//			Ext.Msg.alert('알림','주문내역들을 선택해주세요');
+						//			return false;
+						//		}
+						//
+						//		store_winSms.removeAll();
+						//		var v_prev_od_id;
+						//
+						//		for(var i = 0; i < sm.length; i++) {
+						//			sm[i].data.message = v_SmsMsg[sm[i].data.stats];
+						//
+						//			/*중복주문번호에 대해서는 중복발송 방지위해 필터링*/
+						//			if(sm[i].data.od_id == v_prev_od_id) continue;
+						//
+						//			var stats = sm[i].data.stats;
+						//			if( (stats >= 10 && stats <= 40) || stats == 90)
+						//				stats = stats;
+						//			else
+						//				stats = '';
+						//
+						//			var rec = Ext.create('model.SmsSendForm', {
+						//				'stats'			: stats,
+						//				'message'		: sm[i].data.message,
+						//				'nickname'		: sm[i].data.nickname,
+						//				'name'			: sm[i].data.name,
+						//				'hphone'			: sm[i].data.hphone,
+						//				'od_id'			: sm[i].data.od_id,
+						//				'TOTAL_PRICE'	: sm[i].data.TOTAL_PRICE,
+						//				'it_name'		: sm[i].data.it_name
+						//			});
+						//			store_winSms.add(rec);
+						//
+						//			v_prev_od_id = sm[i].data.od_id;
+						//		}
+						//
+						//
+						//		var button = Ext.get('sendSMS');
+						//		button.dom.disabled = true;
+						//		//this.container.dom.style.visibility=true
+						//
+						//		if (winSmsForm.isVisible()) {
+						//			winSmsForm.hide(this, function() {
+						//				button.dom.disabled = false;
+						//			});
+						//		} else {
+						//			winSmsForm.show(this, function() {
+						//				button.dom.disabled = false;
+						//			});
+						//		}
+						//
+						//		//grid_winSms.reconfigure(store_winSms);
+						//
+						//	}
+						//}
+					]
+				}
 			],
 			bbar: {
 				xtype: 'pagingtoolbar',
@@ -452,7 +429,7 @@ Ext.define('td.view.grid.OrderLog',{
 });
 
 
-
+//입출금내역에서 사용하는 주문관리 그리드
 Ext.define('td.view.grid.BankLinkOrder',{
 	extend: 'Ext.grid.Panel',
 	xtype: 'BankLinkOrder',
@@ -466,7 +443,8 @@ Ext.define('td.view.grid.BankLinkOrder',{
 		'td.store.Local',
 		'td.store.OrderList',
 		'td.view.combo.Product',
-		'td.view.combo.Order'
+		'td.view.combo.Order',
+		'td.view.bank.BankMainController'
 	],
 	name : 'BankLinkOrder',
 	alias:'widget.BankLinkOrder',
@@ -529,110 +507,57 @@ Ext.define('td.view.grid.BankLinkOrder',{
 				{ text: '현.영 정보',		dataIndex: 'cash_receipt_info',			width: 170,		style:'text-align:center',		align:'left'	}
 			],
 			dockedItems: [
-				/*{
+				{
 					xtype : 'toolbar',
 					dock : 'top',
 					items : [
 						{	xtype: 'label',	text: '확장 검색어 : ',		autoWidth:true,	style : 'font-weight:bold;'},
 						{
 							xtype: 'textfield',
-							id : 'banklink_keyword',
+							reference : 'banklink_keyword',
 							name: 'keyword',
 							style: 'padding:0px;',
 							enableKeyEvents: true,
 							listeners:{
-								keydown:function(t,e){
-									if(e.keyCode == 13){
-										var v_param = {
-											keyword : Ext.getCmp('banklink_keyword').getValue()
-										}
-
-										grid_banklinklist.store.loadData([],false);
-										Ext.apply(grid_banklinklist.store.getProxy().extraParams, v_param);
-										Ext.getCmp('ptb_banklinklist').moveFirst();
-									}
-								}
+								keydown: 'searchBankLinkKeyword'
 							}
 						},
 						{
 							text: '입금처리',
-							id: 'btn_link_B01',
+							//: 'btn_link_B01',
+							stats : 'B01',
 							iconCls: 'icon-link',
-							handler: function () {
-								updateLinkBankdata('B01');
-							}
+							handler: 'updateLinkBankdata'
 						},
 						{
 							text: '환불처리',
-							id: 'btn_link_B07',
+							//id: 'btn_link_B07',
+							stats : 'B07',
 							iconCls: 'icon-link',
-							handler: function () {
-								updateLinkBankdata('B07');
-							}
+							handler: 'updateLinkBankdata'
 						},
 						{
-							text	: 'SMS',
-							id		: 'bankSendSMS',
-							iconCls	: 'icon-sms',
-							handler: function() {
-								var sm = grid_banklinklist.getSelection();
+							text: '환불제외로딩',
 
-								if( sm == '' ) {
-									Ext.Msg.alert('알림','주문내역들을 선택해주세요');
-									return false;
-								}
+							iconCls: 'icon-refresh',
+							except_refund : '1',
+							handler: 'loadingExceptRefund'
+						},
+						{
+							text: '환불포함로딩',
+							except_refund : '0',
+							iconCls: 'icon-refresh',
+							handler: 'loadingExceptRefund'
+						}
 
-								store_winSms.removeAll();
-								var v_prev_od_id;
-
-								for(var i = 0; i < sm.length; i++) {
-									sm[i].data.message = v_SmsMsg[sm[i].data.stats];
-
-									//중복주문번호에 대해서는 중복발송 방지위해 필터링
-									if(sm[i].data.od_id == v_prev_od_id) continue;
-
-									var stats = sm[i].data.stats;
-									if( (stats >= 10 && stats <= 40) || stats == 90)
-										stats = stats;
-									else
-										stats = '';
-
-									var rec = Ext.create('model.SmsSendForm', {
-										'stats'			: stats,
-										'message'		: sm[i].data.message,
-										'nickname'		: sm[i].data.nickname,
-										'name'			: sm[i].data.name,
-										'hphone'			: sm[i].data.hphone,
-										'od_id'			: sm[i].data.od_id,
-										'TOTAL_PRICE'	: sm[i].data.TOTAL_PRICE,
-										'it_name'		: sm[i].data.it_name
-									});
-									store_winSms.add(rec);
-
-									v_prev_od_id = sm[i].data.od_id;
-								}
-
-
-								var button = Ext.get('sendSMS');
-								button.dom.disabled = true;
-								//this.container.dom.style.visibility=true
-
-								if (winSmsForm.isVisible()) {
-									winSmsForm.hide(this, function() {
-										button.dom.disabled = false;
-									});
-								} else {
-									winSmsForm.show(this, function() {
-										button.dom.disabled = false;
-									});
-								}
-
-								//grid_winSms.reconfigure(store_winSms);
-
-							}
-						} //SMS버튼 END
+						//{
+						//	text	: 'SMS',
+						//	reference		: 'bankSendSMS',
+						//	iconCls	: 'icon-sms',
+						//	handler: 'sendSms'
+						//} //SMS버튼 END
 					]
-				}*/
+				}
 			],
 			bbar: {
 				xtype: 'pagingtoolbar',
@@ -650,6 +575,6 @@ Ext.define('td.view.grid.BankLinkOrder',{
 		this.getStore().load();
 	},
 	listeners : {
-		selectionchange: 'selOrderLoadLogs'
+
 	}
 });
