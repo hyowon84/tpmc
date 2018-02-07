@@ -25,7 +25,6 @@ Ext.define('td.model.Invoice', {
 	]
 });
 
-
 /* 인보이스 발주서 상세품목 */
 Ext.define('td.model.InvoiceItem', {
 	extend: 'Ext.data.Model',
@@ -54,8 +53,6 @@ Ext.define('td.model.InvoiceItem', {
 		}
 	}
 });
-
-
 
 
 
@@ -144,20 +141,9 @@ Ext.define('td.model.WireEndInvoice', {
 });
 
 
-Ext.define('td.model.dealers', {
-	extend: 'Ext.data.Model',
-	fields : [ 'number','ct_id','ct_name']
-});
-
-
-Ext.define('td.model.combo', {
-	extend: 'Ext.data.Model',
-	fields : [ 'number','value','title']
-});
-
 
 /* 통관완료&입고예정 발주서 */
-Ext.define('model_endClearance', {
+Ext.define('td.model.ClearanceEndInvoice', {
 	extend: 'Ext.data.Model',
 	fields : [
 		{name: 'Group',								type: 'string'},
@@ -181,5 +167,17 @@ Ext.define('model_endClearance', {
 		{name: 'admin_name',					type: 'string'},
 		{name: 'reg_date',						type: 'string'}
 	]
+});
+
+
+Ext.define('td.model.dealers', {
+	extend: 'Ext.data.Model',
+	fields : [ 'number','ct_id','ct_name']
+});
+
+
+Ext.define('td.model.combo', {
+	extend: 'Ext.data.Model',
+	fields : [ 'number','value','title']
 });
 

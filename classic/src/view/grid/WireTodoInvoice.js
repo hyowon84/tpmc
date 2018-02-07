@@ -81,7 +81,7 @@ Ext.define('td.view.grid.WireTodoInvoiceList',{
 					}
 				},
 				{
-					id		: 'btn_wire',
+					reference	: 'btn_wire',
 					text	: '송금',
 					iconCls	: 'icon-table_edit',
 					handler : 'openWinMakeWireInfo'

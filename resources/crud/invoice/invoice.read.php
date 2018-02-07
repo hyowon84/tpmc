@@ -33,8 +33,9 @@ if($keyword) {
 	$공구코드_조건 = $공구명_조건 = $상품명_조건 = $상품ID_조건 = " 1=1 ";
 	for($s = 0; $s < count($분할_검색어); $s++) {
 		/*WHERE밑에 바로 들어가는조건 OR로 분리*/
-		$IVID조건 .= " AND	II.iv_id LIKE '%$분할_검색어[$s]%' ";
-		$WRID조건 .= " AND	II.wr_id LIKE '%$분할_검색어[$s]%' ";
+		$IVID조건 .= " AND		II.iv_id LIKE '%$분할_검색어[$s]%' ";
+		$WRID조건 .= " AND		II.wr_id LIKE '%$분할_검색어[$s]%' ";
+		$CRID조건 .= " AND		CR.cr_id LIKE '%$분할_검색어[$s]%' ";
 		$인보이스번호조건 .= " AND	II.iv_order_no LIKE '%$분할_검색어[$s]%' ";
 		$발주서별칭조건 .= " AND II.iv_name LIKE '%$분할_검색어[$s]%' ";
 		$발주서메모조건 .= " AND II.iv_memo LIKE '%$분할_검색어[$s]%' ";
@@ -493,7 +494,7 @@ else if($mode == 'WireEndInvoice') {
 }
 
 /* 통관예정 송금내역 목록 */
-else if($mode == 'invoiceTodoClearance') {
+else if($mode == 'ClearanceTodoInvoice') {
 	if($wr_id) $AND_SQL.=" AND WR.wr_id = '$wr_id' ";
 
 	if($keyword) {
@@ -599,7 +600,7 @@ else if($mode == 'invoiceTodoClearance') {
 
 
 /* 통관완료내역(입고예정내역) */
-else if($mode == 'invoiceEndClearance') {
+else if($mode == 'ClearanceEndInvoice') {
 
 	if($keyword) {
 		$AND_SQL.= " AND ( ITC.CNT > 0 OR ($통관별칭_조건) ) ";	//OR ($상품명조건)
@@ -651,7 +652,7 @@ else if($mode == 'invoiceEndClearance') {
 									WHERE		1=1
 									$AND_SQL
 	";
-//	echo $SELECT_SQL;
+	echo $SELECT_SQL;
 }
 
 /* 송금탭의 송금예정과 관련된 발주품목 */
