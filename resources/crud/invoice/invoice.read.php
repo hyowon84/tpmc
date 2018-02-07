@@ -652,7 +652,7 @@ else if($mode == 'ClearanceEndInvoice') {
 									WHERE		1=1
 									$AND_SQL
 	";
-	echo $SELECT_SQL;
+//	echo $SELECT_SQL;
 }
 
 /* 송금탭의 송금예정과 관련된 발주품목 */
