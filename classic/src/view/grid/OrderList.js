@@ -457,7 +457,7 @@ Ext.define('td.view.grid.BankLinkOrder',{
 		this.cellEditing = new Ext.grid.plugin.CellEditing({
 			clicksToEdit: 1
 		});
-		var store = Ext.create('td.store.OrderList');
+		var store = Ext.create('td.store.BankLinkOrder');
 		Ext.apply(this, {
 			store: store,
 			plugins: [this.cellEditing],

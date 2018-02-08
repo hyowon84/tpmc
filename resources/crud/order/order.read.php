@@ -95,7 +95,7 @@ if($mode == 'orderlist') {
 	$조건문SQL .= " $AND_SQL ";
 
 }
-else if($mode == 'banklinklist') {
+else if($mode == 'BankLinkOrder') {
 
 	if($number) {
 		$BANK_SQL = "	SELECT	DISTINCT

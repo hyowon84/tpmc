@@ -155,14 +155,19 @@ Ext.define('td.view.invoice.ClearanceMainController', {
 			v_iv_id = v_iv_id.substr(0, v_iv_id.length - 1);
 
 			//v_keyword = Ext.getCmp('orderitems_keyword').getValue();
-			var v_param = {'gpcode': v_gpcode, 'iv_id': v_iv_id};
+			var v_param = {
+											'gpcode': v_gpcode,
+											'iv_id': v_iv_id,
+											'cr_id' : ''		};
 
 			/*공구별 참고사항 로딩*/
+			v_param.mode = 'gpinfo';
 			Ext.apply(grid_gpinfo.store.getProxy().extraParams, v_param);
 			grid_gpinfo.store.load();
 
 			//통관관련 품목 로딩
 			//grid_item.store.removeAll();
+			v_param.mode = 'ClearanceTodoItem';
 			Ext.apply(grid_item.store.getProxy().extraParams, v_param);
 			grid_item.store.load();
 		}
@@ -210,7 +215,7 @@ Ext.define('td.view.invoice.ClearanceMainController', {
 		if (sm[0]) {
 
 			var v_gpcode = '';
-			var v_iv_id = '';
+			var v_cr_id = '';
 
 			for (var i = 0; i < sm.length; i++) {	//sm[i].data
 
@@ -220,21 +225,27 @@ Ext.define('td.view.invoice.ClearanceMainController', {
 					v_gpcode += "'" + v_arr[a] + "',";
 				}
 
-				v_iv_id += "'" + sm[i].data.iv_id + "',";
+				v_cr_id += "'"+sm[i].data.cr_id + "',";
 			}
 
 			v_gpcode = v_gpcode.substr(0, v_gpcode.length - 1);
-			v_iv_id = v_iv_id.substr(0, v_iv_id.length - 1);
+			v_cr_id = v_cr_id.substr(0,v_cr_id.length-1);
 
 			//v_keyword = Ext.getCmp('orderitems_keyword').getValue();
-			var v_param = {'gpcode': v_gpcode, 'iv_id': v_iv_id};
+			var v_param = {
+											'gpcode': '',
+											'iv_id': '',
+											'cr_id' : v_cr_id		};
+
 
 			/*공구별 참고사항 로딩*/
+			v_param.mode = 'gpinfo';
 			Ext.apply(grid_gpinfo.store.getProxy().extraParams, v_param);
 			grid_gpinfo.store.load();
 
 			//통관관련 품목 로딩
 			//grid_item.store.removeAll();
+			v_param.mode = 'ClearanceEndItem';
 			Ext.apply(grid_item.store.getProxy().extraParams, v_param);
 			grid_item.store.load();
 		}

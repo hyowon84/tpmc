@@ -150,16 +150,16 @@ Ext.define('td.view.order.OrderMainController', {
 			return false;
 		}
 
-		var editStats = combo_editStats.getValue();
-		var deliverytype = combo_deliverytype.getValue();
-		var cashreceipt_yn = combo_cashreceipt_yn.getValue();
-		var cashreceipt_type = combo_cashreceipt_type.getValue();
-
+		var editStats = this.lookupReference('cb_editstats').getValue();
+		//var deliverytype = combo_deliverytype.getValue();
+		//var cashreceipt_yn = combo_cashreceipt_yn.getValue();
+		//var cashreceipt_type = combo_cashreceipt_type.getValue();
+		//
 		for(var i = 0; i < sm.length; i++) {
 			if(editStats) sm[i].set('stats',editStats);
-			if(deliverytype) sm[i].set('delivery_type',deliverytype);
-			if(cashreceipt_yn) sm[i].set('cash_receipt_yn',cashreceipt_yn);
-			if(cashreceipt_type) sm[i].set('cash_receipt_type',cashreceipt_type);
+		//	if(deliverytype) sm[i].set('delivery_type',deliverytype);
+		//	if(cashreceipt_yn) sm[i].set('cash_receipt_yn',cashreceipt_yn);
+		//	if(cashreceipt_type) sm[i].set('cash_receipt_type',cashreceipt_type);
 		}
 
 	},

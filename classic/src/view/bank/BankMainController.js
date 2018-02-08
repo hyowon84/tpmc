@@ -81,7 +81,7 @@ Ext.define('td.view.bank.BankMainController', {
 
 			v_keyword = Ext.getCmp('keyword_banklist').getValue();
 			var v_param = { 'number' : v_number,
-				'mode'		:	'banklinklist',
+				'mode'		:	'BankLinkOrder',
 				'keyword' : v_keyword
 			};
 

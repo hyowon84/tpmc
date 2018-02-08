@@ -55,12 +55,12 @@ Ext.define('td.view.invoice.winMakeClearance', {
 									readOnly: true
 								},
 								{
-									fieldLabel: '수입신고번호',
-									name: 'cr_refno'
+									fieldLabel: '별칭',
+									name: 'cr_name'
 								},
 								{
-									fieldLabel: 'B/L 번호',
-									name: 'cr_name'
+									fieldLabel: '수입신고번호',
+									name: 'cr_refno'
 								},
 								{
 									fieldLabel: 'B/L 번호',

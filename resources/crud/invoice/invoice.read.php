@@ -610,7 +610,7 @@ else if($mode == 'ClearanceEndInvoice') {
 	
 	/* 통관완료 발주서 내역 */
 	$SELECT_SQL = "	SELECT	DISTINCT
-													CONCAT('[',CR.cr_id,'] \"',CR.cr_name,'\", 관/부가세:', IFNULL(CR.cr_taxfee,0),'원, 배송비:',IFNULL(CR.cr_shipfee,0),'원') AS 'Group',
+													CONCAT('[',CR.cr_id,'] BLNO:', CR.cr_blno, ', 수입NO:', CR.cr_refno, ', 관/부가세:', IFNULL(CR.cr_taxfee,0),'원, 배송비:',IFNULL(CR.cr_shipfee,0),'원') AS 'Group',
 													CR.cr_id,				/*통관ID*/
 													CR.cr_name,			/*통관내역 별칭*/
 													CR.cr_refno,		/*통관번호*/
@@ -628,15 +628,7 @@ else if($mode == 'ClearanceEndInvoice') {
 													IF(CR_EA.CNT <= IP_EA.CNT,'Y','N') AS IP_COMPLETE
 									FROM		clearance_info CR
 													LEFT JOIN g5_member MB ON (MB.mb_id = CR.admin_id)
-													LEFT JOIN (	SELECT	IV.iv_id,
-																			COUNT(*) AS CNT
-															FROM		invoice_item IV
-																			LEFT JOIN invoice_info II ON (II.iv_id = IV.iv_id)
-																			LEFT JOIN gp_info GI ON (GI.gpcode = IV.gpcode)
-															WHERE		1=1
-															$OR_SQL
-															GROUP BY iv_id
-													) ITC ON (CR.iv_id LIKE CONCAT('%',ITC.iv_id,'%'))
+
 													LEFT JOIN (	SELECT	cr_id,
 																							COUNT(*) AS CNT
 																			FROM		clearance_item
@@ -757,7 +749,7 @@ else if($mode == 'invoice_item') {
  * Step3. 통관품목 5
  * Step4. 해당 발주서 안나오게
 */
-else if($mode == 'todoClearanceItem') {
+else if($mode == 'ClearanceTodoItem') {
 
 	if($iv_id) {
 		$AND_SQL.=" AND IV.iv_id IN (".str_replace("\'","'",$iv_id).") ";
@@ -812,7 +804,7 @@ else if($mode == 'todoClearanceItem') {
 }
 
 /* 통관완료품목 리스트, 입고관리품목 */
-else if($mode == 'endClearanceItem') {
+else if($mode == 'ClearanceEndItem') {
 	
 	if($cr_id) {
 		$AND_SQL.=" AND CI.cr_id IN (".str_replace("\'","'",$cr_id).") ";

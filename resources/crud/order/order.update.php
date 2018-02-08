@@ -49,7 +49,7 @@ else {	/* 복수레코드일때 */
 		$stats = $grid[stats];		/*상태 ( 취소:99, 신청:00, )*/
 
 
-		include G5_INC_PATH."/logWriteOrder.php";
+		include INC_PATH."/logWriteOrder.php";
 
 		/* 상품정보 수정 */
 		$common_sql = "	UPDATE	clay_order	SET

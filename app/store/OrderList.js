@@ -45,9 +45,6 @@ Ext.define('td.store.OrderList', {
 		//},
 });
 
-
-
-
 /* 변경로그 */
 Ext.define('td.store.OrderLog', {
 	extend: 'Ext.data.Store',
@@ -161,6 +158,49 @@ Ext.define('td.store.BankLog', {
 		reader : {
 			rootProperty : 'data',
 			totalProperty : 'total'
+		}
+	}
+});
+
+
+//입출금관리내역에서 사용하는 주문그리드
+Ext.define('td.store.BankLinkOrder', {
+	extend: 'Ext.data.Store',
+	model : 'td.model.Order',
+	alias: 'store.OrderList',
+	groupField: 'Group',
+	pageSize : 50,
+	remoteSort: true,
+	autoLoad : true,
+	autoSync : true,
+	sorters: [
+		{
+			property: 'CL.od_date',
+			direction: 'DESC'
+		},
+		{
+			property: 'CL.od_id',
+			direction: 'DESC'
+		}
+	],
+	proxy : {
+		type : 'ajax',
+		extraParams : {
+
+		},
+		api : {
+			read	: '/resources/crud/order/order.read.php?mode=BankLinkOrder',
+			update: '/resources/crud/order/BankLinkOrder.update.php'
+		},
+		reader : {
+			rootProperty : 'data',
+			totalProperty : 'total'
+		},
+		writer : {
+			type : 'json',
+			writeAllFields : true,
+			encode : true,
+			rootProperty : 'data'
 		}
 	}
 });

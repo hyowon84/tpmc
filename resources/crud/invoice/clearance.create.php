@@ -32,6 +32,7 @@ if($mode == 'new') {
 $common_sql = "	clearance_info	SET
 										cr_name = '$cr_name',	/*통관내역 별칭*/
 										cr_refno = '$cr_refno',	/*통관번호*/
+										cr_blno = '$cr_blno',	/*통관번호*/
 										cr_taxfee = '$cr_taxfee',		/*통관비용 총액*/
 										cr_shipfee = '$cr_shipfee',					/*통관수수료*/
 										cr_file = '$cr_file',	/*통관내역서 파일첨부*/

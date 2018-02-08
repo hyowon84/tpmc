@@ -10,7 +10,7 @@ Ext.define('td.view.order.OrderMain', {
 		'td.view.grid.GpInfoList',
 		'td.view.grid.OrderList'		
 	],
-	//controller:'OrderMainController',
+	controller:'OrderMainController',
 	closable: true,
 	frame : false,
 	title: '주문관리',

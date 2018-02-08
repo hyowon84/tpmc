@@ -100,7 +100,7 @@ Ext.define('td.store.ClearanceItemList', {
 
 		},
 		api : {
-			read 		: '/resources/crud/invoice/invoice.read.php?mode=invoice_item',
+			read 		: '/resources/crud/invoice/invoice.read.php?mode=',
 			update	: '/resources/crud/invoice/invoice_item.update.php'
 		},
 		reader : {
