@@ -193,8 +193,8 @@ Ext.define('td.view.bank.BankMainController', {
 
 			var msg = v_BankList + "<br>위 내역에 대한 연결될 주문번호는 아래와 같습니다<br>"+ msg_odid_list;
 
-			Ext.MessageBox.confirm(v_title, msg, function(btn, text) {
-				if(btn == 'yes') {
+			Ext.MessageBox.confirm(v_title, msg, function(mb_btn, text) {
+				if(mb_btn == 'yes') {
 					for(var i = 0; i < sm_bank.length; i++) {	//sm[i].data
 						sm_bank[i].set('bank_type', btn.stats);	//상품주문
 						sm_bank[i].set('admin_link', v_odid_list);

@@ -9,6 +9,7 @@ Ext.define('td.view.combo.Order', {
 	displayField: 'name',
 	valueField: 'value',
 	name: 'stats',
+	width: 200,
 	store: {type: 'stats'}
 });
 
@@ -56,6 +57,7 @@ Ext.define('td.view.combo.searchtype', {
 	displayField: 'name',
 	valueField: 'value',
 	name: 'searchtype',
+	width : 160,
 	store: {type: 'searchtype'}
 });
 

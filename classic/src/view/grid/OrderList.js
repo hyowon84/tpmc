@@ -88,7 +88,7 @@ Ext.define('td.view.grid.OrderList',{
 							xtype: 'cb_stats',
 							name : 'cb_stats',
 							fieldLabel : '주문상태',
-							labelWidth : 80
+							labelWidth : 60
 						},
 						{
 							fieldLabel : '시작일',
@@ -140,7 +140,7 @@ Ext.define('td.view.grid.OrderList',{
 						{	xtype: 'label',	text: ' 검색 : ',		autoWidth:true,	style : 'font-weight:bold;'},
 						{
 							fieldLabel : '검색유형',
-							labelWidth : 80,
+							labelWidth : 60,
 							name : 'cb_searchtype',
 							xtype: 'cb_searchtype'
 						},
@@ -518,20 +518,18 @@ Ext.define('td.view.grid.BankLinkOrder',{
 							name: 'keyword',
 							style: 'padding:0px;',
 							enableKeyEvents: true,
-							listeners:{
+							listeners: {
 								keydown: 'searchBankLinkKeyword'
 							}
 						},
 						{
 							text: '입금처리',
-							//: 'btn_link_B01',
 							stats : 'B01',
 							iconCls: 'icon-link',
 							handler: 'updateLinkBankdata'
 						},
 						{
 							text: '환불처리',
-							//id: 'btn_link_B07',
 							stats : 'B07',
 							iconCls: 'icon-link',
 							handler: 'updateLinkBankdata'
@@ -549,7 +547,6 @@ Ext.define('td.view.grid.BankLinkOrder',{
 							iconCls: 'icon-refresh',
 							handler: 'loadingExceptRefund'
 						}
-
 						//{
 						//	text	: 'SMS',
 						//	reference		: 'bankSendSMS',
