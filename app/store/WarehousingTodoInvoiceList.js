@@ -2,50 +2,11 @@
  * Created by lucae on 2018-01-10.
  */
 
-//통관예정 발주서 목록
-Ext.define('td.store.ClearanceTodoInvoiceList', {
+//입고예정 발주서 목록
+Ext.define('td.store.WarehousingTodoInvoiceList', {
 	extend: 'Ext.data.Store',
 	model: 'td.model.Invoice',
-	alias: 'store.ClearanceTodoInvoiceList',
-	pageSize : 100,
-	autoSync : false,
-	autoLoad : true,
-	remoteSort: true,
-	sorters:[
-		{
-			property: "GI.reg_date",
-			direction:'DESC'
-		}
-	],
-	proxy : {
-		type : 'ajax',
-		extraParams : {
-		},
-		api : {
-			read		: '/resources/crud/invoice/invoice.read.php?mode=ClearanceTodoInvoice',
-			update	: '/resources/crud/invoice/invoice.update.php',
-			destroy	: '/resources/crud/invoice/invoice.delete.php'
-		},
-		reader : {
-			rootProperty : 'data',
-			totalProperty : 'total'
-		},
-		writer : {
-			type : 'json',
-			writeAllFields : true,
-			encode : true,
-			rootProperty : 'data'
-		}
-	}
-});
-
-
-//통관완료 발주서 목록
-Ext.define('td.store.ClearanceEndInvoiceList', {
-	extend: 'Ext.data.Store',
-	model: 'td.model.ClearanceEndInvoice',
-	alias: 'store.ClearanceEndInvoiceList',
-	groupField: 'Group',
+	alias: 'store.WarehousingTodoInvoiceList',
 	pageSize : 100,
 	autoSync : false,
 	autoLoad : true,
@@ -61,8 +22,7 @@ Ext.define('td.store.ClearanceEndInvoiceList', {
 		extraParams : {
 		},
 		api : {
-			read		: '/resources/crud/invoice/invoice.read.php?mode=ClearanceEndInvoice',
-			update	: '/resources/crud/invoice/invoice.update.php'	//stockinfo_update.php
+			read		: '/resources/crud/invoice/invoice.read.php?mode=ClearanceEndInvoice'
 		},
 		reader : {
 			rootProperty : 'data',
@@ -78,11 +38,50 @@ Ext.define('td.store.ClearanceEndInvoiceList', {
 });
 
 
-/* 통관완료 발주서 아이템 목록 */
-Ext.define('td.store.ClearanceItemList', {
+//입고완료 발주서 목록
+Ext.define('td.store.WarehousingEndInvoiceList', {
+	extend: 'Ext.data.Store',
+	model: 'td.model.WarehousingEndInvoice',
+	alias: 'store.WarehousingEndInvoiceList',
+	groupField: 'Group',
+	pageSize : 100,
+	autoSync : false,
+	autoLoad : true,
+	remoteSort: true,
+	sorters:[
+		{
+			property: "wr_id",
+			direction:'DESC'
+		}
+	],
+	proxy : {
+		type : 'ajax',
+		extraParams : {
+		},
+		api : {
+			read		: '/resources/crud/invoice/invoice.read.php?mode=WarehousingEndInvoice',
+			update	: '/resources/crud/invoice/invoice.update.php'	//stockinfo_update.php
+			//destroy	: '/resources/crud/invoice/invoice.delete.php'
+		},
+		reader : {
+			rootProperty : 'data',
+			totalProperty : 'total'
+		},
+		writer : {
+			type : 'json',
+			writeAllFields : true,
+			encode : true,
+			rootProperty : 'data'
+		}
+	}
+});
+
+
+/* 입고완료 발주서 아이템 목록 */
+Ext.define('td.store.WarehousingItemList', {
 	extend: 'Ext.data.Store',
 	model : 'td.model.InvoiceItem',
-	alias: 'store.ClearanceItemList',
+	alias: 'store.WarehousingItemList',
 	pageSize : 50,
 	remoteSort: true,
 	autoLoad : false,
@@ -99,7 +98,7 @@ Ext.define('td.store.ClearanceItemList', {
 
 		},
 		api : {
-			read 		: '/resources/crud/invoice/invoice.read.php?mode=',
+			read 		: '/resources/crud/invoice/invoice.read.php?mode=ClearanceEndItem',
 			update	: '/resources/crud/invoice/invoice_item.update.php'
 		},
 		reader : {
@@ -117,7 +116,7 @@ Ext.define('td.store.ClearanceItemList', {
 
 
 
-////좌측 상단 통관예정 발주서 목록
+////좌측 상단 입고예정 발주서 목록
 //Ext.define('store.invoice_list',{
 //	extend: 'Ext.data.Store',
 //	fields:['name','value'],
@@ -155,7 +154,7 @@ Ext.define('td.store.ClearanceItemList', {
 //
 //		},
 //		api : {
-//			read		: '/resources/crud/invoice/stock.php?mode=invoiceTodoClearance',
+//			read		: '/resources/crud/invoice/stock.php?mode=invoiceTodoWarehousing',
 //			update	: '/resources/crud/invoice/stockinfo_update.php',
 //			destroy	: '/resources/crud/invoice/invoice_info.delete.php',
 //		},

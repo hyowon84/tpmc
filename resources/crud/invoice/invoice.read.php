@@ -134,7 +134,7 @@ else if($mode == 'gpinfo' || $mode == 'gpmemo') {
 	if(strlen($gpcode)>3) {
 		$AND_SQL.=" AND GI.gpcode IN (".str_replace("\'","'",$gpcode).")";
 	}
-	else if($mode == 'gpmemo'){
+	else if($mode == 'gpmemo' && $cr_id == ''){
 		$AND_SQL.=" AND GI.gpcode IN ('') ";
 	}
 
@@ -808,6 +808,9 @@ else if($mode == 'ClearanceEndItem') {
 	
 	if($cr_id) {
 		$AND_SQL.=" AND CI.cr_id IN (".str_replace("\'","'",$cr_id).") ";
+	}
+	else {
+		$AND_SQL.=" AND  CI.cr_id = '' ";
 	}
 
 	/* TOTAL COUNT */

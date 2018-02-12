@@ -15,6 +15,7 @@ Ext.define('td.view.menu.LeftMenu', {
 		'td.view.invoice.InvoiceMain',
 		'td.view.invoice.WireMain',
 		'td.view.invoice.ClearanceMain',
+		'td.view.invoice.WarehousingMain',
 		'td.view.grading.winImportExcelGrading',
 		'td.view.grading.GradingMain',
 		'td.view.util.OrderEditMain',

@@ -35,6 +35,8 @@ if (isset($mms_path['path'])) {
 }
 unset($mms_path);
 
+
+define('CFG_PATH',M_PATH.'/tdcfg');
 define('SRC_PATH',M_PATH.'/resources');
 define('BBS_PATH',M_PATH.'/resources/html');
 define('LIB_PATH',M_PATH.'/resources/lib');
@@ -71,8 +73,7 @@ ini_set("session.cookie_domain", '');
 session_start();
 
 
-
-include_once(SRC_PATH.'/dbconfig.php');
+include_once(CFG_PATH.'/dbconfig.php');
 include_once(LIB_PATH.'/common.lib.php');
 $connect_db = sql_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD) or die('MySQL Connect Error!!!');
 $select_db  = sql_select_db(MYSQL_DB, $connect_db) or die('MySQL DB Error!!!');

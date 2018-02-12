@@ -348,9 +348,9 @@ Ext.define('td.view.invoice.ClearanceMainController', {
 
 	//선택된 발주품목들만 인쇄
 	printClearanceInvoiceItem : function() {
-		var grid_item = Ext.getCmp('ClearanceItem').down("[name=ClearanceItemList]");
-		var bk_store = grid_item.getStore();	//백업
-		var store = Ext.create('td.store.MakeInvoiceList');
+		var grid_item = Ext.getCmp('ClearanceItem').down("[name=ClearanceItemList]"),
+				bk_store = grid_item.getStore(),	//백업
+				store = Ext.create('td.store.MakeInvoiceList');
 
 		var sm = grid_item.getSelection();
 		if( sm == '' ) {
