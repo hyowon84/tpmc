@@ -612,6 +612,7 @@ else if($mode == 'ClearanceEndInvoice') {
 	$SELECT_SQL = "	SELECT	DISTINCT
 													CONCAT('[',CR.cr_id,'] BLNO:', CR.cr_blno, ', 수입NO:', CR.cr_refno, ', 관/부가세:', IFNULL(CR.cr_taxfee,0),'원, 배송비:',IFNULL(CR.cr_shipfee,0),'원') AS 'Group',
 													CR.cr_id,				/*통관ID*/
+													CR.cr_blno,			/* BL/NO */
 													CR.cr_name,			/*통관내역 별칭*/
 													CR.cr_refno,		/*통관번호*/
 													CR.iv_id,				/*연결된 발주ID*/
@@ -816,6 +817,8 @@ else if($mode == 'ClearanceEndItem') {
 	/* TOTAL COUNT */
 	$SELECT_SQL = "	SELECT		IV.number,									/*발주품목 상태값 변경을 위한*/ 
 														CI.cr_id,										/*통관코드*/
+														CR.cr_blno,									/*통관BL/NO*/
+														CR.cr_refno,								/*통관번호*/
 														CI.iv_id,										/*발주코드*/
 														II.wr_id,
 														II.iv_order_no,							/*인보이스번호*/
@@ -843,6 +846,7 @@ else if($mode == 'ClearanceEndItem') {
 														IV.iv_qty,															/*발주수량*/
 														IFNULL(IT.jaego	,0) + IFNULL(RIV.RIV_QTY,0) - IFNULL(CO.ORDER_QTY,0) AS real_jaego
 									FROM			clearance_item CI
+														LEFT JOIN clearance_info CR ON (CR.cr_id = CI.cr_id)
 														LEFT JOIN invoice_info II ON (II.iv_id = CI.iv_id)
 														LEFT JOIN invoice_item IV ON (IV.gpcode = CI.gpcode AND IV.iv_id = CI.iv_id AND IV.iv_it_id = CI.cr_it_id)
 														LEFT JOIN gp_info GI ON (GI.gpcode = IV.gpcode)

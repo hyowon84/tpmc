@@ -82,19 +82,19 @@ Ext.define('td.view.invoice.winMakeInvoice', {
 									maxValue: new Date(),
 									value : new Date()
 								},
-								{
-									xtype : 'cb_moneytype',
-									reference: 'moneytype',
-									fieldLabel: '통화유형',
-									listConfig: {
-										itemTpl: ['<div data-qtip="{value}">{value}</div>']
-									}
-								},
-								{
-									fieldLabel: '환율',
-									emptyText: '0',
-									name: 'od_exch_rate'
-								},
+								//{
+								//	xtype : 'cb_moneytype',
+								//	reference: 'moneytype',
+								//	fieldLabel: '통화유형',
+								//	listConfig: {
+								//		itemTpl: ['<div data-qtip="{value}">{value}</div>']
+								//	}
+								//},
+								//{
+								//	fieldLabel: '환율',
+								//	emptyText: '0',
+								//	name: 'od_exch_rate'
+								//},
 								{
 									fieldLabel: 'TAX',
 									emptyText: '0',

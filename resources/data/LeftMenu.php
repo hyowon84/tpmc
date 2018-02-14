@@ -20,7 +20,7 @@ if($_SESSION['admin_yn'] == 'Y') {
 			leaf: false,
 			expanded: true,
 			children:[
-				
+
 			]
 		},
 		url: "td.view.report.Main",
@@ -48,11 +48,17 @@ if($_SESSION['admin_yn'] == 'Y') {
 			leaf: false,
 			expanded: true,
 			children:[
+<?
+		if($admin_id == 'todaygoldx@naver.com' OR $admin_id == 'heejung@coinstoday.co.kr' OR $admin_id == 'lucael@naver.com') {
+?>
 				{
 					name: "입출금 관리",
 					url: "td.view.bank.BankMain",
 					leaf: true
 				},
+<?
+		}
+?>
 				{
 					name: "주문 관리",
 					url: "td.view.order.OrderMain",
@@ -114,23 +120,26 @@ if($_SESSION['admin_yn'] == 'Y') {
 				leaf: false,
 				expanded: true,
 				children:[
-
 					{
-						name: "주문정보 에디터",
+						name: "주문관리",
 						url: "td.view.util.OrderEditMain",
 						leaf: true
 					}
 				]
-		}
+		},
+
+
 	<?
+					{
+						name: "대리주문 입력(XLS)",
+						url: "td.view.grading.winImportExcelGrading",
+						reference : "winImportExcelGrading",
+						window : true,
+						leaf: true
+					}
+
 	/*
-	 			{
-					name: "신청서 입력(XLS)",
-					url: "td.view.grading.winImportExcelGrading",
-					reference : "winImportExcelGrading",
-					window : true,
-					leaf: true
-				},
+
 				{
 					name: "송금목록",
 					url: "td.view.invoice.ReceiptMain",

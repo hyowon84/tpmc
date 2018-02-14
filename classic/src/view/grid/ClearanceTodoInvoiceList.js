@@ -48,6 +48,7 @@ Ext.define('td.view.grid.ClearanceTodoInvoiceList',{
 				{ text : '통관ID',							dataIndex : 'cr_id',						width:120,			hidden:true	},
 				{ text : '송금코드',						dataIndex : 'wr_id',						width:130,			hidden:true	},
 				{ text : '%',									dataIndex : 'complete_per',			width:60	},
+				{ text : '발주서메모',					dataIndex : 'iv_memo',					width:170,		editor: { allowBlank : false }	},
 				{ text : '발주코드',						dataIndex : 'iv_id',						width:120	},
 				{ text : '딜러',								dataIndex : 'iv_dealer',				width:80	},
 				{ text : '인보이스번호',				dataIndex : 'iv_order_no',			width:120	},
@@ -69,7 +70,6 @@ Ext.define('td.view.grid.ClearanceTodoInvoiceList',{
 				{ text : '환율(송금)',					dataIndex : 'wr_exch_rate',			width:100,			style:'text-align:center',		align:'right',		editor: { allowBlank : false }	},
 				{ text : '인보이스날짜',				dataIndex : 'iv_date',					sortable: true,	summaryType: 'max',		renderer: Ext.util.Format.dateRenderer('Y-m-d'),	summaryRenderer: Ext.util.Format.dateRenderer('Y-m-d'),		field: { xtype: 'datefield' }	},
 				{ text : '담당자',							dataIndex : 'admin_name',				width:120	},
-				{ text : '발주서메모',					dataIndex : 'iv_memo',					width:170,		editor: { allowBlank : false }	},
 				{ text : '입출금링크',					dataIndex : 'iv_receipt_link',	width:120	}
 			],
 			tbar: [
@@ -149,7 +149,9 @@ Ext.define('td.view.grid.ClearanceEndInvoiceList',{
 			},
 			autoWidth : true,
 			columns : [
-				{ text : '통관코드',						dataIndex : 'cr_id',						width:140	},
+				{ text : '통관코드',						dataIndex : 'cr_id',						width:140,		hidden:true	},
+				{ text : 'BL/NO',							dataIndex : 'cr_blno',					width:150	},
+				{ text : '통관번호',						dataIndex : 'cr_refno',					width:150	},
 				{ text : '통관별칭',						dataIndex : 'cr_name',					width:150	},
 				{ text : '통관일',							dataIndex : 'cr_date',					sortable: true,		summaryType: 'max',						renderer: Ext.util.Format.dateRenderer('Y-m-d')	},
 				{ text : '관세',								dataIndex : 'cr_dutyfee',				width:100,				style:'text-align:center',		align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00'),		editor: { allowBlank : false } },
@@ -398,67 +400,3 @@ Ext.define('td.view.grid.MakeClearanceList',{
 		//selectionchange: 'selGpinfoLoadPrdList'
 	}
 });
-
-
-
-//
-//test : function() {
-//	store_window_clearance.removeAll();
-//
-//	//통관진행할 품목 목록
-//	var sm = grid_clearance_dtl.getSelection();
-//
-//	if( sm == '' ) {
-//		Ext.Msg.alert('알림','발주내역을 선택해주세요');
-//		return false;
-//	}
-//
-//	var v_iv_id = '';
-//	var v_iv_name = '';
-//	var last_iv_id = '';
-//
-//	for(var i = 0; i < sm.length; i++) {
-//
-//		var rec = Ext.create('model.invoice', {
-//			'number'				: sm[i].data.number,
-//			'gpcode'				: sm[i].data.gpcode,
-//			'cr_id'					: sm[i].data.cr_id,
-//			'iv_id'					: sm[i].data.iv_id,
-//			'ip_id'					: sm[i].data.ip_id,
-//			'wr_id'					: sm[i].data.wr_id,
-//			'cr_it_id'			: sm[i].data.iv_it_id,
-//			'cr_it_name'		: sm[i].data.iv_it_name,
-//			'cr_qty'				: sm[i].data.iv_qty,
-//			'cr_cancel_qty'	: 0
-//		});
-//		store_window_clearance.add(rec);
-//
-//		if(sm[i].data.iv_id != last_iv_id)
-//			v_iv_id += sm[i].data.iv_id+',';
-//
-//		last_iv_id = sm[i].data.iv_id;
-//	}
-//
-//
-//	v_iv_id = v_iv_id.substr(0,v_iv_id.length-1);
-//	v_iv_name = v_iv_name.substr(0,v_iv_name.length-1);
-//
-//	/*통관내역 작성 기본폼 로딩*/
-//	var iv_sm = grid_todoClearance.getSelectionModel().getSelection()[0];
-//	iv_sm.data.iv_id = v_iv_id;
-//	Ext.getCmp('clearanceFormPanel').loadRecord(iv_sm);
-//
-//	var button = Ext.get('btn_clearance');
-//	button.dom.disabled = true;
-//
-//	if (winClearanceConfirm.isVisible()) {
-//		winClearanceConfirm.hide(this, function() {
-//			button.dom.disabled = false;
-//		});
-//	} else {
-//		winClearanceConfirm.show(this, function() {
-//			button.dom.disabled = false;
-//		});
-//	}
-//
-//},

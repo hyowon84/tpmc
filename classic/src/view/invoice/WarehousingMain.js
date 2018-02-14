@@ -31,7 +31,7 @@ Ext.define('td.view.invoice.WarehousingMain', {
 			title : '입고예정 목록',
 			region:'west',
 			floatable: false,
-			width: '30%',
+			width: '40%',
 			minWidth: 100,
 			scrollable: false,
 			items : [
@@ -72,7 +72,7 @@ Ext.define('td.view.invoice.WarehousingMain', {
 			collapsible: false,
 			region: 'center',
 			scrollable: false,
-			width : '70%',
+			width : '60%',
 			items : [
 				{
 					id : 'WarehousingItem',

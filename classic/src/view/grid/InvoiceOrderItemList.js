@@ -190,8 +190,8 @@ Ext.define('td.view.grid.InvoiceOrderItemList',{
 			autoWidth : true,
 			columns : [
 				{ text : '날짜',							dataIndex : 'reg_date',							sortable: true,	summaryType: 'max',		renderer: Ext.util.Format.dateRenderer('Y-m-d'),	summaryRenderer: Ext.util.Format.dateRenderer('Y-m-d'),		field: { xtype: 'datefield' },		hidden:true	},
-				{ text : '관리자메모',				dataIndex : 'admin_memo',						width:150,			editor: { allowBlank : false }	},
 				{ text : '공구코드',					dataIndex : 'gpcode',								hidden:true	},
+				{ text : 'IMG', 						dataIndex : 'it_img',								width: 50,			renderer:rendererImage 	},
 				{ text : '공구명',						dataIndex : 'gpcode_name',					width:160		},
 				{ text : '상품코드',					dataIndex : 'it_id',								width:160		},
 				{ text : '▼주문집계',				dataIndex : 'SUM_QTY',							width:120,			style:'text-align:center',	align:'right',	editor: { allowBlank : false },		renderer: Ext.util.Format.numberRenderer('0,000') },
@@ -204,12 +204,11 @@ Ext.define('td.view.grid.InvoiceOrderItemList',{
 				{ text : '전체발주수량',			dataIndex : 'RIV_QTY',							width:120,			style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
 				{ text : '전체주문수량',			dataIndex : 'ORDER_QTY',						width:120,			style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
 				{ text : '예상재고수량',			dataIndex : 'real_jaego',						width:120,			style:'text-align:center',	align:'right'		},
-
 				{ text : '발주총액',					dataIndex : 'SUM_IV_WORLDPRICE',		width:100,			style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000.00') },
-				{ text : 'IMG', 						dataIndex : 'it_img',								width: 50,			renderer:rendererImage 	},
 				{ text : '품목명',						dataIndex : 'it_name',							width:450 },
 				{ text : '주문총액',					dataIndex : 'total_price',					style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000'),	hidden:true },
-				{ text : '주문가',						dataIndex : 'it_org_price',					style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000'),	hidden:true }
+				{ text : '주문가',						dataIndex : 'it_org_price',					style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000'),	hidden:true },
+				{ text : '관리자메모',				dataIndex : 'admin_memo',						width:150,			editor: { allowBlank : false }	}
 			],
 			tbar : [
 				{	xtype: 'label',	text: '검색어 : ',		autoWidth:true,	style : 'font-weight:bold;'},
