@@ -161,7 +161,7 @@ Ext.define('td.view.grid.WireEndInvoiceList',{
 				{ text : '공구코드',						dataIndex : 'gpcode',						width:230,			hidden:true},
 				{ text : '통관코드',						dataIndex : 'cr_id',						width:130,			hidden:true},
 				{ text : '송금코드',						dataIndex : 'wr_id',						width:130,			hidden:true},
-				{ text : '송금별칭',						dataIndex : 'wr_name',					width:120,			hidden:true},
+				{ text : '송금번호/R,NO',			dataIndex : 'wr_name',					width:120	},
 				{ text : '송금수수료(해외)',		dataIndex : 'wr_out_fee',				width:120,			hidden:true},
 				{ text : '송금수수료(국내)',		dataIndex : 'wr_in_fee',				width:120,			hidden:true},
 				{ text : '송금메모',						dataIndex : 'wr_memo',					width:120,			hidden:true},
