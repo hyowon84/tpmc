@@ -69,7 +69,7 @@ Ext.define('td.view.grid.WireTodoInvoiceList',{
 				},
 				//{ text : '딜러',							dataIndex : 'iv_dealer',				width:120,		editor: { allowBlank : false }	},
 				{ text : 'TOTAL',						dataIndex : 'TOTAL_PRICE',			width:150,		style:'text-align:center',		align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00') },
-				{ text : '인보이스번호',			dataIndex : 'iv_order_no',			width:120	},
+				{ text : '인보이스번호',			dataIndex : 'iv_order_no',			width:120,		editor: { allowBlank : false }	},
 				{ text : '메모',							dataIndex : 'iv_memo',					width:170,		editor: { allowBlank : false }	},
 				{ text : 'DC.FEE',					dataIndex : 'iv_discountfee',		width:100,		style:'text-align:center',		align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00'),		editor: { allowBlank : false } },
 				{ text : 'TAX',							dataIndex : 'iv_tax',						width:100,		style:'text-align:center',		align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00'),		editor: { allowBlank : false } },
