@@ -1,9 +1,8 @@
 <?php
 include_once('./_common.php');
 
-
 //스트립슬래시를 안하면 json_decode가 안됨
-$arr = json_decode(str_replace('\"','"',stripslashes( iconv('utf-8', 'cp949', $_POST['data'] ) )),true);
+$arr = jsonDecode($_POST['data']);
 $mb_id = $_SESSION[admin_id];
 
 
@@ -29,6 +28,7 @@ if( strlen($arr[iv_id]) > 1 ) {
 
 	/* 상품정보 수정 */
 	$common_sql = "	UPDATE	invoice_info	SET
+															iv_dealer = '$iv_dealer',						/*USD, CNY, ...*/
 															money_type = '$money_type',						/*USD, CNY, ...*/
 															od_exch_rate = '$od_exch_rate',				/*주문기준 환율*/
 															iv_tax = '$iv_tax',

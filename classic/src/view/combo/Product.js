@@ -59,16 +59,15 @@ Ext.define('td.view.combo.spottype', {
 });
 
 
-
-Ext.define('td.view.combo.moneytype', {
-	extend: 'Ext.form.ComboBox',
-	alias: 'widget.cb_moneytype',
-	editable: false,
-	queryMode: 'local',
-	editable: false,
-	displayField: 'name',
-	valueField: 'value',
-	name: 'moneytype',
-	store: {type: 'moneytype'}
-});
-
+//
+//Ext.define('td.view.combo.moneytype', {
+//	extend: 'Ext.form.ComboBox',
+//	alias: 'widget.cb_moneytype',
+//	editable: false,
+//	queryMode: 'local',
+//	editable: false,
+//	displayField: 'name',
+//	valueField: 'value',
+//	store: {type: 'moneytype'}
+//});
+//

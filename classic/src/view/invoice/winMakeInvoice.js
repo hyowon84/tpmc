@@ -64,6 +64,7 @@ Ext.define('td.view.invoice.winMakeInvoice', {
 									xtype : 'cb_dealers',
 									fieldLabel: '딜러',
 									reference: 'dealers',
+									name : 'iv_dealer',
 									listConfig: {
 										itemTpl: ['<div data-qtip="{ct_id}: {ct_name}">{ct_name} ({ct_id})</div>']
 									}
@@ -85,6 +86,7 @@ Ext.define('td.view.invoice.winMakeInvoice', {
 								{
 									xtype : 'cb_moneytype',
 									reference: 'moneytype',
+									name : 'money_type',
 									fieldLabel: '통화유형',
 									listConfig: {
 										itemTpl: ['<div data-qtip="{value}">{value}</div>']

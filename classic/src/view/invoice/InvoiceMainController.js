@@ -462,7 +462,7 @@ Ext.define('td.view.invoice.InvoiceMainController', {
 		var win = this.lookupReference('winMakeInvoice'),
 				grid_win = win.down("[name=MakeInvoiceList]"),
 				grid_item = Ext.getCmp('InvoiceOrderItemList').down("[name=InvoiceOrderItemList]"),
-				grid_todo = Ext.getCmp('WireInvoice').down("[name=WireTodoInvoiceList]"),
+				//grid_todo = Ext.getCmp('WireInvoice').down("[name=WireTodoInvoiceList]"),
 				form = Ext.getCmp('winMakeInvoiceForm'),
 				btn = this.lookupReference('BtnSubmitInvoice'),
 				cnt = grid_win.getStore().data.items.length,
@@ -484,7 +484,7 @@ Ext.define('td.view.invoice.InvoiceMainController', {
 				grid_win.getStore().removeAll();
 				//grid_gpinfo.store.load();
 				grid_item.store.load();
-				grid_todo.store.load();
+				//grid_todo.store.load();
 				win.hide();
 				btn.show();
 			},
