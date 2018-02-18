@@ -46,7 +46,7 @@ Ext.define('td.view.grid.WireTodoInvoiceList',{
 				{ text : '공구코드',					dataIndex : 'gpcode',						width:230,			hidden:true	},
 				{ text : '송금코드',					dataIndex : 'wr_id',						width:130,			hidden:true	},
 				{ text : '발주코드',					dataIndex : 'iv_id',						width:120	},
-				{ text : '발주서 별칭',			dataIndex : 'iv_name',					width:150	},
+				{ text : '발주서 별칭',			dataIndex : 'iv_name',					width:150,		editor: { allowBlank : false }	},
 				{
 					dataIndex: 'money_type',
 					text: '통화유형',
