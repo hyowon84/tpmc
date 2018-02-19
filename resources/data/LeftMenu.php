@@ -124,12 +124,7 @@ if($_SESSION['admin_yn'] == 'Y') {
 						name: "주문관리",
 						url: "td.view.util.OrderEditMain",
 						leaf: true
-					}
-				]
-		},
-
-
-	<?
+					},
 					{
 						name: "대리주문 입력(XLS)",
 						url: "td.view.grading.winImportExcelGrading",
@@ -137,7 +132,9 @@ if($_SESSION['admin_yn'] == 'Y') {
 						window : true,
 						leaf: true
 					}
-
+				]
+		}
+<?
 	/*
 
 				{
