@@ -389,7 +389,6 @@ Ext.define('td.view.grid.MakeWarehousingList',{
 				{ text : '발주총액',			dataIndex : 'TOTAL_PRICE',			width:140,		style:'text-align:center',	align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00'), 	summaryType : 'sum',		summaryRenderer : rendererSummaryFormat }
 			],
 			listeners : {
-				edit: listenerEditFunc,
 				afterrender: listenerAfterRendererFunc
 			}
 

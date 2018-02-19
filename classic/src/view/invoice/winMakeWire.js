@@ -55,7 +55,7 @@ Ext.define('td.view.invoice.winMakeWire', {
 									readOnly: true
 								},
 								{
-									fieldLabel: '송금내역별칭',
+									fieldLabel: '송금번호/R,NO',
 									name: 'wr_name'
 								},
 								{

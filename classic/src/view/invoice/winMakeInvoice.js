@@ -64,6 +64,7 @@ Ext.define('td.view.invoice.winMakeInvoice', {
 									xtype : 'cb_dealers',
 									fieldLabel: '딜러',
 									reference: 'dealers',
+									name : 'iv_dealer',
 									listConfig: {
 										itemTpl: ['<div data-qtip="{ct_id}: {ct_name}">{ct_name} ({ct_id})</div>']
 									}

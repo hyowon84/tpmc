@@ -8,7 +8,7 @@ Ext.define('td.store.WireTodoInvoiceList', {
 	model: 'td.model.Invoice',
 	alias: 'store.WireTodoInvoiceList',
 	pageSize : 100,
-	autoSync : false,
+	autoSync : true,
 	autoLoad : true,
 	remoteSort: true,
 	sorters:[

@@ -46,16 +46,7 @@ Ext.define('td.view.grid.WireTodoInvoiceList',{
 				{ text : '공구코드',					dataIndex : 'gpcode',						width:230,			hidden:true	},
 				{ text : '송금코드',					dataIndex : 'wr_id',						width:130,			hidden:true	},
 				{ text : '발주코드',					dataIndex : 'iv_id',						width:120	},
-				{ text : '발주서 별칭',			dataIndex : 'iv_name',					width:150	},
-				{ text : '통화',							dataIndex : 'money_type',				width:70	},
-				{ text : 'TOTAL',						dataIndex : 'TOTAL_PRICE',			width:150,		style:'text-align:center',		align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00') },
-				{ text : '인보이스번호',			dataIndex : 'iv_order_no',			width:120	},
-				{ text : '메모',							dataIndex : 'iv_memo',					width:170,		editor: { allowBlank : false }	},
-				{ text : 'DC.FEE',					dataIndex : 'iv_discountfee',		width:100,		style:'text-align:center',		align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00'),		editor: { allowBlank : false } },
-				{ text : 'TAX',							dataIndex : 'iv_tax',						width:100,		style:'text-align:center',		align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00'),		editor: { allowBlank : false } },
-				{ text : 'SHIP.FEE',				dataIndex : 'iv_shippingfee',		width:120,		style:'text-align:center',		align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00'),		editor: { allowBlank : false } },
-				{ text : '딜러',							dataIndex : 'iv_dealer',				width:120	},
-				{ text : '인보이스날짜',			dataIndex : 'iv_date',					width:120	},
+				{ text : '발주서 별칭',			dataIndex : 'iv_name',					width:150,		editor: { allowBlank : false }	},
 				{
 					dataIndex: 'money_type',
 					text: '통화유형',
@@ -66,6 +57,24 @@ Ext.define('td.view.grid.WireTodoInvoiceList',{
 					value : 'USD',
 					renderer: rendererCombo
 				},
+				{
+					dataIndex: 'iv_dealer',
+					text: '딜러',
+					style:'text-align:center',
+					align:'center',
+					allowBlank: true,
+					editor: {xtype: 'cb_dealers'},
+					value : '',
+					renderer: rendererCombo
+				},
+				//{ text : '딜러',							dataIndex : 'iv_dealer',				width:120,		editor: { allowBlank : false }	},
+				{ text : 'TOTAL',						dataIndex : 'TOTAL_PRICE',			width:150,		style:'text-align:center',		align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00') },
+				{ text : '인보이스번호',			dataIndex : 'iv_order_no',			width:120,		editor: { allowBlank : false }	},
+				{ text : '메모',							dataIndex : 'iv_memo',					width:170,		editor: { allowBlank : false }	},
+				{ text : 'DC.FEE',					dataIndex : 'iv_discountfee',		width:100,		style:'text-align:center',		align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00'),		editor: { allowBlank : false } },
+				{ text : 'TAX',							dataIndex : 'iv_tax',						width:100,		style:'text-align:center',		align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00'),		editor: { allowBlank : false } },
+				{ text : 'SHIP.FEE',				dataIndex : 'iv_shippingfee',		width:120,		style:'text-align:center',		align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00'),		editor: { allowBlank : false } },
+				{ text : '인보이스날짜',			dataIndex : 'iv_date',					width:120	},
 				{ text : '담당자',						dataIndex : 'admin_name',				width:120	},
 				{ text : '입출금링크',				dataIndex : 'iv_receipt_link',	width:120	}
 			],
@@ -108,6 +117,7 @@ Ext.define('td.view.grid.WireTodoInvoiceList',{
 		//this.getStore().load();
 	},
 	listeners : {
+		afterrender: listenerAfterRendererFunc,
 		selectionchange: 'selectWireTodoInvoice'
 	}
 });
@@ -161,7 +171,7 @@ Ext.define('td.view.grid.WireEndInvoiceList',{
 				{ text : '공구코드',						dataIndex : 'gpcode',						width:230,			hidden:true},
 				{ text : '통관코드',						dataIndex : 'cr_id',						width:130,			hidden:true},
 				{ text : '송금코드',						dataIndex : 'wr_id',						width:130,			hidden:true},
-				{ text : '송금별칭',						dataIndex : 'wr_name',					width:120,			hidden:true},
+				{ text : '송금번호/R,NO',			dataIndex : 'wr_name',					width:120	},
 				{ text : '송금수수료(해외)',		dataIndex : 'wr_out_fee',				width:120,			hidden:true},
 				{ text : '송금수수료(국내)',		dataIndex : 'wr_in_fee',				width:120,			hidden:true},
 				{ text : '송금메모',						dataIndex : 'wr_memo',					width:120,			hidden:true},
@@ -413,7 +423,6 @@ Ext.define('td.view.grid.MakeWireList',{
 				{ text : '발주총액',			dataIndex : 'TOTAL_PRICE',			width:140,		style:'text-align:center',	align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00'), 	summaryType : 'sum',		summaryRenderer : rendererSummaryFormat }
 			],
 			listeners : {
-				edit: listenerEditFunc,
 				afterrender: listenerAfterRendererFunc
 			}
 

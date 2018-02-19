@@ -165,7 +165,7 @@ function makeProductSql($gpcode) {
 		//장바구니 목록, 장바구니다음의 주문목록에서 사용
 		if($it_id) $AND_SQL = "AND			VGL.links_itid = '$it_id'";
 		
-		if( $member[admin_yn] != 'Y' ) {
+		if( $member[admin_yn] != 'Y' && $_SESSION[admin_yn] != 'Y') {
 			$관리자조건 = "	AND			IT.gp_use = '1'
 											AND			GI.stats = '00'
 											AND			GI.end_date >= DATE_FORMAT(NOW(),'%Y-%m-%d') 

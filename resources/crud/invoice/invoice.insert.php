@@ -35,9 +35,9 @@ if($mode == 'new') {
 $common_sql = "	invoice_info	SET
 								iv_name					=	'$iv_name',
 								gpcode					= '$gpcode',					/*같이 묶어서 보길 원할경우 입력*/
-								iv_dealer				= '$iv_dealer',				/*인보이스 딜러업체*/
+								iv_dealer				= '$_POST[iv_dealer]',				/*인보이스 딜러업체*/
 								iv_order_no			= '$iv_order_no',			/*인보이스 주문번호*/
-								money_type			=	'$money_type',			/*통화유형*/
+								money_type			=	'$_POST[money_type]',			/*통화유형*/
 								od_exch_rate		= '$od_exch_rate',		/*환율*/
 								iv_receipt_link	= '$iv_receipt_link',	/*해외송금 입출금내역 링크*/
 								iv_date					= '$iv_date',					/*인보이스 날짜*/
@@ -47,12 +47,16 @@ $common_sql = "	invoice_info	SET
 								iv_memo					= '$iv_memo'					/*내용*/
 ";
 
+//print_r($_POST);
+//echo $common_sql;
+//exit;
+
 
 switch($mode) {
 	case 'new':
 		$sql = " INSERT INTO ".$common_sql."
 														,iv_id		= '$iv_id'			/*인보이스ID*/
-														,admin_id	= '$member[mb_id]'		/*담당자*/
+														,admin_id	= '$mb_id'		/*담당자*/
 														,reg_date = now()
 		";
 		break;
@@ -78,12 +82,18 @@ for($i = 0; $i < count($grid); $i++) {
 	$it[iv_it_name] = str_replace('"', "\'", $it[iv_it_name]);
 
 
+
+	if($it[ip_qty] > 0) {
+		$입고수량 = "	ip_qty					= '$it[ip_qty]',					/*실제출고수량*/	";
+	}
+
+
 	/* 인보이스 기본폼 입력 */
 	$common_sql = "	invoice_item	SET
 											iv_it_name 			= \"$it[iv_it_name]\",		/*주문상품명*/
 											iv_dealer_worldprice		= '$it[iv_dealer_worldprice]',		/*주문단가*/
 											iv_dealer_price = '$it[iv_dealer_price]',	/*주문단가*/
-											ip_qty					= '$it[ip_qty]',					/*실제출고수량*/
+											$입고수량
 											iv_qty					= '$it[iv_qty]',					/*주문수량*/
 											iv_dealer				= '$iv_dealer',						/*딜러*/
 											iv_order_no			= '$it[iv_order_no]',			/*인보이스 번호*/

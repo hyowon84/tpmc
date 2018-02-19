@@ -1,9 +1,8 @@
 <?php
 include_once('./_common.php');
 
-
 //스트립슬래시를 안하면 json_decode가 안됨
-$arr = json_decode(str_replace('\"','"',stripslashes( iconv('utf-8', 'cp949', $_POST['data'] ) )),true);
+$arr = jsonDecode($_POST['data']);
 $mb_id = $_SESSION[admin_id];
 
 
@@ -13,6 +12,7 @@ if( strlen($arr[iv_id]) > 1 ) {
 
 	$iv_id = $arr[iv_id];
 	$gpcode = $arr[gpcode];
+	$iv_name = $arr[iv_name];
 	$iv_dealer = $arr[iv_dealer];
 	$iv_order_no = $arr[iv_order_no];
 	$iv_receipt_link = $arr[iv_receipt_link];
@@ -29,8 +29,11 @@ if( strlen($arr[iv_id]) > 1 ) {
 
 	/* 상품정보 수정 */
 	$common_sql = "	UPDATE	invoice_info	SET
+															iv_name = '$iv_name',
+															iv_dealer = '$iv_dealer',						/*USD, CNY, ...*/
 															money_type = '$money_type',						/*USD, CNY, ...*/
 															od_exch_rate = '$od_exch_rate',				/*주문기준 환율*/
+															iv_order_no = '$iv_order_no',				/*인보이스 번호*/
 															iv_tax = '$iv_tax',
 															iv_discountfee = '$iv_discountfee',
 															iv_shippingfee = '$iv_shippingfee',
@@ -48,6 +51,7 @@ else {	/* 복수레코드일때 */
 
 		$iv_id = $grid[iv_id];
 		$gpcode = $grid[gpcode];
+		$iv_name = $grid[iv_name];
 		$iv_dealer = $grid[iv_dealer];
 		$iv_order_no = $grid[iv_order_no];
 		$iv_receipt_link = $grid[iv_receipt_link];
@@ -65,8 +69,11 @@ else {	/* 복수레코드일때 */
 
 		/* 상품정보 수정 */
 		$common_sql = "	UPDATE	invoice_info	SET
+															iv_name = '$iv_name',
+															iv_dealer = '$iv_dealer',						/*USD, CNY, ...*/
 															money_type = '$money_type',						/*USD, CNY, ...*/
 															od_exch_rate = '$od_exch_rate',				/*주문기준 환율*/
+															iv_order_no = '$iv_order_no',				/*인보이스 번호*/
 															iv_tax = '$iv_tax',
 															iv_discountfee = '$iv_discountfee',
 															iv_shippingfee = '$iv_shippingfee',

@@ -264,7 +264,6 @@ Ext.define('td.view.grid.InvoiceOrderItemList',{
 		this.getStore().load();
 	},
 	listeners : {
-		edit: listenerEditFunc,
 		afterrender: listenerAfterRendererFunc
 	}
 });
@@ -305,7 +304,7 @@ Ext.define('td.view.grid.MakeInvoiceList',{
 				{ text : '상품코드',			dataIndex : 'iv_it_id',							width:160		},
 				{ text : '품목명',				dataIndex : 'iv_it_name',						width:450		},
 				{ text : '발주가(해외)',	dataIndex : 'iv_dealer_worldprice',	width:120,	editor: { allowBlank : true },		style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000.00') },
-				{ text : '발주가(￦)',		dataIndex : 'iv_dealer_price',			editor: { allowBlank : false },		style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000'),	hidden:true },
+				{ text : '발주가(￦)',		dataIndex : 'iv_dealer_price',			editor: { allowBlank : false },		style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000.00'),	hidden:true },
 				{ text : '발주수량',			dataIndex : 'iv_qty',								editor: { allowBlank : false },		style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
 				{ text : '발주총액',			dataIndex : 'total_price',					editor: { allowBlank : false },		style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000.00'),	hidden:true }
 			],
