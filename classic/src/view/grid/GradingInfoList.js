@@ -14,7 +14,7 @@ Ext.define('td.view.grid.GradingInfoList',{
 	],
 	name : 'GradingInfoList',
 	alias:'widget.GradingInfoList',
-	//controller:'ProductMainController',
+	controller:'GradingMainController',
 	selType: 'checkboxmodel',
 	remoteSort: true,
 	autoLoad : true,
@@ -50,8 +50,13 @@ Ext.define('td.view.grid.GradingInfoList',{
 					style: 'padding:0px;',
 					enableKeyEvents: true,
 					listeners:{
-						keydown: 'searchGradingKeyword'
+						keydown: 'searchGradingInfo'
 					}
+				},
+				{
+					text	: '조회',
+					reference : 'addGradingCode',
+					handler : 'searchGradingMember'
 				},
 				{
 					text	: '추가',

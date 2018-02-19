@@ -3,15 +3,59 @@ Ext.define('td.view.grading.GradingMainController', {
 	alias: 'controller.GradingMainController',
 
 	//그레이딩목록 키워드 검색
-	searchGradingKeyword : function(t,e){
-
-		var grid_gpinfo = Ext.getCmp('prd_gpinfo').items.items[0];
+	searchGradingInfo : function(t,e){
+		//
+		//var win = this.lookupReference('winMakeInvoice'),
+		//	grid_win = win.down("[name=MakeInvoiceList]"),
+		//	grid_item = Ext.getCmp('InvoiceOrderItemList').down("[name=InvoiceOrderItemList]"),
+		////grid_todo = Ext.getCmp('WireInvoice').down("[name=WireTodoInvoiceList]"),
+		//	form = Ext.getCmp('winMakeInvoiceForm'),
+		//	btn = this.lookupReference('BtnSubmitInvoice'),
+		//	cnt = grid_win.getStore().data.items.length,
+		//	jsonData = "[";
 
 		if(e.keyCode == 13){
-			grid_gpinfo.store.loadData([],false);
-			Ext.apply(grid_gpinfo.store.getProxy().extraParams, {keyword : this.getValue()});
-			grid_gpinfo.store.load();
+			var grid_grinfo = Ext.getCmp('grading_mbinfo').down("[name=GradingInfoList]");
+
+			grid_grinfo.store.loadData([],false);
+			Ext.apply(grid_grinfo.store.getProxy().extraParams, { keyword : this.lookupReference('grading_keyword').getValue() });
+			grid_grinfo.store.load();
 		}
+	},
+
+	//그레이딩목록 위 조회버튼 클릭
+	searchGradingMember : function(btn,e){
+		var grid_grinfo = Ext.getCmp('grading_mbinfo').down("[name=GradingInfoList]"),
+		grid_grmb = Ext.getCmp('grading_mbinfo').down("[name=GradingMbList]"),
+		grid_grod = Ext.getCmp('grading_orderlist').down("[name=GradingOrderList]");
+
+
+		grid_grmb.store.loadData([],false);
+		grid_grod.store.loadData([],false);
+
+		/* 공구목록 선택된 레코드 */
+		var sm = grid_grinfo.getSelectionModel().getSelection();
+
+		if(sm) {
+			var v_grcode = '';
+			var v_keyword = '';
+			v_keyword = this.lookupReference('grading_keyword').getValue();
+
+			for(var i = 0; i < sm.length; i++) {	//sm[i].data
+				v_grcode += "'"+sm[i].data.grcode + "',";
+			}
+			v_grcode = v_grcode.substr(0,v_grcode.length-1);
+
+			var params = {
+				grcode : v_grcode,
+				keyword : v_keyword
+			}
+
+			/* >>회원정보 리프레시 */
+			Ext.apply(grid_grmb.store.getProxy().extraParams, params);
+			grid_grmb.store.load();
+		}
+
 	},
 
 	//그레이딩 신청서 입력 팝업 열기

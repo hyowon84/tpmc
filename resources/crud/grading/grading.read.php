@@ -26,11 +26,11 @@ if($mode == 'gradinginfo') {
 	if($keyword) {
 		$키워드 = " AND ";
 
-//		$arrkey = explode(' ',$keyword);
-//		for($i = 0; $i < count($arrkey); $i++) {
-//			$복수키워드 .= " (GI.gpcode LIKE '%$arrkey[$i]%' OR GI.gpcode_name LIKE '%$arrkey[$i]%' ) AND ";
-//		}
-//		$복수키워드 = "AND (".substr($복수키워드, 0, strlen($복수키워드)-4).")";
+		$arrkey = explode(' ',$keyword);
+		for($i = 0; $i < count($arrkey); $i++) {
+			$복수키워드 .= " (GR.grcode LIKE '%$arrkey[$i]%' OR GR.grcode_name LIKE '%$arrkey[$i]%' ) AND ";
+		}
+		$복수키워드 = "AND (".substr($복수키워드, 0, strlen($복수키워드)-4).")";
 	}
 	$AND_SQL .= $복수키워드;
 
@@ -50,12 +50,9 @@ if($mode == 'gradinginfo') {
 }
 //그레이딩 신청자 정보
 else if($mode == 'mblist') {
-//	if($gpcode) $공구코드조건 .=" AND ( CL.gpcode IN (".str_replace("\'","'",$gpcode).")	AND CL.stats <= 35 ) ";
-//	if ($sdate) $기간조건 .= " AND CL.od_date >= '$sdate 00:00:00' ";
-//	if ($edate) $기간조건 .= " AND CL.od_date <= '$edate 23:59:59' ";
-//	if($keyword) $AND_SQL .= "AND (T.mb_name LIKE '%$keyword%' OR T.hphone LIKE '%$keyword%' OR T.mb_nick LIKE '%$keyword%' )";
-//	if($keyword) $내부조건 = " AND (CL.name LIKE '%$keyword%' OR CL.hphone LIKE '%$keyword%' OR CL.clay_id LIKE '%$keyword%' OR ( GI.gpcode_name LIKE '%$keyword%' AND CL.stats <= 39) ) ";
-
+	if($grcode) $공구코드조건 .=" AND ( GI.grcode IN (".str_replace("\'","'",$grcode).") ) ";
+	if($keyword) $내부조건 .= "AND (GI.gr_name LIKE '%$keyword%' OR GI.gr_nickname LIKE '%$keyword%' )";
+//	if($keyword) $내부조건 = " AND (CL.name LIKE '%$keyword%' OR CL.hphone LIKE '%$keyword%' OR CL.clay_id LIKE '%$keyword%' OR ( GI.grcode_name LIKE '%$keyword%' AND CL.stats <= 39) ) ";
 
 	$SELECT_SQL = "	SELECT	GI.gr_nickname,
 													GI.gr_name,
@@ -64,7 +61,6 @@ else if($mode == 'mblist') {
 									WHERE		GI.gr_stats >= '00'
 									AND			GI.gr_stats <= '20'
 									$공구코드조건
-									$기간조건
 									$내부조건
 									GROUP BY GI.gr_nickname, GI.gr_name
 	";
