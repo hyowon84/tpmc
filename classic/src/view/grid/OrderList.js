@@ -514,7 +514,7 @@ Ext.define('td.view.grid.BankLinkOrder',{
 						{	xtype: 'label',	text: '확장 검색어 : ',		autoWidth:true,	style : 'font-weight:bold;'},
 						{
 							xtype: 'textfield',
-							reference : 'banklink_keyword',
+							reference : 'BankLinkOrder_Keyword',
 							name: 'keyword',
 							style: 'padding:0px;',
 							enableKeyEvents: true,

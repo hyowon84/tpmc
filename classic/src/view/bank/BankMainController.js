@@ -57,11 +57,11 @@ Ext.define('td.view.bank.BankMainController', {
 
 	//입출금내역 선택시 연결된 주문정보 로딩
 	selectBankDataLoadOrders : function(view, records) {
-		var grid = Ext.getCmp('BankList').down("[name=BankStatement]");
-		var sm = grid.getSelectionModel().getSelection()[0];
+		var grid = Ext.getCmp('BankList').down("[name=BankStatement]"),
+				grid_bo = Ext.getCmp('BankOrder').down("[name=BankLinkOrder]"),
+				sm = grid.getSelectionModel().getSelection()[0];
 
-		var store_banklinklist = Ext.getCmp('BankOrder').down("[name=BankLinkOrder]").getStore();
-		store_banklinklist.loadData([],false);
+		grid_bo.store.loadData([],false);
 		
 		
 		if(sm) {
@@ -78,15 +78,15 @@ Ext.define('td.view.bank.BankMainController', {
 			}
 
 			v_number = v_number.substr(0,v_number.length-1);
+			v_keyword = grid_bo.lookupReference('BankLinkOrder_Keyword').getValue();
 
-			v_keyword = Ext.getCmp('keyword_banklist').getValue();
 			var v_param = { 'number' : v_number,
 				'mode'		:	'BankLinkOrder',
 				'keyword' : v_keyword
 			};
 
-			Ext.apply(store_banklinklist.getProxy().extraParams, v_param);
-			store_banklinklist.load();
+			Ext.apply(grid_bo.store.getProxy().extraParams, v_param);
+			grid_bo.store.load();
 		}
 
 	},
@@ -127,7 +127,7 @@ Ext.define('td.view.bank.BankMainController', {
 	searchBankLinkKeyword : function(t,e) {
 		if(e.keyCode == 13){
 			var v_param = {
-				keyword : this.lookupReference('banklink_keyword').getValue()
+				keyword : this.lookupReference('BankLinkOrder_Keyword').getValue()
 			}
 
 			var grid_banklinklist = Ext.getCmp('BankOrder').down("[name=BankLinkOrder]");

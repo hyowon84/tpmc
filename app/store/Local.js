@@ -376,7 +376,6 @@ Ext.define('td.store.wiretype',{
 	model: 'td.model.combo',
 	alias: 'store.wiretype',
 	data:[
-		[0,'00', '은행-코인즈투데이'],
 		[1,'01', '은행-투데이(주)'],
 		[2,'10', '페이팔'],
 		[3,'20', '마운틴']
