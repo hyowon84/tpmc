@@ -49,7 +49,7 @@ if($_SESSION['admin_yn'] == 'Y') {
 			expanded: true,
 			children:[
 <?
-		if($admin_id == 'todaygoldx@naver.com' OR $admin_id == 'heejung@coinstoday.co.kr' OR $admin_id == 'lucael@naver.com') {
+		if($admin_id == 'todaygoldx@naver.com' OR $admin_id == 'heejung@coinstoday.co.kr' OR $admin_id == 'sunghye@gmail.com' OR $admin_id == 'lucael@naver.com') {
 ?>
 				{
 					name: "입출금 관리",
