@@ -8,7 +8,7 @@ Ext.define('td.store.ClearanceTodoInvoiceList', {
 	model: 'td.model.Invoice',
 	alias: 'store.ClearanceTodoInvoiceList',
 	pageSize : 100,
-	autoSync : false,
+	autoSync : true,
 	autoLoad : true,
 	remoteSort: true,
 	sorters:[

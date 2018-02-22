@@ -17,7 +17,8 @@ Ext.define('td.view.grid.ClearanceTodoInvoiceList',{
 	title : '통관예정발주서',
 	selType: 'checkboxmodel',
 	remoteSort: true,
-	autoLoad : false,
+	autoSync : true,
+	autoLoad : true,
 	initComponent: function(){
 		this.cellEditing = new Ext.grid.plugin.CellEditing({
 			clicksToEdit: 1
@@ -100,6 +101,7 @@ Ext.define('td.view.grid.ClearanceTodoInvoiceList',{
 		//this.getStore().load();
 	},
 	listeners : {
+		afterrender: listenerAfterRendererFunc,
 		selectionchange: 'selectClearanceTodoInvoice'
 	}
 });
