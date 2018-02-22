@@ -350,6 +350,11 @@ Ext.define('td.view.grid.WireItemList',{
 					text	: '인쇄',
 					iconCls	: 'icon-table_print',
 					handler: 'printWireInvoiceItem'
+				},
+				{
+					text	: '엑셀다운',
+					iconCls	: 'icon-excel',
+					handler: 'exportWireInvoiceItem'
 				}
 
 			],
@@ -372,10 +377,6 @@ Ext.define('td.view.grid.WireItemList',{
 		//selectionchange: 'selectLoadInvoiceItem'
 	}
 });
-
-
-
-
 
 
 //송금내역 작성 팝업의 그리드

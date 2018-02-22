@@ -314,6 +314,11 @@ Ext.define('td.view.grid.ClearanceItemList',{
 					text	: '인쇄',
 					iconCls	: 'icon-table_print',
 					handler: 'printClearanceInvoiceItem'
+				},
+				{
+					text	: '엑셀다운',
+					iconCls	: 'icon-excel',
+					handler: 'exportClearanceItem'
 				}
 
 			],
