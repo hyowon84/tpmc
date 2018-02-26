@@ -31,6 +31,9 @@ if($mode == 'new') {
 }
 
 
+
+$od_exch_rate = ($od_exch_rate > 0) ? $od_exch_rate : '0';
+
 /* 인보이스 기본폼 입력 */
 $common_sql = "	invoice_info	SET
 								iv_name					=	'$iv_name',
@@ -80,7 +83,8 @@ for($i = 0; $i < count($grid); $i++) {
 
 	$it[iv_it_name] = str_replace("'", "\'", $it[iv_it_name]);
 	$it[iv_it_name] = str_replace('"', "\'", $it[iv_it_name]);
-
+	$it[iv_dealer_worldprice] = ($it[iv_dealer_worldprice] > 0) ? $it[iv_dealer_worldprice] : '0';
+	$it[iv_dealer_price] = ($it[iv_dealer_price] > 0) ? $it[iv_dealer_price] : '0';
 
 
 	if($it[ip_qty] > 0) {

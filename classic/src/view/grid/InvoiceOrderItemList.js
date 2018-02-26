@@ -308,7 +308,7 @@ Ext.define('td.view.grid.MakeInvoiceList',{
 				{ text : '발주총액',			dataIndex : 'total_price',					editor: { allowBlank : false },		style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000.00'),	hidden:true }
 			],
 			listeners : {
-				edit: listenerEditFunc,
+				//edit: listenerEditFunc,
 				afterrender: listenerAfterRendererFunc
 			}
 
