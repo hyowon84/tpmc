@@ -20,7 +20,6 @@ Ext.define('td.view.invoice.winMakeInvoice', {
 			id : 'winMakeInvoiceForm',
 			reference : 'winMakeInvoiceForm',
 			url : '/resources/crud/invoice/invoice.insert.php',
-			//url : '/adm/extjs/stock/crud/stock_update.php',
 			layout: 'column',
 			border : 0,
 			autoHeight : true,

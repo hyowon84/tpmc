@@ -6,9 +6,11 @@ include_once('./_common.php');
 //$arr = json_decode(str_replace('\"','"',stripslashes( iconv('utf-8', 'cp949', $_POST[] ) )),true);
 $admin_id = $_SESSION[admin_id];
 
+//print_r($_POST);
+//exit;
+
 
 if (strlen($gpcode_list) > 1) {
-
 	$gpcode = str_replace("\'","'",$_POST[gpcode_list]);
 	$sms_text = $_POST[sms_text];
 	$stats = $_POST[stats];
@@ -54,13 +56,19 @@ if (strlen($gpcode_list) > 1) {
 					$mh_send_message = $sms_text;
 					$mh_send_message = preg_replace("/{주문ID}/", $od['od_id'], $mh_send_message);
 					$mh_send_message = preg_replace("/{주문금액}/", $od['TOTAL_PRICE'], $mh_send_message);
-					$mh_send_message = preg_replace("/{회사명}/", '투데이 주식회사', $mh_send_message);
+//					$mh_send_message = preg_replace("/{회사명}/", '투데이 주식회사', $mh_send_message);
 					$mh_send_message = preg_replace("/{운송장번호}/", $od['delivery_invoice'], $mh_send_message);
 					$내용모음.=$mh_send_message."<br>";
 				}
 
-				$msg .= sendSms($연락처,$내용모음);
+
+//				global $socket_host,$socket_port,$icode_key;
+//				echo " $연락처, $내용모음 ";
+//				echo " $socket_host $socket_port $icode_key";
+//				exit;
+
 				db_log($find_sql."\r\n$연락처\r\n$sms_text",'ICODE_SMS',"공구 단체SMS/LMS");
+				$msg .= sendSms($연락처,$내용모음);
 				
 			}
 			else {

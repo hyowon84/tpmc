@@ -18,7 +18,7 @@ Ext.define('td.view.invoice.winGpSms', {
 		{
 			xtype : 'form',
 			id : 'winGpSmsForm',
-			url : '/resources/crud/invoice/gpsms.php',
+			url : '/resources/crud/invoice/sendsms.php',
 			width: '100%',
 			height : 350,
 			autoHeight : true,
