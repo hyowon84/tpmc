@@ -392,7 +392,7 @@ Ext.define('td.view.grid.MakeClearanceList',{
 				{ text : '취소수량',				dataIndex : 'cr_cancel_qty',	width:90,		editor: { allowBlank : false },		style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') }
 			],
 			listeners : {
-				edit: listenerEditFunc,
+				//edit: listenerEditFunc,
 				afterrender: listenerAfterRendererFunc
 			}
 
