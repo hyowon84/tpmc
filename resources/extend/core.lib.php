@@ -1152,7 +1152,7 @@ function getDataGpJaego($gp_id) {
 /*DB로그 작성*/
 function db_log($쿼리,$테이블명,$메모,$이전데이터='',$현재데이터='') {
 	global $member;
-	$관리자ID = $_SESSION['ss_mb_id'];
+	$관리자ID = $_SESSION['admin_id'];
 	$파일명 = $_SERVER['PHP_SELF'];
 
 	$쿼리 =	preg_replace("/\t\t\t\t/",' ',$쿼리);
