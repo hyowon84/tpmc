@@ -107,7 +107,7 @@ Ext.define('td.view.invoice.WarehousingMain', {
 							items : [
 								{
 									headerPosition: 'left',
-									title : '<b>입고관련 품목</b>',
+									title : '입고관련 품목',
 									name : 'WarehousingItemList',
 									xtype: 'WarehousingItemList',
 									border: 0

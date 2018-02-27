@@ -4,9 +4,9 @@ Ext.define('td.view.invoice.winGpSms', {
 	xtype: 'winGpSms',
 	reference: 'winGpSms',
 	title: '공구 단체문자',
-	width: 500,
-	minWidth: 450,
-	height: 450,
+	width: 540,
+	minWidth: 540,
+	height: 550,
 	closable: true,
 	closeAction: 'hide',
 	maximizable: false,
@@ -20,7 +20,7 @@ Ext.define('td.view.invoice.winGpSms', {
 			id : 'winGpSmsForm',
 			url : '/resources/crud/invoice/sendsms.php',
 			width: '100%',
-			height : 350,
+			height : 450,
 			autoHeight : true,
 			split: false,
 			collapsible: false,
@@ -52,9 +52,12 @@ Ext.define('td.view.invoice.winGpSms', {
 							readOnly : true
 						},
 						{
-							xtype:'cb_stats',
+							xtype:'cb_sms_stats',
+							fieldLabel: 'SMS템플릿',
 							reference : 'cb_stats',
-							style : 'float:left;'
+							margin: '0 0 10 6',
+							style : 'float:left;',
+							value : ''
 						},
 						{
 							xtype : 'button',
@@ -67,17 +70,47 @@ Ext.define('td.view.invoice.winGpSms', {
 
 						{
 							xtype: 'textarea',
-							reference : 'sms_text',
-							name: 'sms_text',
-							fieldLabel: '문자내용',
+							reference : 'sms_text_head',
+							name: 'sms_text_head',
+							fieldLabel: '머리말',
 							labelAlign : 'top',
 							width: '98%',
-							height : 180,
+							height : 50,
 							margin: '0 0 10 6',
 							style:'float:left;',
 							enableKeyEvents: true,
 							listeners : {
-								keyup: 'keyupSizeCnt'
+								//keyup: 'keyupSizeCnt'
+							}
+						},
+						{
+							xtype: 'textarea',
+							reference : 'sms_text',
+							name: 'sms_text',
+							fieldLabel: '템플릿',
+							labelAlign : 'top',
+							width: '98%',
+							height : 110,
+							margin: '0 0 10 6',
+							style:'float:left;',
+							enableKeyEvents: true,
+							listeners : {
+								//keyup: 'keyupSizeCnt'
+							}
+						},
+						{
+							xtype: 'textarea',
+							reference : 'sms_text_tail',
+							name: 'sms_text_tail',
+							fieldLabel: '꼬리말',
+							labelAlign : 'top',
+							width: '98%',
+							height : 50,
+							margin: '0 0 10 6',
+							style:'float:left;',
+							enableKeyEvents: true,
+							listeners : {
+								//keyup: 'keyupSizeCnt'
 							}
 						},
 

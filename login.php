@@ -66,6 +66,7 @@ if($mode == 'check') {
 										MB.admin_yn
 						FROM		g5_member MB
 						WHERE		MB.mb_id = '$mb_id'
+						AND			MB.admin_yn = 'Y'
 						$프리패스
 	";
 	$chk = $sqli->query($sql);
@@ -85,7 +86,7 @@ if($mode == 'check') {
 		exit;
 	}
 	else if($chk->num_rows == 0) {
-		alert('패스워드가 일치하지 않습니다','/');
+		alert('패스워드가 일치하지 않거나 관리자 권한이 없습니다','/');
 
 	}
 	else {

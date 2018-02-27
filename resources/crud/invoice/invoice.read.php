@@ -292,7 +292,7 @@ else if($mode == 'orderitems') {
 																		IFNULL(CLS.SUM_QTY,0) AS SUM_QTY,								/*해당공구의 주문수량*/
 																		
 																		/*발주필요수량*/
-																		( ( IFNULL(CLS.SUM_QTY,0) - IFNULL(IVS.SUM_IV_QTY,0) - IFNULL(GP.jaego,0) ) - IF( ((IFNULL(RIV.RIV_QTY,0)-IFNULL(IVS.SUM_IV_QTY,0)) - (IFNULL(CO.ORDER_QTY,0) - IFNULL(CLS.SUM_QTY,0)) ) > 0, ((IFNULL(RIV.RIV_QTY,0)-IFNULL(IVS.SUM_IV_QTY,0)) - (IFNULL(CO.ORDER_QTY,0) - IFNULL(CLS.SUM_QTY,0))), 0) )  AS NEED_IV_QTY,
+																		( ( IFNULL(CLS.SUM_QTY,0) - IFNULL(IVS.SUM_IV_QTY,0) ) - IF( ((IFNULL(RIV.RIV_QTY,0) + IFNULL(GP.jaego,0) - IFNULL(IVS.SUM_IV_QTY,0)) - (IFNULL(CO.ORDER_QTY,0) - IFNULL(CLS.SUM_QTY,0)) ) > 0, ((IFNULL(RIV.RIV_QTY,0) + IFNULL(GP.jaego,0) -IFNULL(IVS.SUM_IV_QTY,0)) - (IFNULL(CO.ORDER_QTY,0) - IFNULL(CLS.SUM_QTY,0))), 0) )  AS NEED_IV_QTY,
 																		
 																		IFNULL(IVS.SUM_IV_QTY,0) AS SUM_IV_QTY,					/*해당공구의 발주수량*/
 																		

@@ -14,6 +14,20 @@ Ext.define('td.view.combo.Order', {
 });
 
 
+/*SMS 템플릿에서 사용할 주문상태*/
+Ext.define('td.view.combo.SmsStats', {
+	extend: 'Ext.form.ComboBox',
+	alias: 'widget.cb_sms_stats',
+	queryMode: 'local',
+	editable: false,
+	displayField: 'name',
+	valueField: 'value',
+	name: 'sms_stats',
+	width: 200,
+	store: {type: 'smsex'}
+});
+
+
 /*통합배송관리에서 사용하는 주문상태*/
 Ext.define('td.view.combo.shippingstats', {
 	extend: 'Ext.form.ComboBox',

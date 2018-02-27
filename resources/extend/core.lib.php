@@ -1500,7 +1500,7 @@ function parent_reload()
 function checkLogin() {
 	
 	//admin_id가 있고 2글자 이상이면 index.html로, 없으면 로그인페이지로
-	if( !$_SESSION['admin_id'] || strlen($_SESSION['admin_id']) < 2 ) {
+	if( !$_SESSION['admin_id'] || strlen($_SESSION['admin_id']) < 2 || $_SESSION['admin_yn'] != 'Y') {
 		echo "
 		<script>
 			document.location.href = 'login.php';
