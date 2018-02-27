@@ -43,17 +43,17 @@ Ext.define('td.view.grid.ClearanceTodoInvoiceList',{
 			},
 			autoWidth : true,
 			columns : [
-				{ text : '그룹코드',						dataIndex : 'Group',						width:230,			hidden:true	},
-				{ text : '날짜',								dataIndex : 'iv_date',					sortable: true,	summaryType: 'max',		renderer: Ext.util.Format.dateRenderer('Y-m-d'),	summaryRenderer: Ext.util.Format.dateRenderer('Y-m-d'),		field: { xtype: 'datefield' },		hidden:true	},
-				{ text : '공구코드',						dataIndex : 'gpcode',						width:230,			hidden:true	},
-				{ text : '통관ID',							dataIndex : 'cr_id',						width:120,			hidden:true	},
-				{ text : '송금코드',						dataIndex : 'wr_id',						width:130,			hidden:true	},
-				{ text : '%',									dataIndex : 'complete_per',			width:60	},
-				{ text : '발주서메모',					dataIndex : 'iv_memo',					width:170,		editor: { allowBlank : false }	},
-				{ text : '발주코드',						dataIndex : 'iv_id',						width:120	},
-				{ text : '딜러',								dataIndex : 'iv_dealer',				width:80	},
-				{ text : '인보이스번호',				dataIndex : 'iv_order_no',			width:120	},
-				{ text : '발주서 별칭',				dataIndex : 'iv_name',					width:150	},
+				{ text : '그룹코드',						dataIndex : 'Group',						width:230,			align:'center',			hidden:true	},
+				{ text : '날짜',								dataIndex : 'iv_date',					width:130,			align:'center',			sortable: true,	summaryType: 'max',		renderer: Ext.util.Format.dateRenderer('Y-m-d'),	summaryRenderer: Ext.util.Format.dateRenderer('Y-m-d'),		field: { xtype: 'datefield' },		hidden:true	},
+				{ text : '공구코드',						dataIndex : 'gpcode',						width:230,			align:'left',				hidden:true	},
+				{ text : '통관ID',							dataIndex : 'cr_id',						width:120,			align:'left',				hidden:true	},
+				{ text : '송금코드',						dataIndex : 'wr_id',						width:130,			align:'left',				hidden:true	},
+				{ text : '%',									dataIndex : 'complete_per',			width:60,				align:'center'	},
+				{ text : '발주서메모',					dataIndex : 'iv_memo',					width:170,			align:'left',			editor: { allowBlank : false }	},
+				{ text : '발주코드',						dataIndex : 'iv_id',						width:120,			align:'left'		},
+				{ text : '딜러',								dataIndex : 'iv_dealer',				width:80,				align:'left'	},
+				{ text : '인보이스번호',				dataIndex : 'iv_order_no',			width:120,			align:'left'	},
+				{ text : '발주서 별칭',				dataIndex : 'iv_name',					width:150,			align:'left'	},
 				{
 					dataIndex: 'money_type',
 					text: '통화유형',
@@ -64,14 +64,14 @@ Ext.define('td.view.grid.ClearanceTodoInvoiceList',{
 					value : 'USD',
 					renderer: rendererCombo
 				},
-				{ text : 'TOTAL',							dataIndex : 'TOTAL_PRICE',			width:150,			style:'text-align:center',		align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00'), 	summaryType : 'sum',		summaryRenderer : rendererSummaryFormat },
-				{ text : 'DC.FEE',						dataIndex : 'iv_discountfee',		width:100,			style:'text-align:center',		align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00'), 	summaryType : 'sum',		summaryRenderer : rendererSummaryFormat },
-				{ text : 'TAX',								dataIndex : 'iv_tax',						width:100,			style:'text-align:center',		align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00'), 	summaryType : 'sum',		summaryRenderer : rendererSummaryFormat },
-				{ text : 'SHIP.FEE',					dataIndex : 'iv_shippingfee',		width:120,			style:'text-align:center',		align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00'), 	summaryType : 'sum',		summaryRenderer : rendererSummaryFormat },
-				{ text : '환율(송금)',					dataIndex : 'wr_exch_rate',			width:100,			style:'text-align:center',		align:'right',		editor: { allowBlank : false }	},
-				{ text : '인보이스날짜',				dataIndex : 'iv_date',					sortable: true,	summaryType: 'max',		renderer: Ext.util.Format.dateRenderer('Y-m-d'),	summaryRenderer: Ext.util.Format.dateRenderer('Y-m-d'),		field: { xtype: 'datefield' }	},
-				{ text : '담당자',							dataIndex : 'admin_name',				width:120	},
-				{ text : '입출금링크',					dataIndex : 'iv_receipt_link',	width:120	}
+				{ text : 'TOTAL',							dataIndex : 'TOTAL_PRICE',			width:150,					align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00'), 	summaryType : 'sum',		summaryRenderer : rendererSummaryFormat },
+				{ text : 'DC.FEE',						dataIndex : 'iv_discountfee',		width:100,					align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00'), 	summaryType : 'sum',		summaryRenderer : rendererSummaryFormat },
+				{ text : 'TAX',								dataIndex : 'iv_tax',						width:100,					align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00'), 	summaryType : 'sum',		summaryRenderer : rendererSummaryFormat },
+				{ text : 'SHIP.FEE',					dataIndex : 'iv_shippingfee',		width:120,					align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00'), 	summaryType : 'sum',		summaryRenderer : rendererSummaryFormat },
+				{ text : '환율(송금)',					dataIndex : 'wr_exch_rate',			width:100,					align:'right',		editor: { allowBlank : false }	},
+				{ text : '인보이스날짜',				dataIndex : 'iv_date',					sortable: true,			summaryType: 'max',		renderer: Ext.util.Format.dateRenderer('Y-m-d'),	summaryRenderer: Ext.util.Format.dateRenderer('Y-m-d'),		field: { xtype: 'datefield' }	},
+				{ text : '담당자',							dataIndex : 'admin_name',				width:120,					align:'center'	},
+				{ text : '입출금링크',					dataIndex : 'iv_receipt_link',	width:120,					align:'left'	}
 			],
 			tbar: [
 				{	xtype: 'label',	text: '검색어 : ',		autoWidth:true,	style : 'font-weight:bold;'},
@@ -156,9 +156,9 @@ Ext.define('td.view.grid.ClearanceEndInvoiceList',{
 				{ text : '통관번호',						dataIndex : 'cr_refno',					width:150	},
 				{ text : '통관별칭',						dataIndex : 'cr_name',					width:150	},
 				{ text : '통관일',							dataIndex : 'cr_date',					sortable: true,		summaryType: 'max',						renderer: Ext.util.Format.dateRenderer('Y-m-d')	},
-				{ text : '관세',								dataIndex : 'cr_dutyfee',				width:100,				style:'text-align:center',		align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00'),		editor: { allowBlank : false } },
-				{ text : '부가세',							dataIndex : 'cr_taxfee',				width:100,				style:'text-align:center',		align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00'),		editor: { allowBlank : false } },
-				{ text : '배송비',							dataIndex : 'cr_shipfee',				width:120,				style:'text-align:center',		align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00'),		editor: { allowBlank : false } },
+				{ text : '관세',								dataIndex : 'cr_dutyfee',				width:100,						align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00'),		editor: { allowBlank : false } },
+				{ text : '부가세',							dataIndex : 'cr_taxfee',				width:100,						align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00'),		editor: { allowBlank : false } },
+				{ text : '배송비',							dataIndex : 'cr_shipfee',				width:120,						align:'right',		renderer: Ext.util.Format.numberRenderer('0,000.00'),		editor: { allowBlank : false } },
 				{ text : '담당자',							dataIndex : 'admin_id',					width:120	}
 			],
 			tbar: [
@@ -227,12 +227,12 @@ Ext.define('td.view.grid.InvoiceGpInfo',{
 				{ text : '공구명', 			width : 380,	dataIndex : 'gpcode_name',	sortable: false	},
 				{ text : '공구코드',		width : 120,	dataIndex : 'gpcode',				hidden:true	},
 				{ text : '날짜',				width : 120,	dataIndex : 'reg_date',			hidden:true	},
-				{ text : '주문',				width : 70,		dataIndex : 'SUM_QTY',			style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
-				{ text : '미발주',			width : 80,		dataIndex : 'NEED_IV_QTY',	style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
-				{ text : '발주',				width : 70,		dataIndex : 'SUM_IV_QTY',		style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
-				{ text : '주문총액',		width : 120,	dataIndex : 'SUM_PAY',			style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
-				{ text : '주문량',			width : 90,		dataIndex : 'ITC_CNT',			style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
-				{ text : '발주량',			width : 90,		dataIndex : 'IVC_CNT',			style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') }
+				{ text : '주문',				width : 70,		dataIndex : 'SUM_QTY',				align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
+				{ text : '미발주',			width : 80,		dataIndex : 'NEED_IV_QTY',		align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
+				{ text : '발주',				width : 70,		dataIndex : 'SUM_IV_QTY',			align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
+				{ text : '주문총액',		width : 120,	dataIndex : 'SUM_PAY',				align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
+				{ text : '주문량',			width : 90,		dataIndex : 'ITC_CNT',				align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
+				{ text : '발주량',			width : 90,		dataIndex : 'IVC_CNT',				align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') }
 			]
 		});
 		this.callParent();
@@ -280,18 +280,18 @@ Ext.define('td.view.grid.ClearanceItemList',{
 				{ text: '통관코드',			dataIndex : 'cr_id',								width:130		},
 				{ text: '발주코드',			dataIndex : 'iv_id',								width:120		},
 				{ text: '인보이스번호',	dataIndex : 'iv_order_no',					width:120		},
-				{	text: '현황',					dataIndex: 'iv_stats',							style:'text-align:center',			align:'center',			allowBlank: true,			editor: {xtype: 'cb_ivstats'},			value : '00',			renderer: rendererCombo	},
+				{	text: '현황',					dataIndex: 'iv_stats',							align:'center',			allowBlank: true,			editor: {xtype: 'cb_ivstats'},			value : '00',			renderer: rendererCombo	},
 				{ text: '공구코드',			dataIndex : 'gpcode',								width:120,		hidden:true		},
 				{ text: '공구명',				dataIndex : 'gpcode_name',					width:120		},
 				{ text: '날짜',					dataIndex : 'reg_date',							sortable: true,		summaryType: 'max',		renderer: Ext.util.Format.dateRenderer('Y-m-d'),	summaryRenderer: Ext.util.Format.dateRenderer('Y-m-d'),		field: { xtype: 'datefield' },		hidden:true	},
 				{ text: 'IMG', 					dataIndex : 'iv_it_img',						width:50,					renderer:rendererImage 		},
 				{ text: '상품코드',			dataIndex : 'iv_it_id',							width:160		},
 				{ text: '통화',					dataIndex : 'money_type',						width:70		},
-				{ text: '발주가',				dataIndex : 'iv_dealer_worldprice',	width:80,		editor: { allowBlank : false },		style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000.00') },
-				{ text: '발주가(￦)',		dataIndex : 'iv_dealer_price',			width:120,	editor: { allowBlank : false },		style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000'),	hidden:true },
-				{ text: '발주수량',			dataIndex : 'iv_qty',								width:100,	editor: { allowBlank : false },		style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
-				{ text: '통관수량',			dataIndex : 'cr_qty',								width:100,	editor: { allowBlank : false },		style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
-				{ text: '취소수량',			dataIndex : 'cr_cancel_qty',				width:100,	editor: { allowBlank : false },		style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
+				{ text: '발주가',				dataIndex : 'iv_dealer_worldprice',	width:80,		editor: { allowBlank : false },			align:'right',	renderer: Ext.util.Format.numberRenderer('0,000.00') },
+				{ text: '발주가(￦)',		dataIndex : 'iv_dealer_price',			width:120,	editor: { allowBlank : false },			align:'right',	renderer: Ext.util.Format.numberRenderer('0,000'),	hidden:true },
+				{ text: '발주수량',			dataIndex : 'iv_qty',								width:100,	editor: { allowBlank : false },			align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
+				{ text: '통관수량',			dataIndex : 'cr_qty',								width:100,	editor: { allowBlank : false },			align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
+				{ text: '취소수량',			dataIndex : 'cr_cancel_qty',				width:100,	editor: { allowBlank : false },			align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
 				{ text: '품목명',				dataIndex : 'iv_it_name',						width:450		}
 			],
 			tbar : [
@@ -388,8 +388,8 @@ Ext.define('td.view.grid.MakeClearanceList',{
 				{ text : '발주코드',				dataIndex : 'iv_id',					width:120		},
 				{ text : '통관 상품코드',	dataIndex : 'cr_it_id',				width:160		},
 				{ text : '통관 상품명',		dataIndex : 'cr_it_name',			width:260		},
-				{ text : '통관수량',				dataIndex : 'cr_qty',					width:90,		editor: { allowBlank : false },		style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
-				{ text : '취소수량',				dataIndex : 'cr_cancel_qty',	width:90,		editor: { allowBlank : false },		style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') }
+				{ text : '통관수량',				dataIndex : 'cr_qty',					width:90,		editor: { allowBlank : false },			align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
+				{ text : '취소수량',				dataIndex : 'cr_cancel_qty',	width:90,		editor: { allowBlank : false },			align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') }
 			],
 			listeners : {
 				//edit: listenerEditFunc,

@@ -104,6 +104,8 @@ Ext.define('td.view.invoice.WarehousingMainController', {
 			var rec = Ext.create('td.model.InvoiceItem', {
 				'number'				: sm[i].data.number,
 				'real_jaego'		: sm[i].data.real_jaego,
+				'cr_blno'					: sm[i].data.cr_blno,
+				'cr_refno'					: sm[i].data.cr_refno,
 				'cr_id'					: sm[i].data.cr_id,
 				'iv_id'					: sm[i].data.iv_id,
 				'iv_order_no'		: sm[i].data.iv_order_no,
