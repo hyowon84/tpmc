@@ -45,7 +45,7 @@ if ($mode == 'editor') {
 									GROUP BY CL.it_id
 	";
 }
-/* 코투재고는 */
+/* 코투 빠른배송상품, 임시카테고리 */
 else if ($gpcode == 'QUICK') {
 	/* 카테고리 CT */
 	$SELECT_SQL = "	SELECT	
@@ -86,6 +86,7 @@ else if ($gpcode == 'QUICK') {
 													T.ebay_id
 									FROM		$sql_admin_product
 									WHERE		1=1
+									AND			T.ca_id LIKE 'CT%'
 									$AND_SQL
 	";
 //			echo $SELECT_SQL;
@@ -130,7 +131,53 @@ else if($gpcode == 'JAEGO') {
 													T.ebay_id
 									FROM		$sql_admin_product
 									WHERE		1=1
+									AND			T.ca_id LIKE 'CT%'
 									AND			T.location != ''
+									$AND_SQL
+	";
+//		echo $SELECT_SQL;
+}
+else if($gpcode == 'TEMP') {
+	/* 카테고리 CT */
+	$SELECT_SQL = "	SELECT
+													T.gp_id,
+													T.ca_id,
+													T.location,
+													T.gp_img,
+													T.gp_name,
+													T.gp_update_time,
+													T.gp_price_type,
+													T.gp_metal_type,
+													T.gp_metal_don,
+													T.gp_spotprice_type,
+													T.gp_spotprice,
+													T.gp_order,
+													T.gp_use,
+
+													T.gp_price,
+													T.gp_usdprice,
+													T.gp_realprice,
+													T.gp_price_org,
+													T.gp_buy_max_qty,
+													T.only_member,
+
+													/*최초재고값 + 발주수량 - 실주문량*/
+													T.real_jaego,												/*실재고*/
+													T.jaego,														/*재고보정값*/
+													T.jaego_memo,												/*재고메모*/
+													IFNULL(T.CO_SUM,0) AS CO_SUM,				/*누적주문량*/
+													T.IV_SUM,														/*누적발주량*/
+
+													T.ac_yn,								/*경매진행여부*/
+													T.ac_code,							/*경매진행코드*/
+													T.ac_qty,								/*경매진행수량*/
+													T.ac_enddate,						/*경매종료일자*/
+													T.ac_startprice,				/*경매 시작가*/
+													T.ac_buyprice,						/*경매 즉시구매가*/
+													T.ebay_id
+									FROM		$sql_admin_product
+									WHERE		1=1
+									AND			T.ca_id LIKE 'JG%'
 									$AND_SQL
 	";
 //		echo $SELECT_SQL;

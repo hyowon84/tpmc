@@ -107,8 +107,9 @@ else if($mode == 'oldinvoice') {
 /* 방문자 접속정보 추출 */
 else if($mode == 'visitinfo') {
 	$SELECT_SQL = "	SELECT	*
-								FROM		g5_visit
-								WHERE		1=1
+									FROM		g5_visit V
+									WHERE		1=1
+									AND			V.vi_date > DATE_ADD(NOW(),INTERVAL -7 DAY)
 	";
 }
 

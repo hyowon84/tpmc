@@ -62,6 +62,19 @@ if($mode == 'product') {
 													) AS ITEM_CNT
 									FROM		DUAL
 									UNION ALL
+									SELECT	'TEMP' AS gpcode,
+													'코투 재고조사중' AS gpcode_name,
+													'00' AS stats,
+													'상시진행' AS stats_name,
+													'2016-01-01' AS start_date,
+													'2999-12-31' AS end_date,
+													'2999-12-31 00:00:00' AS reg_date,
+													(	SELECT	COUNT(*)
+														FROM		g5_shop_group_purchase GP
+														WHERE		GP.ca_id LIKE 'JG%'
+													) AS ITEM_CNT
+									FROM		DUAL
+									UNION ALL
 									SELECT	GI.gpcode,
 													GI.gpcode_name,
 													GI.stats,

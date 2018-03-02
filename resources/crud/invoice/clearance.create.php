@@ -1,6 +1,6 @@
 <?php
 include_once('./_common.php');
-$mb_id = $_SESSION[admin_id];
+$admin_id = $_SESSION[admin_id];
 
 
 /*
@@ -46,7 +46,7 @@ switch($mode) {
 		$sql = " INSERT INTO ".$common_sql."
 														,cr_id		= '$cr_id'					/*인보이스ID*/
 														,iv_id		= '$iv_id'					/*연결된 인보이스ID*/
-														,admin_id	= '$member[mb_id]'	/*담당자*/
+														,admin_id	= '$admin_id'	/*담당자*/
 														,reg_date = now()
 		";
 		break;

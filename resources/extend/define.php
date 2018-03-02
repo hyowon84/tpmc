@@ -125,6 +125,7 @@ $sql_admin_product = "	(	SELECT	GP.*,
 													FROM		(	SELECT	*
 																		FROM		g5_shop_group_purchase
 																		WHERE		ca_id LIKE 'CT%'
+																		OR			ca_id LIKE 'JG%'
 																	) GP
 																	
 																	

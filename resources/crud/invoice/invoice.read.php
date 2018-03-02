@@ -268,7 +268,6 @@ else if($mode == 'orderitems') {
 
 	}
 
-
 	/* TOTAL COUNT */
 	$SELECT_SQL = "	SELECT	T.*,
 													T.real_jaego,
@@ -291,9 +290,16 @@ else if($mode == 'orderitems') {
 																		/*발주 관련 합계 컬럼, 공구단위로 묶어야*/
 																		
 																		IFNULL(CLS.SUM_QTY,0) AS SUM_QTY,								/*해당공구의 주문수량*/
-																		
-																		/*발주필요수량*/
-																		( ( IFNULL(CLS.SUM_QTY,0) - IFNULL(IVS.SUM_IV_QTY,0) ) - IF( ((IFNULL(RIV.RIV_QTY,0) + IFNULL(GP.jaego,0) - IFNULL(IVS.SUM_IV_QTY,0)) - (IFNULL(CO.ORDER_QTY,0) - IFNULL(CLS.SUM_QTY,0)) ) > 0, ((IFNULL(RIV.RIV_QTY,0) + IFNULL(GP.jaego,0) -IFNULL(IVS.SUM_IV_QTY,0)) - (IFNULL(CO.ORDER_QTY,0) - IFNULL(CLS.SUM_QTY,0))), 0) )  AS NEED_IV_QTY,
+
+																		/*발주필요수량
+																			(해당공구 주문집계수량 - 해당공구 발주수량 - 상품초기재고값)
+																			- IF(	(전체발주수량 - 해당공구발주수량) - (전체주문집계수량 - 해당공구주문집계수량) )  > 0,
+																						참이면 ((전체발주수량 - 해당공구발주수량) - (전체주문집계수량 - 해당공구주문집계수량)), )
+																						거짓이면 0 )
+																			*/
+																			( ( IFNULL(CLS.SUM_QTY,0) - IFNULL(IVS.SUM_IV_QTY,0) )
+																						- IF( ( (IFNULL(RIV.RIV_QTY,0) + IFNULL(GP.jaego,0) - IFNULL(IVS.SUM_IV_QTY,0)) - (IFNULL(CO.ORDER_QTY,0) - IFNULL(CLS.SUM_QTY,0)) ) > 0,
+																									((IFNULL(RIV.RIV_QTY,0) + IFNULL(GP.jaego,0) - IFNULL(IVS.SUM_IV_QTY,0)) - (IFNULL(CO.ORDER_QTY,0) - IFNULL(CLS.SUM_QTY,0))), 0) )  AS NEED_IV_QTY,
 																		
 																		IFNULL(IVS.SUM_IV_QTY,0) AS SUM_IV_QTY,					/*해당공구의 발주수량*/
 																		
