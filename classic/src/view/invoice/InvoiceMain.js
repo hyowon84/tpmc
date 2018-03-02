@@ -34,7 +34,7 @@ Ext.define('td.view.invoice.InvoiceMain', {
 			title : '공동구매 목록',
 			region:'west',
 			floatable: false,
-			width: '30%',
+			width: '35%',
 			minWidth: 100,
 			scrollable: false,
 			items : [
@@ -52,7 +52,7 @@ Ext.define('td.view.invoice.InvoiceMain', {
 			collapsible: false,
 			region: 'center',
 			scrollable: false,
-			width : '70%',
+			width : '65%',
 			items : [
 				{
 					id : 'InvoiceOrderItemList',

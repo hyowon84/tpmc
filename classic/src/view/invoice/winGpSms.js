@@ -1,4 +1,3 @@
-
 Ext.define('td.view.invoice.winGpSms', {
 	extend: 'Ext.window.Window',
 	xtype: 'winGpSms',
@@ -26,13 +25,12 @@ Ext.define('td.view.invoice.winGpSms', {
 			collapsible: false,
 			floatable: true,
 			border: 0,
-			style: 'margin-top:10px;',
 			items:[
 				{
 					xtype: 'container',
 					flex: 1,
 					width: '100%',
-					style : 'float:left;',
+					style : 'float:left; padding-top:0px; margin-top:0px;',
 					items: [
 						{
 							xtype: 'textfield',
@@ -80,7 +78,7 @@ Ext.define('td.view.invoice.winGpSms', {
 							style:'float:left;',
 							enableKeyEvents: true,
 							listeners : {
-								//keyup: 'keyupSizeCnt'
+								keyup: 'keyupSizeCnt'
 							}
 						},
 						{
@@ -95,7 +93,7 @@ Ext.define('td.view.invoice.winGpSms', {
 							style:'float:left;',
 							enableKeyEvents: true,
 							listeners : {
-								//keyup: 'keyupSizeCnt'
+								keyup: 'keyupSizeCnt'
 							}
 						},
 						{
@@ -110,14 +108,14 @@ Ext.define('td.view.invoice.winGpSms', {
 							style:'float:left;',
 							enableKeyEvents: true,
 							listeners : {
-								//keyup: 'keyupSizeCnt'
+								keyup: 'keyupSizeCnt'
 							}
 						},
 
 						{
 							xtype: 'textfield',
 							readOnly: true,
-							id : 'sizecnt',
+							reference : 'sizecnt',
 							border: 0,
 							style : 'margin-left:10px; float:left; font-weight:bold;',
 							width : 40
@@ -130,15 +128,21 @@ Ext.define('td.view.invoice.winGpSms', {
 					]
 				}
 			],	//items item end
-			buttons: [{
-				text: '취소',
-				handler: 'closeWinGpSms'
-			}, {
-				text: '전송',
-				handler: 'submitWinGpSms'
-			}]
+			buttons: [
+				{xtype: 'tbfill'},
+				{
+					text: '취소',
+					tabCls: 'right-tab',
+					handler: 'closeWinGpSms'
+				}, {
+					text: '전송',
+					tabCls: 'right-tab',
+					handler: 'submitWinGpSms'
+				}
+			]
 		}
 	]
 });
+
 
 

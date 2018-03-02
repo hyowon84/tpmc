@@ -3,7 +3,7 @@ Ext.define('td.store.ProductList', {
 	extend: 'Ext.data.Store',
 	model : 'td.model.Product',
 	alias: 'store.ProductList',
-	pageSize : 200,
+	pageSize : 109,
 	autoLoad : false,
 	remoteSort: true,
 	autoSync : true,

@@ -241,6 +241,6 @@ Ext.define('td.store.MakeInvoiceList',{
 	extend: 'Ext.data.ArrayStore',
 	model : 'td.model.WireEndInvoice',
 	alias: 'store.MakeInvoiceList',
-	groupField: 'Group',
-	sorters:	{	property:'reg_date',		direction:'DESC'}
+	//sorters:	{	property:'II.gpcode',		direction:'ASC'},
+	groupField: 'Group'
 });

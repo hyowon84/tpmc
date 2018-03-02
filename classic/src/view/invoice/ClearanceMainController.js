@@ -369,6 +369,7 @@ Ext.define('td.view.invoice.ClearanceMainController', {
 				'iv_stats'			: sm[i].data.iv_stats,
 				'reg_date'			: sm[i].data.reg_date,
 				'gpcode'				: sm[i].data.gpcode,
+				'gpcode_name'		: sm[i].data.gpcode_name,
 				'iv_it_img'			: sm[i].data.iv_it_img,
 				'iv_it_id'			: sm[i].data.iv_it_id,
 				'iv_it_name' 		: sm[i].data.iv_it_name,

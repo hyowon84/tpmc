@@ -83,14 +83,14 @@ Ext.define('td.store.ClearanceItemList', {
 	extend: 'Ext.data.Store',
 	model : 'td.model.InvoiceItem',
 	alias: 'store.ClearanceItemList',
-	pageSize : 50,
+	pageSize : 100,
 	remoteSort: true,
 	autoLoad : false,
 	autoSync : true,
 	sorters:[
 		{
-			property:'reg_date',
-			direction:'DESC'
+			property:'II.gpcode',
+			direction:'ASC'
 		}
 	],
 	proxy : {
@@ -115,59 +115,3 @@ Ext.define('td.store.ClearanceItemList', {
 	}
 });
 
-
-
-////좌측 상단 통관예정 발주서 목록
-//Ext.define('store.invoice_list',{
-//	extend: 'Ext.data.Store',
-//	fields:['name','value'],
-//	pageSize : 300,
-//	//model	:	'model_stockManage',
-//	fields : [
-//		'gpcode',
-//		'iv_id',
-//		'iv_dealer',
-//		'iv_order_no',
-//		'iv_receipt_link',
-//		'iv_date',
-//		'od_exch_rate',
-//		'money_type',
-//		'iv_tax',
-//		'iv_shippingfee',
-//		'iv_memo',
-//		'admin_id',
-//		'admin_name',
-//		'reg_date'
-//	],
-//	remoteSort: true,
-//	autoLoad : false,
-//	autoSync : true,
-//	//remoteFilter: true,
-//	sorters:[
-//		{
-//			property:'reg_date',
-//			direction:'DESC'
-//		}
-//	],
-//	proxy : {
-//		type : 'ajax',
-//		extraParams : {
-//
-//		},
-//		api : {
-//			read		: '/resources/crud/invoice/stock.php?mode=invoiceTodoClearance',
-//			update	: '/resources/crud/invoice/stockinfo_update.php',
-//			destroy	: '/resources/crud/invoice/invoice_info.delete.php',
-//		},
-//		reader : {
-//			rootProperty : 'data',
-//			totalProperty : 'total'
-//		},
-//		writer : {
-//			type : 'json',
-//			writeAllFields : true,
-//			encode : true,
-//			rootProperty : 'data'
-//		}
-//	}
-//});

@@ -1,5 +1,5 @@
 
-Ext.Panel.prototype.buttonAlign = 'right';
+Ext.Panel.prototype.buttonAlign = 'left';
 
 Ext.define('td.view.main.Main', {
 	extend: 'Ext.container.Container',

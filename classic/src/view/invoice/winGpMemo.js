@@ -1,5 +1,3 @@
-Ext.Panel.prototype.buttonAlign = 'right';
-
 Ext.define('td.view.invoice.winGpMemo', {
 	extend: 'Ext.window.Window',
 	xtype: 'winGpMemo',
@@ -64,6 +62,7 @@ Ext.define('td.view.invoice.winGpMemo', {
 				}
 			],	//items item end
 			buttons: [
+				{xtype: 'tbfill'},
 				{
 					text: '취소',
 					handler: 'closeWinGpMemo'

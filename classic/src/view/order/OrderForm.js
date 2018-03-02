@@ -1,6 +1,4 @@
-//주문관리에서 폼 하단 버튼 좌측 강제정렬 적용
-Ext.Panel.prototype.buttonAlign = 'left';
-
+Ext.Panel.prototype.buttonAlign = 'center';
 
 /* 주문자정보 패널에 사용되는 폼 */
 Ext.define('td.view.order.OrderForm', {
@@ -9,7 +7,7 @@ Ext.define('td.view.order.OrderForm', {
 	xtype : 'OrderForm',
 	name : 'frmOrderForm',
 	url : '/resources/crud/order/orderinfo.update.php',
-	width : 1900,
+	width : '100%',
 	height: 180,
 	split: false,
 	collapsible: false,
@@ -278,7 +276,7 @@ Ext.define('td.view.order.OrderForm', {
 					xtype: 'textarea',
 					fieldLabel: '관리자메모',
 					labelAlign : 'top',
-					width: 300,
+					width: 200,
 					height: 100,
 					margin: '0 0 10 10',
 					style:'float:left;',
@@ -288,7 +286,7 @@ Ext.define('td.view.order.OrderForm', {
 					xtype: 'textarea',
 					fieldLabel: '구매자메모',
 					labelAlign : 'top',
-					width: 300,
+					width: 200,
 					height: 100,
 					margin: '0 0 10 6',
 					style:'float:left;',
@@ -300,6 +298,7 @@ Ext.define('td.view.order.OrderForm', {
 	buttons: [
 		{
 			text: '수정',
+			style : 'float:left;',
 			handler: function() {
 				var grid = Ext.getCmp('od_odlist').down("[name=OrderList]");
 				var sm = grid.getSelection()[0];

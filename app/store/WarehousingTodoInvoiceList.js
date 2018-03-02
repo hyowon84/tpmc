@@ -41,7 +41,7 @@ Ext.define('td.store.WarehousingTodoInvoiceList', {
 //입고완료 발주서 목록
 Ext.define('td.store.WarehousingEndInvoiceList', {
 	extend: 'Ext.data.Store',
-	model: 'td.model.WarehousingEndInvoice',
+	model: 'td.model.Invoice',
 	alias: 'store.WarehousingEndInvoiceList',
 	groupField: 'Group',
 	pageSize : 100,
@@ -88,8 +88,8 @@ Ext.define('td.store.WarehousingItemList', {
 	autoSync : true,
 	sorters:[
 		{
-			property:'reg_date',
-			direction:'DESC'
+			property:'II.gpcode',
+			direction:'ASC'
 		}
 	],
 	proxy : {

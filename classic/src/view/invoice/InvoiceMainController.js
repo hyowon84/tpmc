@@ -168,7 +168,8 @@ Ext.define('td.view.invoice.InvoiceMainController', {
 
 	//문자내용 타이핑시 byte체크
 	keyupSizeCnt : function() {
-		this.lookupReferencep('sizecnt').setValue(this.lookupReference('sms_text').getValue().length);
+		var sizecnt = this.lookupReference('sms_text_head').getValue().length + this.lookupReference('sms_text').getValue().length + this.lookupReference('sms_text_tail').getValue().length;
+		this.lookupReference('sizecnt').setValue(sizecnt);
 	},
 
 	//단체문자 팝업 취소 버튼

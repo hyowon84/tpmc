@@ -176,68 +176,12 @@ Ext.define('td.view.grid.OrderList',{
 							text	: '인쇄',
 							iconCls	: 'icon-table_print',
 							handler: 'printOrders'
+						},
+						{
+							text	: 'SMS',
+							iconCls	: 'icon-sms',
+							handler: 'openWinSms'
 						}
-						//{
-						//	text	: 'SMS',
-						//	id		: 'sendSMS',
-						//	iconCls	: 'icon-sms',
-						//	handler: function() {
-						//		var sm = grid_orderlist.getSelection();
-						//
-						//		if( sm == '' ) {
-						//			Ext.Msg.alert('알림','주문내역들을 선택해주세요');
-						//			return false;
-						//		}
-						//
-						//		store_winSms.removeAll();
-						//		var v_prev_od_id;
-						//
-						//		for(var i = 0; i < sm.length; i++) {
-						//			sm[i].data.message = v_SmsMsg[sm[i].data.stats];
-						//
-						//			/*중복주문번호에 대해서는 중복발송 방지위해 필터링*/
-						//			if(sm[i].data.od_id == v_prev_od_id) continue;
-						//
-						//			var stats = sm[i].data.stats;
-						//			if( (stats >= 10 && stats <= 40) || stats == 90)
-						//				stats = stats;
-						//			else
-						//				stats = '';
-						//
-						//			var rec = Ext.create('model.SmsSendForm', {
-						//				'stats'			: stats,
-						//				'message'		: sm[i].data.message,
-						//				'nickname'		: sm[i].data.nickname,
-						//				'name'			: sm[i].data.name,
-						//				'hphone'			: sm[i].data.hphone,
-						//				'od_id'			: sm[i].data.od_id,
-						//				'TOTAL_PRICE'	: sm[i].data.TOTAL_PRICE,
-						//				'it_name'		: sm[i].data.it_name
-						//			});
-						//			store_winSms.add(rec);
-						//
-						//			v_prev_od_id = sm[i].data.od_id;
-						//		}
-						//
-						//
-						//		var button = Ext.get('sendSMS');
-						//		button.dom.disabled = true;
-						//		//this.container.dom.style.visibility=true
-						//
-						//		if (winSmsForm.isVisible()) {
-						//			winSmsForm.hide(this, function() {
-						//				button.dom.disabled = false;
-						//			});
-						//		} else {
-						//			winSmsForm.show(this, function() {
-						//				button.dom.disabled = false;
-						//			});
-						//		}
-						//
-						//		//grid_winSms.reconfigure(store_winSms);
-						//
-						//	}
-						//}
 					]
 				}
 			],

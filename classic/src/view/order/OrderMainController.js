@@ -191,5 +191,80 @@ Ext.define('td.view.order.OrderMainController', {
 		Ext.ux.grid.Printer.mainTitle = '선택된 주문목록';
 		Ext.ux.grid.Printer.print(grid);
 		grid.reconfigure(bk_store);
+	},
+
+	openWinSms : function(btn,e) {
+		var win = this.lookupReference('winSms');
+		var grid = Ext.getCmp('od_odlist').down("[name=OrderList]");
+		var sm = grid.getSelectionModel().getSelection();
+
+		if( !sm[0] ) {
+			Ext.Msg.alert('알림','주문내역들을 선택해주세요');
+			return false;
+		}
+
+		if(sm[0]) {
+			if (win) {
+				if(win.isVisible()) {
+					win.hide(this, function () {
+						Ext.getCmp('winSmsForm').reset();
+					});
+
+					return;
+				}
+			}
+			else {	//비활성 상태
+				if (!win) {
+					win = new td.view.order.winSms();
+					//win.x = -400;
+					win.y = -100;
+					this.getView().add(win);
+				}
+			}
+
+			win.show(this, function() {
+				Ext.getCmp('winSmsForm').reset();
+
+				grid.store.removeAll();
+				var v_prev_od_id;
+
+				for(var i = 0; i < sm.length; i++) {
+					sm[i].data.message = v_SmsMsg[sm[i].data.stats];
+
+					/*중복주문번호에 대해서는 중복발송 방지위해 필터링*/
+					if(sm[i].data.od_id == v_prev_od_id) continue;
+
+					var stats = sm[i].data.stats;
+					if( (stats >= 10 && stats <= 40) || stats == 90)
+						stats = stats;
+					else
+						stats = '';
+
+					var rec = Ext.create('model.SmsSendForm', {
+						'stats'			: stats,
+						'message'		: sm[i].data.message,
+						'nickname'		: sm[i].data.nickname,
+						'name'			: sm[i].data.name,
+						'hphone'			: sm[i].data.hphone,
+						'od_id'			: sm[i].data.od_id,
+						'TOTAL_PRICE'	: sm[i].data.TOTAL_PRICE,
+						'it_name'		: sm[i].data.it_name
+					});
+					grid.store.add(rec);
+
+					v_prev_od_id = sm[i].data.od_id;
+				}
+
+			});
+
+		}
+
+
+	},
+
+	//문자내용 타이핑시 byte체크
+	keyupSizeCnt : function(btn,e) {
+		var sizecnt = this.lookupReference('sms_text_head').getValue().length + this.lookupReference('sms_text').getValue().length + this.lookupReference('sms_text_tail').getValue().length;
+		this.lookupReference('sizecnt').setValue(sizecnt);
 	}
 });

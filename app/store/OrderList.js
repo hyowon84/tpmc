@@ -204,3 +204,10 @@ Ext.define('td.store.BankLinkOrder', {
 		}
 	}
 });
+
+
+Ext.define('td.store.SmsSendForm', {
+	extend: 'Ext.data.Store',
+	model	:	'td.model.SmsSendForm',
+	sorters:	{	property:'od_id',		direction:'ASC'}
+});

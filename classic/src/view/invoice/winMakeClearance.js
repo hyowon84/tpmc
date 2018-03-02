@@ -1,5 +1,3 @@
-Ext.Panel.prototype.buttonAlign = 'right';
-
 Ext.define('td.view.invoice.winMakeClearance', {
 	extend: 'Ext.window.Window',
 	xtype: 'winMakeClearance',
@@ -121,6 +119,7 @@ Ext.define('td.view.invoice.winMakeClearance', {
 				//	text: '일괄수정',
 				//	handler: 'updateInvoiceQty'
 				//},
+				{xtype: 'tbfill'},
 				{
 					text: '인쇄',
 					handler: 'printWinMakeClearance'

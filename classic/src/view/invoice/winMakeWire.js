@@ -1,5 +1,3 @@
-Ext.Panel.prototype.buttonAlign = 'right';
-
 Ext.define('td.view.invoice.winMakeWire', {
 	extend: 'Ext.window.Window',
 	xtype: 'winMakeWire',
@@ -133,6 +131,7 @@ Ext.define('td.view.invoice.winMakeWire', {
 				}
 			],	//items item end
 			buttons: [
+				{xtype: 'tbfill'},
 				{
 					reference : 'InvoiceQty',
 					fieldLabel: '수량',
