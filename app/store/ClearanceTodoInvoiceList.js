@@ -47,7 +47,7 @@ Ext.define('td.store.ClearanceEndInvoiceList', {
 	alias: 'store.ClearanceEndInvoiceList',
 	groupField: 'Group',
 	pageSize : 100,
-	autoSync : false,
+	autoSync : true,
 	autoLoad : true,
 	remoteSort: true,
 	sorters:[
@@ -62,7 +62,7 @@ Ext.define('td.store.ClearanceEndInvoiceList', {
 		},
 		api : {
 			read		: '/resources/crud/invoice/invoice.read.php?mode=ClearanceEndInvoice',
-			update	: '/resources/crud/invoice/invoice.update.php'	//stockinfo_update.php
+			update	: '/resources/crud/invoice/clearance.update.php'	//stockinfo_update.php
 		},
 		reader : {
 			rootProperty : 'data',

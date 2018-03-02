@@ -124,8 +124,9 @@ $sql_admin_product = "	(	SELECT	GP.*,
 																	IFNULL(GP.jaego	,0) - IF(GP.ac_code != '' && GP.ac_enddate > NOW(), 1, 0) + IFNULL(GP.gp_jaego,0) + IFNULL(IV.IV_SUM,0) - IFNULL(CO.CO_SUM,0) AS real_jaego
 													FROM		(	SELECT	*
 																		FROM		g5_shop_group_purchase
-																		WHERE		ca_id LIKE 'CT%'
-																		OR			ca_id LIKE 'JG%'
+																		WHERE		ca_id LIKE 'CT%'	#코투 전체 카테고리
+																		OR			ca_id LIKE 'JG%'	#코투 재고조사 카테고리
+																		OR			ca_id LIKE 'SR%'	#코투 쇼룸 카테고리
 																	) GP
 																	
 																	
