@@ -268,6 +268,7 @@ else if($mode == 'orderitems') {
 
 	}
 
+
 	/* TOTAL COUNT */
 	$SELECT_SQL = "	SELECT	T.*,
 													T.real_jaego,
