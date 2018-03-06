@@ -48,7 +48,7 @@ if($keyword) {
 		$상품ID_조건 .= " AND	IV.iv_it_id LIKE '%$분할_검색어[$s]%' ";
 		$공구명_조건 .= " AND	GI.gpcode_name LIKE '%$분할_검색어[$s]%' ";
 		$공구코드_조건 .= " AND	GI.gpcode LIKE '%$분할_검색어[$s]%' ";
-		
+
 	}
 }
 
@@ -104,22 +104,22 @@ if($mode == 'naviFindInvoice') {
 													LEFT JOIN g5_member MB ON (MB.mb_id = II.admin_id)
 													LEFT JOIN gp_info GI ON (GI.gpcode = II.gpcode)
 													
-													
 													LEFT JOIN (	SELECT	iv_id,
 																							COUNT(*) AS CNT
-																			FROM		wire_info
-																			GROUP BY iv_id													
+																			FROM		invoice_item
+																			WHERE		iv_stats >= 20
+																			GROUP BY iv_id
 													) CNT_WR ON (CNT_WR.iv_id = II.iv_id)
 													LEFT JOIN (	SELECT	iv_id,
 																							COUNT(*) AS CNT
-																			FROM		clearance_info
-																			GROUP BY iv_id													
+																			FROM		clearance_item
+																			GROUP BY iv_id
 													) CNT_CLR ON (CNT_CLR.iv_id = II.iv_id)
 													LEFT JOIN (	SELECT	iv_id,
 																							COUNT(*) AS CNT
 																			FROM		invoice_item
-																			WHERE		iv_stats = 40
-																			GROUP BY iv_id													
+																			WHERE		iv_stats >= 40
+																			GROUP BY iv_id
 													) CNT_INP ON (CNT_INP.iv_id = II.iv_id)
 									WHERE		1=1
 									$AND_SQL
@@ -374,7 +374,7 @@ else if($mode == 'WireTodoInvoice') {
 		$AND_SQL.= " AND ( ($IVID조건) OR ($인보이스번호조건) OR ($발주서별칭조건) OR ($발주서메모조건) OR (ITC.CNT > 0) )";	//OR ($상품명조건)
 		$OR_SQL .= " AND	(($상품명_조건) OR	($상품ID_조건) OR	($공구명_조건) OR	($공구코드_조건)) ";
 	}
-	
+
 	/* TOTAL COUNT */
 	$SELECT_SQL = "	SELECT	II.iv_id,							/*인보이스ID*/
 													II.iv_name,						/*발주서 별칭*/
@@ -417,7 +417,7 @@ else if($mode == 'WireTodoInvoice') {
 									AND			(II.wr_id IS NULL OR II.wr_id = '')
 									$AND_SQL
 	";
-	
+
 //	echo $SELECT_SQL." $ORDER_BY";
 }
 
@@ -507,8 +507,8 @@ else if($mode == 'ClearanceTodoInvoice') {
 	if($keyword) {
 		$AND_SQL.= " AND ( ($IVID조건) OR ($WRID조건) OR ($인보이스번호조건) OR ($송금별칭조건) OR ($발주서별칭조건) OR ($발주서메모조건) OR (ITC.CNT > 0) )";	//OR ($상품명조건)
 		$OR_SQL .= " AND	(($상품명_조건) OR	($상품ID_조건) OR	($공구명_조건) OR	($공구코드_조건)) ";
-	}	
-	
+	}
+
 	/* TOTAL COUNT */
 	$SELECT_SQL = "	SELECT	CAL.IV_IT_CNT,							/*품목유형의 수*/
 													CAL.CP_CNT,									/*통관완료된 품목유형의 수*/
@@ -610,11 +610,11 @@ else if($mode == 'ClearanceTodoInvoice') {
 else if($mode == 'ClearanceEndInvoice') {
 
 	if($keyword) {
-		$AND_SQL.= " AND ( ITC.CNT > 0 OR ($통관별칭_조건) ) ";	//OR ($상품명조건)
+		$AND_SQL.= " AND ( ($통관별칭_조건) ) ";	//OR ($상품명조건)
 		$OR_SQL .= " AND	( ($IVID조건) OR ($WRID조건) OR ($인보이스번호조건) OR ($발주서별칭조건) OR ($발주서메모조건)
 		 										OR ($상품명_조건) OR	($상품ID_조건) OR	($공구명_조건) OR	($공구코드_조건) OR	($공구코드_조건) )	";
 	}
-	
+
 	/* 통관완료 발주서 내역 */
 	$SELECT_SQL = "	SELECT	DISTINCT
 													CONCAT('[',CR.cr_id,'] BLNO:', CR.cr_blno, ', 수입NO:', CR.cr_refno, ', 관/부가세:', IFNULL(CR.cr_taxfee,0),'원, 배송비:',IFNULL(CR.cr_shipfee,0),'원') AS 'Group',
@@ -662,8 +662,8 @@ else if($mode == 'invoice_item') {
 //		$AND_SQL.= " AND ( ($IVID조건) OR ($인보이스번호조건) OR ($발주서별칭조건) OR ($발주서메모조건)  )";	//OR ($상품명조건)
 		$AND_SQL .= " AND	(($상품명_조건) OR	($상품ID_조건) OR	($공구명_조건) OR	($공구코드_조건)) ";
 	}
-	
-	
+
+
 	if($iv_id) {
 		$AND_SQL.=" AND IV.iv_id IN (".str_replace("\'","'",$iv_id).") ";
 	}
@@ -813,7 +813,7 @@ else if($mode == 'ClearanceTodoItem') {
 
 /* 통관완료품목 리스트, 입고관리품목 */
 else if($mode == 'ClearanceEndItem') {
-	
+
 	if($cr_id) {
 		$AND_SQL.=" AND CI.cr_id IN (".str_replace("\'","'",$cr_id).") ";
 	}

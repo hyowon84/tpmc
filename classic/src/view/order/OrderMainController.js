@@ -1,7 +1,6 @@
 Ext.define('td.view.order.OrderMainController', {
 	extend: 'Ext.app.ViewController',
 	alias: 'controller.OrderMainController',
-	popup:{},
 
 	//주문목록 레코드 선택시 상단 주문정보, 좌측 로그정보 로딩
 	selOrderLoadLogs: function(btn,e) {
@@ -193,10 +192,16 @@ Ext.define('td.view.order.OrderMainController', {
 		grid.reconfigure(bk_store);
 	},
 
+	//단체문자 팝업 취소 버튼
+	//closeWinGpSms : function(btn,e) {
+	//	this.lookupReference('winGpSms').hide();
+	//	Ext.getCmp('winGpSmsForm').getForm().reset();
+	//},
+
 	openWinSms : function(btn,e) {
 		var win = this.lookupReference('winSms');
-		var grid = Ext.getCmp('od_odlist').down("[name=OrderList]");
-		var sm = grid.getSelectionModel().getSelection();
+		var grid_odlist = Ext.getCmp('od_odlist').down("[name=OrderList]"),
+				sm = grid_odlist.getSelectionModel().getSelection();
 
 		if( !sm[0] ) {
 			Ext.Msg.alert('알림','주문내역들을 선택해주세요');
@@ -207,7 +212,8 @@ Ext.define('td.view.order.OrderMainController', {
 			if (win) {
 				if(win.isVisible()) {
 					win.hide(this, function () {
-						Ext.getCmp('winSmsForm').reset();
+						//form.reset();
+						this.lookupReference('winSmsForm').reset();
 					});
 
 					return;
@@ -221,12 +227,14 @@ Ext.define('td.view.order.OrderMainController', {
 					this.getView().add(win);
 				}
 			}
+			this.lookupReference('winSmsForm').reset();
+			var grid = this.lookupReference('SmsTemplate');
+
 
 			win.show(this, function() {
-				Ext.getCmp('winSmsForm').reset();
+				var v_prev_od_id;
 
 				grid.store.removeAll();
-				var v_prev_od_id;
 
 				for(var i = 0; i < sm.length; i++) {
 					sm[i].data.message = v_SmsMsg[sm[i].data.stats];
@@ -240,7 +248,7 @@ Ext.define('td.view.order.OrderMainController', {
 					else
 						stats = '';
 
-					var rec = Ext.create('model.SmsSendForm', {
+					var rec = Ext.create('td.model.SmsSendForm', {
 						'stats'			: stats,
 						'message'		: sm[i].data.message,
 						'nickname'		: sm[i].data.nickname,
@@ -258,13 +266,87 @@ Ext.define('td.view.order.OrderMainController', {
 			});
 
 		}
+	},
 
+	//상태값 선택에 따른 문자메시지 예제 변경
+	changeStats : function(btn,e) {
+		var sm = this.lookupReference('SmsTemplate').getSelection();
+
+		if( sm == '' ) {
+			Ext.Msg.alert('알림','품목들을 선택해주세요');
+			return false;
+		}
+
+		var smsStats = this.lookupReference('cb_smsex').getValue();
+
+		for(var i = 0; i < sm.length; i++) {
+			if(smsStats) sm[i].set('stats',smsStats);
+
+			sm[i].set('message', v_SmsMsg[sm[i].data.stats]);
+		}
 
 	},
+
+	changeMsg : function(btn,e){
+		var sm = this.lookupReference('SmsTemplate').getSelection();
+		var msg = this.lookupReference('msg');
+
+		this.lookupReference('sizecnt').setValue(msg.getValue().length);
+
+		if(sm.length) {
+			for(var i = 0; i < sm.length; i++) {
+				sm[i].set('message',msg.getValue());
+			}
+		}
+		else {
+		}
+	},
+
+
+	//function() {
+	//	var smsStats = this.lookupReference('cb_stats').getValue();
+	//	this.lookupReference('sms_text').setValue(v_SmsMsg[smsStats]);
+	//},
 
 	//문자내용 타이핑시 byte체크
 	keyupSizeCnt : function(btn,e) {
 		var sizecnt = this.lookupReference('sms_text_head').getValue().length + this.lookupReference('sms_text').getValue().length + this.lookupReference('sms_text_tail').getValue().length;
 		this.lookupReference('sizecnt').setValue(sizecnt);
+	},
+
+	closeWinSms : function(btn,e) {
+		this.lookupReference('winSms').hide();
+		this.lookupReference('winSmsForm').reset();
+	},
+
+	submitWinSms : function(btn,e) {
+		var	win =  this.lookupReference('winSms'),
+				store = this.lookupReference('SmsTemplate').store,
+				form = this.lookupReference('winSmsForm'),
+				cnt = store.data.items.length,
+				jsonData = "[";
+
+		for(var i = 0; i < cnt; i++) {
+			jsonData += Ext.encode(store.data.items[i].data)+",";
+		}
+
+		jsonData = jsonData.substring(0,jsonData.length-1) + "]";
+
+		form.submit({
+			target : '',
+			params : {	mode  : 'sendSms',
+				grid : jsonData
+			},
+			success : function(form,action) {
+				Ext.Msg.alert('변경완료', action.result.message);
+				form.reset();
+				store.removeAll();
+				win.hide();
+			},
+			failure : function (form, action) {
+				Ext.Msg.alert('기록실패', action.result ? action.result.message : '실패하였습니다');
+			}
+		});
 	}
+
 });

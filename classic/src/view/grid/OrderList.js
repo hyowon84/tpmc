@@ -22,7 +22,6 @@ Ext.define('td.view.grid.OrderList',{
 	alias:'widget.OrderList',
 	controller:'OrderMainController',
 	selType: 'checkboxmodel',
-	//selModel: Ext.create('Ext.selection.CheckboxModel'),
 	remoteSort: true,
 	autoLoad : true,
 	initComponent: function(){

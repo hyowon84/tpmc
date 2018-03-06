@@ -34,7 +34,7 @@ class SMSN {
 
 				if(strlen($strData)>90) {	// 0: SMS / 1: LMS
 					$sendType = 1;
-					$strSubject = "코인즈투데이 안내문자입니다";
+					$strSubject = "[코인즈투데이]";//입력해도 적용안됨
 				}
 				else {
 					$sendType = 0;

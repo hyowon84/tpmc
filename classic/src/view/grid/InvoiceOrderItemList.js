@@ -194,7 +194,7 @@ Ext.define('td.view.grid.InvoiceOrderItemList',{
 				{ text : 'IMG', 						dataIndex : 'it_img',								width: 50,			renderer:rendererImage 	},
 				{ text : '공구명',						dataIndex : 'gpcode_name',					width:160,			style:'text-align:center',	align:'left'		},
 				{ text : '상품코드',					dataIndex : 'it_id',								width:160,			style:'text-align:center',	align:'left'	},
-				{ text : '▼주문집계',				dataIndex : 'SUM_QTY',							width:120,			style:'text-align:center',	align:'right',	editor: { allowBlank : false },		renderer: Ext.util.Format.numberRenderer('0,000') },
+				{ text : '▼주문집계',				dataIndex : 'SUM_QTY',							width:120,			style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
 				{ text : '△발주필요',				dataIndex : 'NEED_IV_QTY',					width:120,			style:'text-align:center',	align:'right'		},
 				{ text : '▲발주완료',				dataIndex : 'SUM_IV_QTY',						width:120,			style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },
 				{ text : '과발주',						dataIndex : 'OVER_IV_QTY',					width:100,			style:'text-align:center',	align:'right',	renderer: Ext.util.Format.numberRenderer('0,000') },

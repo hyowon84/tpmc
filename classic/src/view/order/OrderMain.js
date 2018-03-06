@@ -1,7 +1,4 @@
 //주문관리에서 폼 하단 버튼 좌측 강제정렬 적용
-Ext.Panel.prototype.buttonAlign = 'left';
-
-
 Ext.define('td.view.order.OrderMain', {
 	extend: 'Ext.panel.Panel',
 	alias: 'widget.OrderMain',
@@ -11,8 +8,8 @@ Ext.define('td.view.order.OrderMain', {
 		'td.store.mbinfo',
 		'td.view.order.OrderForm',
 		'td.view.grid.GpInfoList',
-		'td.view.order.winSms',
-		'td.view.grid.OrderList'		
+		'td.view.grid.OrderList',
+		'td.view.order.winSms'
 	],
 	controller:'OrderMainController',
 	closable: true,

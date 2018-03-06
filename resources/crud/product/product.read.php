@@ -75,8 +75,8 @@ else if ($gpcode == 'QUICK') {
 													T.jaego,														/*재고보정값*/
 													T.jaego_memo,												/*재고메모*/
 													IFNULL(T.CO_SUM,0) AS CO_SUM,				/*누적주문량*/
-													T.IV_SUM,														/*누적발주량*/
-													
+													IFNULL(T.IV_SUM,0) AS IV_SUM,				/*누적발주량*/
+													IFNULL(T.CR_SUM,0) AS CR_SUM,				/*누적통관수량*/
 													T.ac_yn,								/*경매진행여부*/
 													T.ac_code,							/*경매진행코드*/
 													T.ac_qty,								/*경매진행수량*/
@@ -89,7 +89,7 @@ else if ($gpcode == 'QUICK') {
 									AND			T.ca_id LIKE 'CT%'
 									$AND_SQL
 	";
-//			echo $SELECT_SQL;
+
 }
 else if($gpcode == 'JAEGO') {
 	/* 카테고리 CT */
@@ -120,7 +120,8 @@ else if($gpcode == 'JAEGO') {
 													T.jaego,														/*재고보정값*/
 													T.jaego_memo,												/*재고메모*/
 													IFNULL(T.CO_SUM,0) AS CO_SUM,				/*누적주문량*/
-													T.IV_SUM,														/*누적발주량*/
+													IFNULL(T.IV_SUM,0) AS IV_SUM,				/*누적발주량*/
+													IFNULL(T.CR_SUM,0) AS CR_SUM,				/*누적통관수량*/
 													
 													T.ac_yn,								/*경매진행여부*/
 													T.ac_code,							/*경매진행코드*/
@@ -135,7 +136,6 @@ else if($gpcode == 'JAEGO') {
 									AND			T.location != ''
 									$AND_SQL
 	";
-//		echo $SELECT_SQL;
 }
 else if($gpcode == 'TEMP') {
 	/* 카테고리 CT */
@@ -166,7 +166,8 @@ else if($gpcode == 'TEMP') {
 													T.jaego,														/*재고보정값*/
 													T.jaego_memo,												/*재고메모*/
 													IFNULL(T.CO_SUM,0) AS CO_SUM,				/*누적주문량*/
-													T.IV_SUM,														/*누적발주량*/
+													IFNULL(T.IV_SUM,0) AS IV_SUM,				/*누적발주량*/
+													IFNULL(T.CR_SUM,0) AS CR_SUM,				/*누적통관수량*/
 
 													T.ac_yn,								/*경매진행여부*/
 													T.ac_code,							/*경매진행코드*/
@@ -180,7 +181,6 @@ else if($gpcode == 'TEMP') {
 									AND			T.ca_id LIKE 'JG%'
 									$AND_SQL
 	";
-//		echo $SELECT_SQL;
 }
 else if($gpcode == 'SHOWROOM') {
 	/* 카테고리 CT */
@@ -211,7 +211,8 @@ else if($gpcode == 'SHOWROOM') {
 													T.jaego,														/*재고보정값*/
 													T.jaego_memo,												/*재고메모*/
 													IFNULL(T.CO_SUM,0) AS CO_SUM,				/*누적주문량*/
-													T.IV_SUM,														/*누적발주량*/
+													IFNULL(T.IV_SUM,0) AS IV_SUM,				/*누적발주량*/
+													IFNULL(T.CR_SUM,0) AS CR_SUM,				/*누적통관수량*/
 
 													T.ac_yn,								/*경매진행여부*/
 													T.ac_code,							/*경매진행코드*/
@@ -225,7 +226,6 @@ else if($gpcode == 'SHOWROOM') {
 									AND			T.ca_id LIKE 'SR%'
 									$AND_SQL
 	";
-//		echo $SELECT_SQL;
 }
 /* 경매상품은 */
 else if ($gpcode == 'AUCTION') {
@@ -264,7 +264,8 @@ else if ($gpcode == 'AUCTION') {
 													T.real_jaego,												/*실재고*/
 													T.jaego,														/*재고보정값*/
 													IFNULL(T.CO_SUM,0) AS CO_SUM,				/*누적주문량*/
-													T.IV_SUM,														/*누적발주량*/
+													IFNULL(T.IV_SUM,0) AS IV_SUM,				/*누적발주량*/
+													IFNULL(T.CR_SUM,0) AS CR_SUM,				/*누적통관수량*/
 													
 													T.ac_yn,								/*경매진행여부*/
 													T.ac_code,							/*경매진행코드*/
@@ -278,7 +279,6 @@ else if ($gpcode == 'AUCTION') {
 									AND			ac_yn = 'Y'
 									$AND_SQL
 	";
-	//		echo $SELECT_SQL;
 } else if ($gpcode) {
 
 	$sql_product = str_replace('#상품기본조건#', " AND GL.gpcode = '$gpcode' ", $sql_product);
@@ -310,6 +310,8 @@ else if ($gpcode == 'AUCTION') {
 													T.jaego,														/*재고보정값*/
 													IFNULL(T.ORDER_QTY,0) AS CO_SUM,		/*누적주문량*/
 													IFNULL(T.RIV_QTY,0) AS IV_SUM,			/*누적발주량*/
+													IFNULL(T.CR_QTY,0) AS CR_SUM,				/*누적통관수량*/
+
 													T.jaego,
 													T.gp_price_type,
 													T.gp_metal_type,
@@ -367,8 +369,9 @@ else {
 													T.jaego,														/*재고보정값*/
 													T.jaego_memo,												/*재고메모*/
 													IFNULL(T.CO_SUM,0) AS CO_SUM,				/*누적주문량*/
-													T.IV_SUM,														/*누적발주량*/
-													
+													IFNULL(T.IV_SUM,0) AS IV_SUM,				/*누적발주량*/
+													IFNULL(T.CR_SUM,0) AS CR_SUM,				/*누적통관수량*/
+
 													T.ac_yn,								/*경매진행여부*/
 													T.ac_code,							/*경매진행코드*/
 													T.ac_qty,								/*경매진행수량*/

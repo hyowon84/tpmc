@@ -7,7 +7,6 @@ Ext.define('td.view.bank.BankMain', {
 		'Ext.layout.container.Border',
 		'td.view.bank.BankMainController',
 		'td.store.mbinfo',
-		'td.store.Local',
 		'td.view.grid.BankStatement',
 		'td.view.grid.OrderList'
 	],

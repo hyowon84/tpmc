@@ -88,7 +88,8 @@ Ext.define('td.view.grading.winImportExcelGrading', {
 						ptype: 'validationstatus',
 						form: 'ImportExcelGradingForm'
 					}
-				},'->',
+				},
+				'->',
 				{
 					text	: '등록',
 					handler : 'submitImportGrading'

@@ -2,6 +2,7 @@ Ext.define('td.view.invoice.winGpSms', {
 	extend: 'Ext.window.Window',
 	xtype: 'winGpSms',
 	reference: 'winGpSms',
+	controller: 'InvoiceMainController',
 	title: '공구 단체문자',
 	width: 540,
 	minWidth: 540,
@@ -10,13 +11,14 @@ Ext.define('td.view.invoice.winGpSms', {
 	closeAction: 'hide',
 	maximizable: false,
 	resizable : true,
-	closeAction: 'hide',
 	x: 200, y: 100,
 	layout : 'fit',
 	items: [
 		{
 			xtype : 'form',
 			id : 'winGpSmsForm',
+			alias:'widget.winGpSmsForm',
+			reference: 'winGpSmsForm',
 			url : '/resources/crud/invoice/sendsms.php',
 			width: '100%',
 			height : 450,
@@ -129,13 +131,26 @@ Ext.define('td.view.invoice.winGpSms', {
 				}
 			],	//items item end
 			buttons: [
-				{xtype: 'tbfill'},
+				{
+					xtype: 'statusbar',
+					dock: 'bottom',
+					reference: 'statbar',
+					defaultText: '대기..',
+					plugins: {
+						ptype: 'validationstatus',
+						form: 'winGpSmsForm'
+					}
+				},
+				'->',
 				{
 					text: '취소',
+					reference : 'BtnCancel',
 					tabCls: 'right-tab',
 					handler: 'closeWinGpSms'
-				}, {
+				},
+				{
 					text: '전송',
+					reference : 'BtnSubmit',
 					tabCls: 'right-tab',
 					handler: 'submitWinGpSms'
 				}

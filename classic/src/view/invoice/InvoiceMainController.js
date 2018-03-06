@@ -180,18 +180,32 @@ Ext.define('td.view.invoice.InvoiceMainController', {
 
 	//단체문자 팝업 전송 버튼
 	submitWinGpSms : function(btn,e) {
-		var win = this.lookupReference('winGpSms');
-		var form = Ext.getCmp('winGpSmsForm');
+		var win = this.lookupReference('winGpSms'),
+				form = Ext.getCmp('winGpSmsForm'),
+				sb = this.lookupReference('statbar');
 
+		sb.showBusy('- 전송 중... -');
 		form.submit({
 			params : {	mode : 'memo'	},
 			success : function(form,action) {
+				sb.setStatus({
+					text: '- 전송완료! -',
+					iconCls: '',
+					clear: true
+				});
+
 				Ext.Msg.alert('수정완료', action.result.message);
 				form.reset();
 				win.hide();
 			},
 			failure : function (form, action) {
-				Ext.Msg.alert('수정실패', action.result ? action.result.message : '실패하였습니다');
+				sb.setStatus({
+					text: '- 전송실패! -',
+					iconCls: '',
+					clear: true
+				});
+
+				Ext.Msg.alert('전송실패', action.result ? action.result.message : '실패하였습니다');
 			}
 		});
 

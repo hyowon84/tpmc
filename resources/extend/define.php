@@ -120,16 +120,16 @@ $sql_admin_product = "	(	SELECT	GP.*,
 																	/* 재고수량 계산 */
 																	CO.CO_SUM,
 																	IV.IV_SUM,
+																	CR.CR_SUM,
 																	
-																	IFNULL(GP.jaego	,0) - IF(GP.ac_code != '' && GP.ac_enddate > NOW(), 1, 0) + IFNULL(GP.gp_jaego,0) + IFNULL(IV.IV_SUM,0) - IFNULL(CO.CO_SUM,0) AS real_jaego
+																	IFNULL(GP.jaego	,0) - IF(GP.ac_code != '' && GP.ac_enddate > NOW(), 1, 0) + IFNULL(GP.gp_jaego,0) + IFNULL(CR.CR_SUM,0) - IFNULL(CO.CO_SUM,0) AS real_jaego
 													FROM		(	SELECT	*
 																		FROM		g5_shop_group_purchase
 																		WHERE		ca_id LIKE 'CT%'	#코투 전체 카테고리
 																		OR			ca_id LIKE 'JG%'	#코투 재고조사 카테고리
 																		OR			ca_id LIKE 'SR%'	#코투 쇼룸 카테고리
 																	) GP
-																	
-																	
+
 																	/* 총주문수량 */
 																	LEFT JOIN ( SELECT	it_id,
 																											SUM(it_qty) AS CO_SUM
@@ -143,10 +143,19 @@ $sql_admin_product = "	(	SELECT	GP.*,
 																											SUM(iv_qty) AS IV_SUM
 																							FROM		invoice_item
 																							WHERE		1=1
-																							#AND			gpcode LIKE '%$목록공구코드%'
-																							AND			iv_stats >= 00
+																							AND			iv_stats >= '00'
+																							AND			iv_stats != 99
 																							GROUP BY iv_it_id				
 																	) IV ON (IV.iv_it_id = GP.gp_id)
+
+																	/*실제통관수량*/
+																	LEFT JOIN (		SELECT	iv_it_id,
+																												SUM(iv_qty) AS CR_SUM
+																								FROM		invoice_item
+																								WHERE		1=1
+																								AND			iv_stats >= 20
+																								GROUP BY iv_it_id
+																	) CR ON (CR.iv_it_id = GP.gp_id)
 
 																	,(	SELECT	*
 																			FROM		flow_price
@@ -216,11 +225,11 @@ function makeProductSql($gpcode) {
 																gp_stock,	
 																gp_time,	
 																gp_update_time,	
-																gp_price,	/*코투현금가(\)*/
+																gp_price,	/*코투현금가*/
 																gp_usdprice,	/*상품 달러가격*/
 																gp_price_org,	/*코투 매입가($)*/
 																gp_card,	/*카드가 노출 여부*/
-																gp_card_price,	/*코투카드가(\)*/
+																gp_card_price,	/*코투카드가*/
 																gp_price_type,	/*고정형 / 실시간형*/
 																gp_spotprice_type,	/*스팟시세유형 $달러, %, 원*/
 																gp_spotprice,	/*스팟시세값*/
@@ -249,7 +258,6 @@ function makeProductSql($gpcode) {
 												WHERE		1=1
 												$관리자조건
 												#상품기본조건#
-												
 		";
 	}
 	
@@ -313,29 +321,20 @@ function makeProductSql($gpcode) {
 															
 															CASE
 																WHEN	'$목록공구코드' = 'QUICK' || '$목록공구코드' = 'AUCTION' THEN		
-																	IFNULL(GP.jaego	,0) - IF(GP.ac_code != '' && GP.ac_enddate > NOW(), 1, 0) + IFNULL(RIV.RIV_QTY,0) - IFNULL(CO.ORDER_QTY,0)
+																	IFNULL(GP.jaego	,0) - IF(GP.ac_code != '' && GP.ac_enddate > NOW(), 1, 0) + IFNULL(CR.CR_QTY,0) - IFNULL(CO.ORDER_QTY,0)
 																ELSE															
 																	IFNULL(GP.jaego	,0) - IF(GP.ac_code != '' && GP.ac_enddate > NOW(), 1, 0) + IFNULL(GP.gp_jaego,0) + IFNULL(RIV.RIV_QTY,0) - IFNULL(CO.ORDER_QTY,0)
 															END AS real_jaego,
 															
-															VIV.VIV_QTY,
 															GPO.GP_ORDER_QTY,
 															
-															RIV.RIV_QTY,														
+															RIV.RIV_QTY,
+															CR.CR_QTY,
 															CO.ORDER_QTY
 															
 											FROM		(	$PRODUCT_QUERY
 															) GP
 															
-															/*가상발주수량*/
-															LEFT JOIN (	SELECT	iv_it_id,
-																									SUM(iv_qty) AS VIV_QTY
-																					FROM		invoice_item
-																					WHERE		gpcode LIKE '%$목록공구코드%'
-																					AND			iv_stats = '00'
-																					GROUP BY iv_it_id											
-															)	VIV ON (VIV.iv_it_id = GP.gp_id)
-											
 															/* 해당공구 총주문수량 */
 															LEFT JOIN ( SELECT	it_id,
 																									SUM(it_qty) AS GP_ORDER_QTY
@@ -354,7 +353,16 @@ function makeProductSql($gpcode) {
 																					AND			iv_stats >= 00
 																					GROUP BY iv_it_id				
 															)	RIV ON (RIV.iv_it_id = GP.gp_id)
-															
+
+															/*실제통관수량*/
+															LEFT JOIN (		SELECT	iv_it_id,
+																										SUM(iv_qty) AS CR_QTY
+																						FROM		invoice_item
+																						WHERE		1=1
+																						AND			iv_stats >= 20
+																						GROUP BY iv_it_id
+															) CR ON (CR.iv_it_id = GP.gp_id)
+
 															/* 총주문수량 */
 															LEFT JOIN ( SELECT	it_id,
 																									SUM(it_qty) AS ORDER_QTY
@@ -685,7 +693,6 @@ $sql_cartproduct = "	(	SELECT	CT.number,
 																		IFNULL(GP.jaego	,0) - IF(GP.ac_code != '' && GP.ac_enddate > NOW(), 1, 0) + IFNULL(GP.gp_jaego,0) + IFNULL(RIV.RIV_QTY,0) - IFNULL(CO.ORDER_QTY,0)
 																END AS real_jaego,
 																
-																VIV.VIV_QTY,
 																GPO.GP_ORDER_QTY,
 																RIV.RIV_QTY,
 																CO.ORDER_QTY
@@ -693,15 +700,6 @@ $sql_cartproduct = "	(	SELECT	CT.number,
 																LEFT JOIN gp_info GI ON (GI.gpcode = CT.gpcode)
 																LEFT JOIN g5_shop_group_purchase GP ON (GP.gp_id = CT.it_id)
 
-																/*가상발주수량*/
-																LEFT JOIN (	SELECT	gpcode,
-																										iv_it_id,
-																										SUM(iv_qty) AS VIV_QTY
-																						FROM		invoice_item
-																						WHERE		iv_stats = '00'
-																						GROUP BY gpcode, iv_it_id											
-																) VIV ON (VIV.gpcode = CT.gpcode AND VIV.iv_it_id = GP.gp_id)
-												
 																/* 해당공구 총주문수량 */
 																LEFT JOIN ( SELECT	gpcode,
 																										it_id,

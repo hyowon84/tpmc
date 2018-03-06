@@ -3,15 +3,7 @@ include_once('./_common.php');
 
 //스트립슬래시를 안하면 json_decode가 안됨
 $arr = jsonDecode($_POST['data']);
-//$arr = json_decode($_POST['data'],true);
-$mb_id = $_SESSION[admin_id];
-
-
-//echo $arr[gp_name];
-//$arr[gp_name] = str_replace('"','',$arr[gp_name]);
-//echo "\r\n";
-//echo $arr[gp_name];
-//print_r($arr);
+$admin_id = $_SESSION[admin_id];
 
 
 function process($data) {

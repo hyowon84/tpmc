@@ -2,7 +2,7 @@ Ext.define('td.view.invoice.winMakeInvoice', {
 	extend: 'Ext.window.Window',
 	xtype: 'winMakeInvoice',
 	reference: 'winMakeInvoice',
-	title: '공구상품목록 재정렬',
+	title: '발주서 작성',
 	width: 1400,
 	minWidth: 350,
 	height: 460,
@@ -10,7 +10,6 @@ Ext.define('td.view.invoice.winMakeInvoice', {
 	closeAction: 'hide',
 	maximizable: false,
 	resizable : true,
-	closeAction: 'hide',
 	x: 200, y: 100,
 	items: [
 		{
